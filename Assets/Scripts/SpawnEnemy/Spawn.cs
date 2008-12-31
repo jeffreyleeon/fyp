@@ -45,7 +45,7 @@ public class Spawn : MonoBehaviour {
 		spawnPoint.y = Random.Range (minY, maxY);
 		spawnPoint.z = Random.Range (minZ, maxZ);
 	
-		enemies = GameObject.FindGameObjectsWithTag ("Enemy");
+		enemies = ObjectStore.FindEnemies ();
 		amount = enemies.Length + 1;
 		if (amount < maxEnemy) {
 			Instantiate(enemyPrefab, spawnPoint, Quaternion.identity);

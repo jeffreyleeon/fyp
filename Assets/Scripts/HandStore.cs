@@ -17,7 +17,7 @@ public sealed class HandStore{
 
 	private HandStore(){
 		allHands = new HandList();
-		leapMotionController = GameObject.FindGameObjectWithTag ("LeapMotionController");
+		leapMotionController = ObjectStore.FindLeapMotionController ();
 	}
 
 	public static HandStore GetInstance(){
