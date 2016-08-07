@@ -4,29 +4,28 @@ using System.Collections;
 public sealed class HandStore{
 
 	private static HandStore instance = new HandStore();
-	private HandModel[] allhands;
-	private int handnum;
+	private HandModel[] allHands;
+	private int handNum;
 
 	private HandStore(){
-		allhands = null;
-		handnum = 0;
+		allHands = null;
+		handNum = 0;
 	}
 
-	public static HandStore getInstance(){
+	public static HandStore GetInstance(){
 		return instance;
 	}
 
 	// set hands
-	public void setHands(HandModel[] hands){
-		if (hands.Length != 0 || handnum != 0) {
-			allhands = new HandModel[hands.Length];
-			hands.CopyTo (allhands, 0);
-			handnum = hands.Length;
-			Debug.Log (handnum);
-		}
+	public void SetHands(HandModel[] hands){
+			allHands = new HandModel[hands.Length];
+			hands.CopyTo (allHands, 0);
+			handNum = hands.Length;
 	}
 
-
+	public HandModel[] GetHands (){
+		return allHands;
+	}
 
 	// check if hand is open
 	public bool IsOpenHand(int hand){
@@ -37,7 +36,7 @@ public sealed class HandStore{
 
 	// check if hand appear
 	public bool IsHandAppear(){
-		if (handnum == 0) {
+		if (handNum == 0) {
 			return false;
 		} else {
 			return true;

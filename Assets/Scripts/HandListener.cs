@@ -6,6 +6,6 @@ public class HandListener : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		HandController Controller = GetComponent<HandController> ();
-		HandStore.getInstance().setHands (Controller.GetAllGraphicsHands());
+		HandStore.GetInstance().SetHands (Controller.GetAllGraphicsHands());
 	}
 }
