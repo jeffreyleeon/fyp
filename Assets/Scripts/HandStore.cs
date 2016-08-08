@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Leap;
 
 public sealed class HandStore{
 
 	private static HandStore instance = new HandStore();
-	private HandModel[] allHands;
+	private HandList allHands;
 	private int handNum;
+	private const int extendFingerThreshold = 4;
 
 	private HandStore(){
 		allHands = null;
@@ -17,21 +19,27 @@ public sealed class HandStore{
 	}
 
 	// set hands
-	public void SetHands(HandModel[] hands){
-			allHands = new HandModel[hands.Length];
-			hands.CopyTo (allHands, 0);
-			handNum = hands.Length;
+	public void SetHands(Frame leapFrame){
+		handNum = leapFrame.Hands.Count;
+		allHands = leapFrame.Hands;
 	}
 
-	public HandModel[] GetHands (){
+	public HandList GetHands (){
 		return allHands;
 	}
 
 	// check if hand is open
-	public bool IsOpenHand(int hand){
-
-
-		return true;
+	public bool IsOpenHand(Hand hand){
+		int extendCount = 0;
+		foreach (Finger finger in hand.Fingers) {
+			if (finger.IsExtended) {
+				extendCount++;
+			}
+		}
+		if (extendCount >= extendFingerThreshold) {
+			return true;
+		}
+		return false;
 	}
 
 	// check if hand appear
