@@ -22,6 +22,7 @@ public sealed class HandStore{
 	public void SetHands(Frame leapFrame){
 		handNum = leapFrame.Hands.Count;
 		allHands = leapFrame.Hands;
+
 	}
 
 	public HandList GetHands (){
@@ -44,10 +45,6 @@ public sealed class HandStore{
 
 	// check if hand appear
 	public bool IsHandAppear(){
-		if (handNum == 0) {
-			return false;
-		} else {
-			return true;
-		}
+		return handNum != 0;
 	}
 }
