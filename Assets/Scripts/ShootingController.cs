@@ -16,12 +16,17 @@ public class ShootingController : MonoBehaviour {
 	void Update () {
 		HandList hands = handStore.GetHands();
 		foreach (Hand hand in hands) {
-			if (handStore.IsOpenHand (hand)) {
-				Vector3 controllerPos = GameObject.FindGameObjectWithTag ("LeapMotionController").transform.position;
-				print ("=====ok");
-				//Debug.Log ((LeapUnityUtil.toUnityvector3(hand.PalmPosition.ToUnityScaled() * 5) + controllerPos).ToString());
-//				Instantiate (bullet, (LeapUnityUtil.toUnityvector3(hand.PalmPosition.ToUnityScaled() * 10) + controllerPos), new Quaternion(0,0,0,0));
-			}
+			SpawnBulletFromHand (hand);
 		}
+	}
+
+	private void SpawnBulletFromHand(Hand hand) {
+		if (!handStore.IsOpenHand (hand)) {
+			// Returning if hand is not opened
+			return;
+		}
+		Vector3 position = handStore.GetPalmPositionInWorld (hand);
+		Quaternion rotation = new Quaternion (0, 0, 0, 0);
+		Instantiate (bullet, position, rotation);
 	}
 }

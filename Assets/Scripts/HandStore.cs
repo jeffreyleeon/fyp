@@ -5,6 +5,7 @@ using Leap;
 public sealed class HandStore{
 
 	private static HandStore instance = new HandStore();
+	private static GameObject leapMotionController;
 	private HandList allHands;
 	private const int extendFingerThreshold = 4;
 
@@ -16,6 +17,7 @@ public sealed class HandStore{
 
 	private HandStore(){
 		allHands = new HandList();
+		leapMotionController = GameObject.FindGameObjectWithTag ("LeapMotionController");
 	}
 
 	public static HandStore GetInstance(){
@@ -48,5 +50,11 @@ public sealed class HandStore{
 	// check if hand appear
 	public bool IsHandAppear(){
 		return handNum != 0;
+	}
+
+	public Vector3 GetPalmPositionInWorld (Hand hand) {
+		Vector3 unityPosition = hand.PalmPosition.ToUnityScaled ();
+		Vector3 worldPosition = leapMotionController.transform.TransformPoint (unityPosition);
+		return worldPosition;
 	}
 }
