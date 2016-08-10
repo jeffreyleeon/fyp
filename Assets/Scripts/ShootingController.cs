@@ -7,13 +7,19 @@ public class ShootingController : MonoBehaviour {
 	[Tooltip("Prefab of bullet to be spawned")]
 	public GameObject bullet;
 
+	[Tooltip("Number of bullets to be spawned per second")]
+	public int numOfBulletPerSecond;
+
 	private HandStore handStore;
 
 	void Start () {
 		handStore = HandStore.GetInstance ();
+
+		float rate = 1.0f / numOfBulletPerSecond;
+		InvokeRepeating ("SpawnBullet", 0, rate);
 	}
 
-	void Update () {
+	private void SpawnBullet() {
 		HandList hands = handStore.GetHands();
 		foreach (Hand hand in hands) {
 			SpawnBulletFromHand (hand);
