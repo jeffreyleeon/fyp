@@ -57,4 +57,9 @@ public sealed class HandStore{
 		Vector3 worldPosition = leapMotionController.transform.TransformPoint (unityPosition);
 		return worldPosition;
 	}
+
+	public Vector3 GetPalmNormalDirection (Hand hand) {
+		Vector direction = hand.Direction;
+		return new Vector3 (direction.x, direction.y, direction.z) * -1;
+	}
 }

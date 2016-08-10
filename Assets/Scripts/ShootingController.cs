@@ -5,7 +5,7 @@ using Leap;
 public class ShootingController : MonoBehaviour {
 
 	[Tooltip("Prefab of bullet to be spawned")]
-	public Rigidbody bullet;
+	public GameObject bullet;
 
 	private HandStore handStore;
 
@@ -26,7 +26,12 @@ public class ShootingController : MonoBehaviour {
 			return;
 		}
 		Vector3 position = handStore.GetPalmPositionInWorld (hand);
-		Quaternion rotation = new Quaternion (0, 0, 0, 0);
-		Instantiate (bullet, position, rotation);
+		Vector3 palmNormalDirection = handStore.GetPalmNormalDirection (hand);
+		GameObject bulletGO = Instantiate (bullet) as GameObject;
+		bulletGO.layer = LayerMask.NameToLayer("Bullet");
+		// Place the bullet a bit in front of the palm
+		bulletGO.transform.position = position + palmNormalDirection * 2;
+		Rigidbody rigidBody = bulletGO.GetComponent<Rigidbody> ();
+		rigidBody.velocity = palmNormalDirection * 100;
 	}
 }
