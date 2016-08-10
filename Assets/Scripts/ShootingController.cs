@@ -1,12 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Leap;
-using trinus;
 
 public class ShootingController : MonoBehaviour {
-		
 	public Rigidbody bullet;
-	Vector3 gal;
 	// Update is called once per frame
 	void Update () {
 		HandStore handstore = HandStore.GetInstance ();
@@ -16,16 +13,9 @@ public class ShootingController : MonoBehaviour {
 				if (handstore.IsOpenHand (hand)) {
 					Vector3 controllerPos = GameObject.FindGameObjectWithTag ("LeapMotionController").transform.position;
 					//Debug.Log ((LeapUnityUtil.toUnityvector3(hand.PalmPosition.ToUnityScaled() * 5) + controllerPos).ToString());
-					Instantiate (bullet, (LeapUnityUtil.toUnityvector3(hand.PalmPosition.ToUnityScaled() * 10) + controllerPos), new Quaternion(0,0,0,0));
-
-					}
+//					Instantiate (bullet, (LeapUnityUtil.toUnityvector3(hand.PalmPosition.ToUnityScaled() * 10) + controllerPos), new Quaternion(0,0,0,0));
+				}
 			}
 		}
-
-
-
-		GameObject camera = GameObject.FindGameObjectWithTag ("TrinusCamera");
-		Debug.Log (camera.transform.rotation.ToString());
-
 	}
 }
