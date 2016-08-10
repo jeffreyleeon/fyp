@@ -6,12 +6,16 @@ public sealed class HandStore{
 
 	private static HandStore instance = new HandStore();
 	private HandList allHands;
-	private int handNum;
 	private const int extendFingerThreshold = 4;
 
+	private int handNum {
+		get {
+			return allHands.Count;
+		}
+	}
+
 	private HandStore(){
-		allHands = null;
-		handNum = 0;
+		allHands = new HandList();
 	}
 
 	public static HandStore GetInstance(){
@@ -20,9 +24,7 @@ public sealed class HandStore{
 
 	// set hands
 	public void SetHands(Frame leapFrame){
-		handNum = leapFrame.Hands.Count;
 		allHands = leapFrame.Hands;
-
 	}
 
 	public HandList GetHands (){
