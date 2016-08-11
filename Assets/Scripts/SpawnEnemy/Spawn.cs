@@ -14,17 +14,17 @@ public class Spawn : MonoBehaviour {
 	public int maxEnemy = 10;
 
 	[Tooltip("Boundary of X-cor that an enemy appear")]
-	public int minX = -8;
+	public int minX = -20;
 	[Tooltip("Boundary of X-cor that an enemy appear")]
-	public int maxX = 8;
+	public int maxX = 20;
 	[Tooltip("Boundary of Y-cor that an enemy appear")]
-	public int minY = 0;
+	public int minY = -10;
 	[Tooltip("Boundary of Y-cor that an enemy appear")]
-	public int maxY = 1;
+	public int maxY = 10;
 	[Tooltip("Boundary of Z-cor that an enemy appear")]
-	public int minZ = -2;
+	public int minZ = 30;
 	[Tooltip("Boundary of Z-cor that an enemy appear")]
-	public int maxZ = 2;
+	public int maxZ = 40;
 
 	[Tooltip("Min time for new enemy to appear")]
 	public int minSpawnTime = 1;

@@ -11,20 +11,20 @@ public class EnemyMove : MonoBehaviour {
 	public float moveSpeed = 3f;
 
 	[Tooltip("Height that the enemy jump")]
-	public int jumpHeight = 2;
+	public int jumpingForce = 750;
 
 	[Tooltip("Boundary of X-cor that an enemy to destroy")]
-	public int minX = -10;
+	public int minX = -40;
 	[Tooltip("Boundary of X-cor that an enemy to destroy")]
-	public int maxX = 10;
+	public int maxX = 40;
 	[Tooltip("Boundary of Y-cor that an enemy to destroy")]
-	public int minY = -10;
+	public int minY = -12;
 	[Tooltip("Boundary of Y-cor that an enemy to destroy")]
-	public int maxY = 10;
+	public int maxY = 40;
 	[Tooltip("Boundary of Z-cor that an enemy to destroy")]
-	public int minZ = -10;
+	public int minZ = 2;
 	[Tooltip("Boundary of Z-cor that an enemy to destroy")]
-	public int maxZ = 10; 
+	public int maxZ = 40; 
 
 	// Use this for initialization
 	void Start () {
@@ -43,7 +43,10 @@ public class EnemyMove : MonoBehaviour {
 			Destroy(gameObject);
 		} else {
 			float move = moveSpeed * Time.deltaTime;
-			transform.Translate(Vector3.up * jumpHeight * Time.deltaTime, Space.World);
+//			transform.Translate(Vector3.up * jumpHeight * Time.deltaTime, Space.World);
+			if (transform.position.y < minY + 3) {
+				gameObject.GetComponent<Rigidbody> ().AddForce(new Vector3(0, jumpingForce, 0));
+			}
 			transform.position = Vector3.MoveTowards(transform.position, track.position, move);
 		}
 	}
