@@ -43,10 +43,13 @@ Q: Internet connection loss when USB Tethering turn on
 A: With USB Tethering on, go Control Panel -> Network and Sharing Center -> Change adapter setting
    you should see two active connections, one is connected with Ethernet Controller which is the Internet connection and the other one is for USB tethering
    Right click the one for USB tethering, click Property. Select IPv4, click Properties, then click Advanced
-   Uncheck Automatic metric and input 100. Internet should resume.
+   Uncheck Automatic metric and input 2000. Internet should resume.
 
 Q: Trinus VR fail to connect to the game and shows port being used
 A: First, try to kill Trinus VR app and re-launch it see if it works. If not, press the Option icon at bottom right, and set port number to something other than 7777,
    then go back to Trinus front page. In the Trinus connection page on PC, input the IP address shown on Trinus app front page and input the port number you set, then
    press Apply.     
+   
+Q: Leap motion is not working, no red light on front panel
+A: Leap Service need to be active. Go to Task Manager, select Service, right click LeapService and Start service.
    
