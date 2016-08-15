@@ -20,20 +20,20 @@ public class ShootingController : MonoBehaviour {
 	}
 
 	private void SpawnBullet() {
-		HandModel[] handmods = new HandModel[handStore.handNum];
-		handStore.GetHands ().CopyTo (handmods, 0);
-		foreach (HandModel handmod in handmods) {
+		HandModel[] handModels = new HandModel[handStore.handNum];
+		handStore.GetHands ().CopyTo (handModels, 0);
+		foreach (HandModel handmod in handModels) {
 			SpawnBulletFromHand (handmod);
 		}
 	}
 
-	private void SpawnBulletFromHand(HandModel handMod) {
-		if (!handStore.IsOpenHand (handMod)) {
+	private void SpawnBulletFromHand(HandModel handModel) {
+		if (!handStore.IsOpenHand (handModel)) {
 			// Returning if hand is not opened
 			return;
 		}
-		Vector3 position = handMod.GetPalmPosition();
-		Vector3 palmNormal = handMod.GetPalmNormal();
+		Vector3 position = handModel.GetPalmPosition();
+		Vector3 palmNormal = handModel.GetPalmNormal();
 		GameObject bulletGO = Instantiate (bullet) as GameObject;
 		bulletGO.layer = LayerMask.NameToLayer("Bullet");
 		// Place the bullet a bit in front of the palm

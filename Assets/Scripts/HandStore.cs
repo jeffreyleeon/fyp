@@ -6,17 +6,17 @@ public sealed class HandStore{
 
 	private static HandStore instance = new HandStore();
 	private static GameObject leapMotionController;
-	private HandModel[] allHandmods;
+	private HandModel[] allHandModels;
 	private const int extendFingerThreshold = 4;
 
 	public int handNum {
 		get {
-			return allHandmods.Length;
+			return allHandModels.Length;
 		}
 	}
 
 	private HandStore(){
-		allHandmods = new HandModel[] {};
+		allHandModels = new HandModel[] {};
 		leapMotionController = ObjectStore.FindLeapMotionController ();
 	}
 
@@ -26,18 +26,18 @@ public sealed class HandStore{
 
 	// set hands
 	public void SetHands(HandModel[] allGraphicHands){
-		allHandmods = new HandModel[allGraphicHands.Length];
-		allGraphicHands.CopyTo(allHandmods, 0);
+		allHandModels = new HandModel[allGraphicHands.Length];
+		allGraphicHands.CopyTo(allHandModels, 0);
 	}
 
 	public HandModel[] GetHands (){
-		return allHandmods;
+		return allHandModels;
 	}
 
 	// check if hand is open
-	public bool IsOpenHand(HandModel handmod){
+	public bool IsOpenHand(HandModel handModel){
 		int extendCount = 0;
-		Hand leapHand = handmod.GetLeapHand ();
+		Hand leapHand = handModel.GetLeapHand ();
 		foreach (Finger finger in leapHand.Fingers) {
 			if (finger.IsExtended) {
 				extendCount++;
