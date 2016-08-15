@@ -6,17 +6,17 @@ public sealed class HandStore{
 
 	private static HandStore instance = new HandStore();
 	private static GameObject leapMotionController;
-	private HandList allHands;
+	private HandModel[] allHandModels;
 	private const int extendFingerThreshold = 4;
 
-	private int handNum {
+	public int handNum {
 		get {
-			return allHands.Count;
+			return allHandModels.Length;
 		}
 	}
 
 	private HandStore(){
-		allHands = new HandList();
+		allHandModels = new HandModel[] {};
 		leapMotionController = ObjectStore.FindLeapMotionController ();
 	}
 
@@ -25,18 +25,20 @@ public sealed class HandStore{
 	}
 
 	// set hands
-	public void SetHands(Frame leapFrame){
-		allHands = leapFrame.Hands;
+	public void SetHands(HandModel[] allGraphicHands){
+		allHandModels = new HandModel[allGraphicHands.Length];
+		allGraphicHands.CopyTo(allHandModels, 0);
 	}
 
-	public HandList GetHands (){
-		return allHands;
+	public HandModel[] GetHands (){
+		return allHandModels;
 	}
 
 	// check if hand is open
-	public bool IsOpenHand(Hand hand){
+	public bool IsOpenHand(HandModel handModel){
 		int extendCount = 0;
-		foreach (Finger finger in hand.Fingers) {
+		Hand leapHand = handModel.GetLeapHand ();
+		foreach (Finger finger in leapHand.Fingers) {
 			if (finger.IsExtended) {
 				extendCount++;
 			}
@@ -52,14 +54,14 @@ public sealed class HandStore{
 		return handNum != 0;
 	}
 
-	public Vector3 GetPalmPositionInWorld (Hand hand) {
-		Vector3 unityPosition = hand.PalmPosition.ToUnityScaled ();
-		Vector3 worldPosition = leapMotionController.transform.TransformPoint (unityPosition);
-		return worldPosition;
+	/*
+	public Vector3 GetPalmPosition (HandModel handmod) {
+		return handmod.GetPalmPosition();
+	
 	}
 
-	public Vector3 GetPalmNormalDirection (Hand hand) {
-		Vector direction = hand.Direction;
-		return new Vector3 (direction.x, direction.y, direction.z) * -1;
+	public Vector3 GetPalmNormalDirection (HandModel handmod) {
+		return handmod.GetPalmNormal();
 	}
+	*/
 }
