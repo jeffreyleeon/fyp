@@ -3,41 +3,36 @@ using System.Collections;
 using Leap;
 
 public class RayController : MonoBehaviour {
-	LineRenderer LineRend = null;
+	private LineRenderer lineRender = null;
 	private HandStore handStore;
 
-	// Use this for initialization
 	void Start () {
 		handStore = HandStore.GetInstance ();
-		LineRend = gameObject.GetComponent<LineRenderer> ();
-
-		if (LineRend == null) {
-			LineRend = gameObject.AddComponent<LineRenderer> ();
+		lineRender = gameObject.GetComponent<LineRenderer> ();
+		if (lineRender == null) {
+			lineRender = gameObject.AddComponent<LineRenderer> ();
+			lineRender.SetColors (Color.yellow, Color.yellow);
+			lineRender.SetPositions (new [] { Vector3.zero, Vector3.zero });
 		}
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		HandList hands = handStore.GetHands();
-		foreach (Hand hand in hands) {
-			if (!handStore.IsOpenHand (hand)) {
-				// Returning if hand is not opened
+	void FixedUpdate () {
+		HandModel[] handModels = new HandModel[handStore.handNum];
+		handStore.GetHands ().CopyTo (handModels, 0);
+		foreach (HandModel handModel in handModels) {
+			if (!handStore.IsOpenHand (handModel)) {
+				lineRender.SetPositions (new [] { Vector3.zero, Vector3.zero });
 				return;
 			}
-			Vector3 palmNormalDirection = handStore.GetPalmNormalDirection (hand);
-			Vector3 position = handStore.GetPalmPositionInWorld (hand);
+
+			Vector3 palmNormal = handModel.GetPalmNormal();
+			Vector3 position = handModel.GetPalmPosition();
 			RaycastHit rayHit;
-			if (Physics.Raycast (position, palmNormalDirection, out rayHit, 100.0f)) {
-				Debug.Log ("hit");
-				LineRend.SetPositions(new [] {position, rayHit.point} );
-				LineRend.SetColors (Color.yellow, Color.yellow);
+			if (Physics.Raycast (position, palmNormal, out rayHit, 100.0f)) {
+				lineRender.SetPositions (new [] { position, rayHit.point });
+			} else {
+				lineRender.SetPositions (new [] { position, (palmNormal * 100.0f)  });
 			}
-
-
-		
 		}
-
-
-
 	}
 }
