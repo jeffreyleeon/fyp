@@ -20,24 +20,25 @@ public class ShootingController : MonoBehaviour {
 	}
 
 	private void SpawnBullet() {
-		HandList hands = handStore.GetHands();
-		foreach (Hand hand in hands) {
-			SpawnBulletFromHand (hand);
+		HandModel[] handmods = new HandModel[handStore.handNum];
+		handStore.GetHands ().CopyTo (handmods, 0);
+		foreach (HandModel handmod in handmods) {
+			SpawnBulletFromHand (handmod);
 		}
 	}
 
-	private void SpawnBulletFromHand(Hand hand) {
-		if (!handStore.IsOpenHand (hand)) {
+	private void SpawnBulletFromHand(HandModel handMod) {
+		if (!handStore.IsOpenHand (handMod)) {
 			// Returning if hand is not opened
 			return;
 		}
-		Vector3 position = handStore.GetPalmPositionInWorld (hand);
-		Vector3 palmNormalDirection = handStore.GetPalmNormalDirection (hand);
+		Vector3 position = handMod.GetPalmPosition();
+		Vector3 palmNormal = handMod.GetPalmNormal();
 		GameObject bulletGO = Instantiate (bullet) as GameObject;
 		bulletGO.layer = LayerMask.NameToLayer("Bullet");
 		// Place the bullet a bit in front of the palm
-		bulletGO.transform.position = position + palmNormalDirection * 2;
+		bulletGO.transform.position = position + palmNormal * 2;
 		Rigidbody rigidBody = bulletGO.GetComponent<Rigidbody> ();
-		rigidBody.velocity = palmNormalDirection * 100;
+		rigidBody.velocity = palmNormal * 100;
 	}
 }
