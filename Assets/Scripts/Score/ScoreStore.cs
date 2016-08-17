@@ -24,6 +24,10 @@ public sealed class ScoreStore{
 		return PlayerPrefs.GetFloat (singlePlayerKey, 0.0f);
 	}
 
+	public void ResetScore () {
+		PlayerPrefs.DeleteKey (singlePlayerKey);
+	}
+
 	// TODO: Deal with online game, score from server
 	// TODO: Deal with multi-player game (Optional)
 }
