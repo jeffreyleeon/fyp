@@ -24,7 +24,7 @@ public class GameManager : Photon.PunBehaviour {
 	override public void OnConnectedToMaster () {
 		// TODO: Current force join room of demo game
 		Debug.Log ("FYP/OnConnectedToMaster");
-		NetworkManager.JoinRoom ();
+		NetworkManager.JoinRoom (roomName);
 	}
 
 	override public void OnCreatedRoom () {
