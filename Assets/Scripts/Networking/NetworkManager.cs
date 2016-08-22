@@ -14,8 +14,33 @@ public sealed class NetworkManager {
 		PhotonNetwork.automaticallySyncScene = true;
 	}
 
-	public static void JoinLobby () {
+	public static void ConnectToMasterServer () {
 		PhotonNetwork.ConnectUsingSettings (gameVersion);
+	}
+
+	public static void CreateRoom (byte playerPerRoom = 2, string roomName = null) {
+		PhotonNetwork.CreateRoom (
+			roomName,
+			new RoomOptions() {
+				maxPlayers = playerPerRoom
+			},
+			null
+			);
+	}
+
+	/// <summary>
+	/// Joins the room.
+	/// If roomName is not given, will try to join random room and create room if no random room to join
+	/// If roomName is given but the room is not able to join, will throw appropriate error
+	/// If roomName is given but the room does not exist, will create one for user
+	/// </summary>
+	/// <param name="roomName">Room name.</param>
+	public static void JoinRoom (string roomName = null) {
+		if (roomName == null) {
+			PhotonNetwork.JoinRandomRoom ();
+		} else {
+			PhotonNetwork.JoinOrCreateRoom (roomName, null, null);
+		}
 	}
 
 }
