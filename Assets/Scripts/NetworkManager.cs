@@ -73,6 +73,11 @@ public class NetworkManager : Photon.PunBehaviour {
 
 		PhotonNetwork.CreateRoom (roomName, roomOptions, null);
 	}
+
+	public void StartGame(){
+		GameObject gameManager = GameObject.Find ("GameManager");
+		gameManager.GetComponent<GameManager> ().enabled = true;
+	}
 	#endregion
 
 	#region PUN callbacks
@@ -96,7 +101,7 @@ public class NetworkManager : Photon.PunBehaviour {
 
 	public override void OnJoinedRoom ()
 	{
-		Debug.Log ("PUN Room join");
+		StartGame ();
 	}
 	#endregion
 }
