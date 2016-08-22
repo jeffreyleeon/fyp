@@ -43,4 +43,13 @@ public sealed class NetworkManager {
 		}
 	}
 
+	public static void CreatePlayer () {
+		PhotonNetwork.Instantiate (
+			"Player",
+			Vector3.zero,
+			Quaternion.identity,
+			0
+		);
+	}
+
 }

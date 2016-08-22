@@ -3,6 +3,8 @@ using System.Collections;
 
 public class GameManager : Photon.PunBehaviour {
 
+	public GameObject trinusUIManager;
+
 	private const string roomName = "FYP_DEMO";
 
 	void Start () {
@@ -33,6 +35,10 @@ public class GameManager : Photon.PunBehaviour {
 
 	override public void OnJoinedRoom () {
 		Debug.Log ("FYP/OnJoinedRoom");
+
+		// Create player object for joined player
+		NetworkManager.CreatePlayer ();
+		Instantiate (trinusUIManager);
 	}
 
 	override public void OnPhotonRandomJoinFailed (object[] codeAndMsg) {
