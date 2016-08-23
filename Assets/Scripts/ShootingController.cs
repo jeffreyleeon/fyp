@@ -34,10 +34,10 @@ public class ShootingController : MonoBehaviour {
 		}
 		Vector3 position = handModel.GetPalmPosition();
 		Vector3 palmNormal = handModel.GetPalmNormal();
-		GameObject bulletGO = Instantiate (bullet) as GameObject;
+		GameObject bulletGO = PhotonNetwork.Instantiate("Bullet", (position + palmNormal * 2), Quaternion.identity, 0 ) as GameObject;
 		bulletGO.layer = LayerMask.NameToLayer("Bullet");
 		// Place the bullet a bit in front of the palm
-		bulletGO.transform.position = position + palmNormal * 2;
+		//bulletGO.transform.position = position + palmNormal * 2;
 		Rigidbody rigidBody = bulletGO.GetComponent<Rigidbody> ();
 		rigidBody.velocity = palmNormal * 100;
 	}
