@@ -18,6 +18,18 @@ public sealed class NetworkManager {
 		PhotonNetwork.sendRateOnSerialize = PUNsendRateOnSerialize;
 	}
 
+	/// <summary>
+	/// Connects the server.
+	/// Caller should override OnConnectedToMaster, OnFailedToConnectToPhoton and OnConnectionFail callbacks from PUN and deal with it themselves
+	/// </summary>
+	public static void ConnectServer () {
+		if (PhotonNetwork.connected) {
+			Debug.Log ("FYP/NetworkManager/ConnectServer Server is connected");
+			return;
+		}
+		PhotonNetwork.ConnectUsingSettings (gameversion);
+	}
+
 	void Start () {
 		if (!multiplayerMode) {
 			//play single

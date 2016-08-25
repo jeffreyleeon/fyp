@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameManager : MonoBehaviour{
+public class GameManager : Photon.PunBehaviour {
 	GameObject trinus;
 	GameObject player;
 	GameObject enemyManager;
@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour{
 		enemyManager = GameObject.Find ("EnemyManager");
 
 		NetworkManager.InitConfig ();
+		NetworkManager.ConnectServer ();
 	}
 
 	// Use this for initialization
@@ -24,4 +25,18 @@ public class GameManager : MonoBehaviour{
 	void Update () {
 	
 	}
+
+	#region PUN callbacks
+
+	override public void OnFailedToConnectToPhoton (DisconnectCause cause) {
+		Debug.LogError ("FYP/OnFailedToConnectToPhoton " + cause);
+		Debug.LogError ("Please check network connection and app id");
+	}
+
+	override public void OnConnectionFail (DisconnectCause cause) {
+		Debug.LogError ("FYP/OnConnectionFail " + cause);
+		Debug.LogError ("Please check network region and CCU limit");
+	}
+
+	#endregion
 }
