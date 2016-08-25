@@ -1,23 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NetworkManager : Photon.PunBehaviour {
+public sealed class NetworkManager {
 
+	static bool multiplayerMode = true;
+	static string roomName = "YOLO";
+	static int PUNsendRate = 50;
+	static int PUNsendRateOnSerialize = 30;
+	static string gameversion = "1.0";
 
-	bool multiplayerMode = true;
-	string roomName = "YOLO";
-	int PUNsendRate = 50;
-	int PUNsendRateOnSerialize = 30;
-	string _gameversion = "1.0";
-
-	#region autocalls
-	void Awake() {
+	public static void InitConfig () {
 		PhotonNetwork.logLevel = PhotonLogLevel.Informational;
 		PhotonNetwork.autoJoinLobby = false;
 		PhotonNetwork.automaticallySyncScene = true;
 		PhotonNetwork.autoCleanUpPlayerObjects = true;
-		PhotonNetwork.sendRate = 50;
-		PhotonNetwork.sendRateOnSerialize = 30;
+		PhotonNetwork.sendRate = PUNsendRate;
+		PhotonNetwork.sendRateOnSerialize = PUNsendRateOnSerialize;
 	}
 
 	void Start () {
@@ -29,12 +27,6 @@ public class NetworkManager : Photon.PunBehaviour {
 		}
 
 	}
-	
-	void Update () {
-		
-	}
-
-	#endregion
 
 	#region public method
 
@@ -44,7 +36,7 @@ public class NetworkManager : Photon.PunBehaviour {
 			return;
 		}
 
-		PhotonNetwork.ConnectUsingSettings (_gameversion);
+		PhotonNetwork.ConnectUsingSettings (gameversion);
 	}
 
 	public void JoinRoom(){
@@ -75,28 +67,28 @@ public class NetworkManager : Photon.PunBehaviour {
 	}
 	#endregion
 
-	#region PUN callbacks
-
-	public override void OnConnectedToMaster ()
-	{
-		JoinRoom ();
-	}
-
-	public override void OnPhotonJoinRoomFailed (object[] codeAndMsg)
-	{
-		// NOT dealng with full room yet
-		CreateRoom ();
-	}
-
-	public override void OnPhotonRandomJoinFailed (object[] codeAndMsg)
-	{
-		CreateRoom ();
-	}
-
-
-	public override void OnJoinedRoom ()
-	{
-		StartGame ();
-	}
-	#endregion
+//	#region PUN callbacks
+//
+//	public override void OnConnectedToMaster ()
+//	{
+//		JoinRoom ();
+//	}
+//
+//	public override void OnPhotonJoinRoomFailed (object[] codeAndMsg)
+//	{
+//		// NOT dealng with full room yet
+//		CreateRoom ();
+//	}
+//
+//	public override void OnPhotonRandomJoinFailed (object[] codeAndMsg)
+//	{
+//		CreateRoom ();
+//	}
+//
+//
+//	public override void OnJoinedRoom ()
+//	{
+//		StartGame ();
+//	}
+//	#endregion
 }

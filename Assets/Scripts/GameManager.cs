@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour{
 		trinus = GameObject.Find ("Trinus");
 		enemyManager = GameObject.Find ("EnemyManager");
 
+		NetworkManager.InitConfig ();
 	}
 
 	// Use this for initialization
