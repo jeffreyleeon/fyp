@@ -10,8 +10,8 @@ public class GameManager : Photon.PunBehaviour {
 	public string roomName = "";
 
 	void Awake(){
-		trinus = GameObject.Find ("Trinus");
-		enemyManager = GameObject.Find ("EnemyManager");
+		trinus = ObjectStore.FindTrinus ();
+		enemyManager = ObjectStore.FindEnemyManager ();
 
 		NetworkManager.InitConfig ();
 		if (!NetworkManager.IsServerConnected) {
