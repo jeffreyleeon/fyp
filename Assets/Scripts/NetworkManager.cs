@@ -3,11 +3,10 @@ using System.Collections;
 
 public sealed class NetworkManager {
 
-	static bool multiplayerMode = true;
-	static string roomName = "YOLO";
 	static int PUNsendRate = 50;
 	static int PUNsendRateOnSerialize = 30;
 	static string gameversion = "1.0";
+	const byte maxNumOfPlayers = 4;
 
 	public static void InitConfig () {
 		PhotonNetwork.logLevel = PhotonLogLevel.Informational;
@@ -30,77 +29,67 @@ public sealed class NetworkManager {
 		PhotonNetwork.ConnectUsingSettings (gameversion);
 	}
 
-	void Start () {
-		if (!multiplayerMode) {
-			//play single
-			return;
-		} else {
-			ConnectToServer ();
+	/// <summary>
+	/// Determines if is server connected.
+	/// </summary>
+	/// <returns><c>true</c> if is server connected; otherwise, <c>false</c>.</returns>
+	public static bool IsServerConnected {
+		get {
+			return PhotonNetwork.connected;
 		}
-
 	}
 
-	#region public method
-
-	public void ConnectToServer(){
-		if (PhotonNetwork.connected) {
-			JoinRoom ();
-			return;
-		}
-
-		PhotonNetwork.ConnectUsingSettings (gameversion);
-	}
-
-	public void JoinRoom(){
+	/// <summary>
+	/// Joins the room.
+	/// Caller should override OnJoinedRoom, OnPhotonJoinRoomFailed callbacks from PUN and deal with it themselves
+	/// </summary>
+	/// <param name="roomName">Room name, must be provided</param>
+	public static void JoinRoom (string roomName) {
 		if (roomName == "") {
-			PhotonNetwork.JoinRandomRoom ();
-		} else {
-			PhotonNetwork.JoinRoom (roomName);
+			Debug.LogError ("FYP/NetworkManager/JoinRoom roomName must be provided");
+			return;
 		}
+		PhotonNetwork.JoinRoom (roomName);
 	}
 
-	public void CreateRoom(){
+	/// <summary>
+	/// Joins a random room.
+	/// Caller should override OnConnectedToMaster, OnFailedToConnectToPhoton and OnConnectionFail callbacks from PUN and deal with it themselves
+	/// </summary>
+	public static void JoinRandomRoom () {
+		PhotonNetwork.JoinRandomRoom ();
+	}
+
+	/// <summary>
+	/// Joins or create room.
+	/// </summary>
+	/// <param name="roomName">Room name, must be provided</param>
+	/// <param name="numOfPlayers">Number of players in created room, if needed</param>
+	public static void JoinOrCreateRoom (string roomName, byte numOfPlayers = maxNumOfPlayers) {
 		if (roomName == "") {
-			roomName = "FYP" + Random.Range(0, 100).ToString ();
-		} 
+			Debug.LogError ("FYP/NetworkManager/JoinOrCreateRoom roomName must be provided");
+			return;
+		}
 		RoomOptions roomOptions = new RoomOptions ();
-
 		//Room Settings
 		{
-			roomOptions.MaxPlayers = 4;
+			roomOptions.MaxPlayers = numOfPlayers;
 		}
+		PhotonNetwork.JoinOrCreateRoom (roomName, roomOptions, null);
+	}
 
+	/// <summary>
+	/// Creates the room.
+	/// Caller should override OnCreatedRoom, OnJoinedRoom and OnPhotonCreateRoomFailed callbacks from PUN and deal with it themselves
+	/// </summary>
+	/// <param name="roomName">Room name. Passing null will create room with random name</param>
+	/// <param name="numOfPlayers">Number of players.</param>
+	public static void CreateRoom(string roomName = "", byte numOfPlayers = maxNumOfPlayers){
+		RoomOptions roomOptions = new RoomOptions ();
+		//Room Settings
+		{
+			roomOptions.MaxPlayers = numOfPlayers;
+		}
 		PhotonNetwork.CreateRoom (roomName, roomOptions, null);
 	}
-
-	public void StartGame(){
-		GameObject gameManager = GameObject.Find ("GameManager");
-		gameManager.GetComponent<GameManager> ().enabled = true;
-	}
-	#endregion
-
-//	#region PUN callbacks
-//
-//	public override void OnConnectedToMaster ()
-//	{
-//		JoinRoom ();
-//	}
-//
-//	public override void OnPhotonJoinRoomFailed (object[] codeAndMsg)
-//	{
-//		// NOT dealng with full room yet
-//		CreateRoom ();
-//	}
-//
-//	public override void OnPhotonRandomJoinFailed (object[] codeAndMsg)
-//	{
-//		CreateRoom ();
-//	}
-//
-//
-//	public override void OnJoinedRoom ()
-//	{
-//		StartGame ();
-//	}
-//	#endregion
 }
