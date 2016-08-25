@@ -4,16 +4,11 @@ using System.Collections;
 public class NetworkManager : Photon.PunBehaviour {
 
 
-	public bool multiplayerMode = false;
-	[Tooltip("Room Name, empty for random room")]
-	public string roomName = "";
-	[Tooltip("Network package send rate per second")]
-	public int PUNsendRate = 50;
-	[Tooltip("PhotonSerialize call on PhotonView per second")]
-	public int PUNsendRateOnSerialize = 30;
-
-	private string _gameversion = "1.0";
-
+	bool multiplayerMode = true;
+	string roomName = "YOLO";
+	int PUNsendRate = 50;
+	int PUNsendRateOnSerialize = 30;
+	string _gameversion = "1.0";
 
 	#region autocalls
 	void Awake() {
