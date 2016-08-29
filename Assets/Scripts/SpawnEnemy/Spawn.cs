@@ -31,13 +31,16 @@ public class Spawn : MonoBehaviour {
 	[Tooltip("Max time for new enemy to appear")]
 	public int maxSpawnTime = 5;
 
-	[Tooltip("Prefab of the enemy spawn")]
-	public GameObject enemyPrefab;
+	[Tooltip("Prefab name of the enemy spawn")]
+	public string enemyPrefabName = "Enemy";
 
 	private Vector3 spawnPoint;
 
 	void Start () {
-		SpawnEnemy ();
+		if (PhotonNetwork.isMasterClient) {
+			Debug.Log ("MasterClient!");
+			SpawnEnemy ();
+		}
 	}
 
 	void SpawnEnemy() {
@@ -48,7 +51,7 @@ public class Spawn : MonoBehaviour {
 		enemies = ObjectStore.FindEnemies ();
 		amount = enemies.Length + 1;
 		if (amount < maxEnemy) {
-			Instantiate(enemyPrefab, spawnPoint, Quaternion.identity);
+			PhotonNetwork.Instantiate(enemyPrefabName, spawnPoint, Quaternion.identity, 0);
 		}
 		Invoke ("SpawnEnemy", Random.Range(minSpawnTime, maxSpawnTime));
 	}
