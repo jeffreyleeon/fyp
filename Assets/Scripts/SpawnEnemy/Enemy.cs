@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyMove : MonoBehaviour {
+public class Enemy : MonoBehaviour {
 
 	private Transform track;
 	[Tooltip("Game Object that the enemies move toward")]
@@ -33,17 +33,17 @@ public class EnemyMove : MonoBehaviour {
 		}
 		track = trackObj.transform;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		bool outOfBound = transform.position.x < minX || transform.position.x > maxX ||
-						  transform.position.y < minY || transform.position.y > maxY ||
-						  transform.position.z < minZ || transform.position.z > maxZ;
+			transform.position.y < minY || transform.position.y > maxY ||
+			transform.position.z < minZ || transform.position.z > maxZ;
 		if (outOfBound) {
 			Destroy(gameObject);
 		} else {
 			float move = moveSpeed * Time.deltaTime;
-//			transform.Translate(Vector3.up * jumpHeight * Time.deltaTime, Space.World);
+			//			transform.Translate(Vector3.up * jumpHeight * Time.deltaTime, Space.World);
 			if (transform.position.y < minY + 3) {
 				gameObject.GetComponent<Rigidbody> ().AddForce(new Vector3(0, jumpingForce, 0));
 			}
