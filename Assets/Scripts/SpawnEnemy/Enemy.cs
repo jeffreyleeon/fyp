@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour {
 	public float moveSpeed = 3f;
 
 	[Tooltip("Height that the enemy jump")]
-	public int jumpingForce = 750;
+	public int jumpingForce = 150;
 
 	[Tooltip("Boundary of X-cor that an enemy to destroy")]
 	public int minX = -40;
@@ -36,6 +36,13 @@ public class Enemy : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		Move ();
+
+	}
+
+
+
+	private void Move() {
 		bool outOfBound = transform.position.x < minX || transform.position.x > maxX ||
 			transform.position.y < minY || transform.position.y > maxY ||
 			transform.position.z < minZ || transform.position.z > maxZ;
@@ -43,8 +50,9 @@ public class Enemy : MonoBehaviour {
 			Destroy(gameObject);
 		} else {
 			float move = moveSpeed * Time.deltaTime;
-			//			transform.Translate(Vector3.up * jumpHeight * Time.deltaTime, Space.World);
+			//transform.Translate(Vector3.up * jumpHeight * Time.deltaTime, Space.World);
 			if (transform.position.y < minY + 3) {
+				Debug.Log ("<color=red> enemy Y: </color>" + transform.position.y);
 				gameObject.GetComponent<Rigidbody> ().AddForce(new Vector3(0, jumpingForce, 0));
 			}
 			transform.position = Vector3.MoveTowards(transform.position, track.position, move);
