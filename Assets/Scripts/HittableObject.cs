@@ -3,7 +3,7 @@ using System.Collections;
 
 public abstract class HittableObject : Photon.MonoBehaviour {
 
-	public int maxHealth;
+	public int maxHealth = 100;
 
 	private int currentHealth;
 
@@ -36,6 +36,7 @@ public abstract class HittableObject : Photon.MonoBehaviour {
 		currentHealth -= damage;
 		if (currentHealth < 0) {
 			currentHealth = 0;
+			Kill ();
 		}
 	}
 
