@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(PhotonView))]
 public abstract class HittableObject : Photon.MonoBehaviour {
 
 	public int maxHealth = 100;
