@@ -27,8 +27,8 @@ public abstract class HittableObject : Photon.MonoBehaviour {
 
 	/// <summary>
 	/// Object get hit by damage.
+	/// Autocatically call <c>Kill()</c> when Health less than or equal zero
 	/// </summary>
-	/// <returns><c>true</c>, if object still alive, <c>false</c> otherwise.</returns>
 	/// <param name="damage">Damage.</param>
 	public virtual void HitBy(int damage){
 		if (currentHealth < 0) {
