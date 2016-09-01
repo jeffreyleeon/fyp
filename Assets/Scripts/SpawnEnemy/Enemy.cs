@@ -59,7 +59,6 @@ public class Enemy : HittableObject {
 			float move = moveSpeed * Time.deltaTime;
 			//transform.Translate(Vector3.up * jumpHeight * Time.deltaTime, Space.World);
 			if (transform.position.y < minY + 3) {
-				Debug.Log ("<color=red> enemy Y: </color>" + transform.position.y);
 				gameObject.GetComponent<Rigidbody> ().AddForce(new Vector3(0, jumpingForce, 0));
 			}
 			transform.position = Vector3.MoveTowards(transform.position, track.position, move);
