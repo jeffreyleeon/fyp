@@ -4,7 +4,7 @@ using System.Collections;
 public class Player : HittableObject {
 	
 	#region public param
-	public int ID;
+	public int playerId;
 	#endregion 
 
 
@@ -14,41 +14,41 @@ public class Player : HittableObject {
 	#endregion
 
 	void Start(){
-		setUserName ();
+		SetUserName ();
 	}
 
 	// Update is called once per frame
 	void FixedUpdate () {
-		MovementControll ();
+		MovementControl ();
 
 	}
 
 
 	#region public method
-	public int getScore(){
+	public int GetScore(){
 		return score;
 	}
 
-	public void addScore(int mark){
+	public void AddScore(int mark){
 		score += mark;
 	}
 
-	public string getUserName(){
+	public string GetUserName(){
 		return userName;
 	}
 	#endregion
 
 
 	#region private method
-	private void setUserName(){
-		// get username from UI
+	private void SetUserName(){
+		// TODO: get username from UI
 		userName = "Default" + Random.Range(1,100);
 	}
 
 	/// <summary>
 	/// Move Player position, just for testing
 	/// </summary>
-	private void MovementControll(){
+	private void MovementControl(){
 		//control movement
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");

@@ -31,8 +31,8 @@ public abstract class HittableObject : Photon.MonoBehaviour {
 	/// </summary>
 	/// <param name="damage">Damage.</param>
 	public virtual void HitBy(int damage){
-		if (currentHealth < 0) {
-			Debug.LogError ("Object has negative health already");
+		if (damage < 0) {
+			Debug.LogError ("Cannot have negative damage.");
 		}
 		currentHealth -= damage;
 		if (currentHealth < 0) {
@@ -48,7 +48,7 @@ public abstract class HittableObject : Photon.MonoBehaviour {
 		PhotonNetwork.Destroy (this.gameObject);
 	}
 
-	public bool Alive(){
+	public bool IsAlive(){
 		return currentHealth == 0;
 	}
 

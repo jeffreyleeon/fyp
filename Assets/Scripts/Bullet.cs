@@ -8,7 +8,7 @@ public class Bullet : Photon.MonoBehaviour {
 	public int attack = 100;
 
 	void OnCollisionEnter(Collision col){
-		if (col.gameObject.CompareTag ("Enemy")) {
+		if (col.gameObject.CompareTag (ObjectStore.GetEnemyTag())) {
 			col.gameObject.GetComponent<HittableObject> ().Kill();
 
 		}

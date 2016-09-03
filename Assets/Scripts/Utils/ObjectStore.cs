@@ -23,4 +23,8 @@ public class ObjectStore {
 	public static GameObject FindTrinus () {
 		return GameObject.Find (TRINUS_NAME);
 	}
+
+	public static string GetEnemyTag (){
+		return ENEMY_TAG;
+	}
 }
