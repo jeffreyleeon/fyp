@@ -7,6 +7,9 @@ public class ShootingController : MonoBehaviour {
 	[Tooltip("Prefab of bullet to be spawned")]
 	public GameObject bullet;
 
+    [Tooltip("Bullet's custom rotation during init")]
+    public Quaternion bulletRotation = Quaternion.identity;
+
 	[Tooltip("Number of bullets to be spawned per second")]
 	public int numOfBulletPerSecond;
 
@@ -34,7 +37,7 @@ public class ShootingController : MonoBehaviour {
 		}
 		Vector3 position = handModel.GetPalmPosition();
 		Vector3 palmNormal = handModel.GetPalmNormal();
-		GameObject bulletGO = PhotonNetwork.Instantiate(bullet.name, (position + palmNormal * 2), Quaternion.identity, 0 ) as GameObject;
+        GameObject bulletGO = PhotonNetwork.Instantiate(bullet.name, (position + palmNormal * 2), bulletRotation, 0) as GameObject;
 		bulletGO.layer = LayerMask.NameToLayer("Bullet");
 		// Place the bullet a bit in front of the palm
 		//bulletGO.transform.position = position + palmNormal * 2;
