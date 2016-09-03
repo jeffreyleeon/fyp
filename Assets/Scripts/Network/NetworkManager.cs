@@ -92,4 +92,21 @@ public sealed class NetworkManager {
 		}
 		PhotonNetwork.CreateRoom (roomName, roomOptions, null);
 	}
+
+    /// <summary>
+    /// Destroy a networked object
+    /// </summary>
+    /// <param name="gameObject"></param>
+    public static void DestroyNetworkObject(GameObject gameObject) {
+        PhotonView view = gameObject.GetComponent<PhotonView>();
+        if (!view) {
+            Debug.LogError("FYP/NetworkManager/DestroyNetworkObject gameObject does not contains PhotonView");
+            return;
+        }
+        if (!view.isMine) {
+            Debug.LogError("FYP/NetworkManager/DestroyNetworkObject gameObject does not belongs to me");
+            return;
+        }
+        PhotonNetwork.Destroy(gameObject);
+    }
 }
