@@ -9,7 +9,7 @@ public sealed class NetworkManager {
 	const byte maxNumOfPlayers = 4;
 
 	public static void InitConfig () {
-		PhotonNetwork.logLevel = PhotonLogLevel.Informational;
+		PhotonNetwork.logLevel = PhotonLogLevel.ErrorsOnly;
 		PhotonNetwork.autoJoinLobby = false;
 		PhotonNetwork.automaticallySyncScene = true;
 		PhotonNetwork.autoCleanUpPlayerObjects = true;
