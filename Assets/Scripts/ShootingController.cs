@@ -2,6 +2,7 @@
 using System.Collections;
 using Leap;
 
+[RequireComponent(typeof(PhotonView))]
 public class ShootingController : MonoBehaviour {
 
 	[Tooltip("Prefab of bullet to be spawned")]
@@ -22,6 +23,9 @@ public class ShootingController : MonoBehaviour {
 		InvokeRepeating ("SpawnBullet", 0, rate);
 	}
 
+	/// <summary>
+	/// Spawns bullet by passing in handmod
+	/// </summary>
 	private void SpawnBullet() {
 		HandModel[] handModels = new HandModel[handStore.handNum];
 		handStore.GetHands ().CopyTo (handModels, 0);
@@ -30,6 +34,11 @@ public class ShootingController : MonoBehaviour {
 		}
 	}
 
+
+	/// <summary>
+	/// Spwan bullet from palm normal
+	/// </summary>
+	/// <param name="handModel">Hand model.</param>
 	private void SpawnBulletFromHand(HandModel handModel) {
 		if (!handStore.IsOpenHand (handModel)) {
 			// Returning if hand is not opened
@@ -44,4 +53,6 @@ public class ShootingController : MonoBehaviour {
 		Rigidbody rigidBody = bulletGO.GetComponent<Rigidbody> ();
 		rigidBody.velocity = palmNormal * 100;
 	}
+
+
 }
