@@ -41,7 +41,9 @@ public class Enemy : HittableObject {
 
 	// Update is called once per frame
 	void Update () {
-		Move ();
+		if (this.photonView.isMine) {
+			Move ();
+		}
 
 	}
 
