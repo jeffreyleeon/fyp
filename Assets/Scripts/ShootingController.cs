@@ -58,7 +58,7 @@ public class ShootingController : Photon.MonoBehaviour {
 		GameObject bulletPrefab = Resources.Load (bulletPrefabPath) as GameObject;
 		GameObject bulletGO = Instantiate (bulletPrefab, bulletPosition, bulletRotation) as GameObject;
 		Bullet bullet = bulletGO.GetComponent<Bullet> ();
-		bullet.setOwner (owner);
+		bullet.SetOwner (owner);
 		bullet.gameObject.layer = LayerMask.NameToLayer("Bullet");
 		// Place the bullet a bit in front of the palm
 		Rigidbody rigidBody = bullet.GetComponent<Rigidbody> ();

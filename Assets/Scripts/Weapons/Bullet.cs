@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour {
 	//public for debugging, will be private
 	public string owner;
 
-	public void setOwner(string ownerName){
+	public void SetOwner(string ownerName){
 		owner = ownerName;
 	}
 }
