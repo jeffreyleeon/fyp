@@ -43,6 +43,8 @@ public class Player : HittableObject {
 	private void SetUserName(){
 		// TODO: get username from UI
 		userName = "Default" + Random.Range(1,100);
+
+		PhotonNetwork.player.name = userName;
 	}
 
 	/// <summary>

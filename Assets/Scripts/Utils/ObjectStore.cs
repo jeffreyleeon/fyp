@@ -7,6 +7,7 @@ public class ObjectStore {
 	private const string ENEMY_TAG = "Enemy";
 	private const string ENEMY_MANAGER_NAME = "EnemyManager";
 	private const string TRINUS_NAME = "Trinus";
+	private const string BULLET_TAG = "Bullet";
 
 	public static GameObject FindLeapMotionController () {
 		return GameObject.FindGameObjectWithTag (LEAP_MOTION_CONTROLLER_TAG);
@@ -26,5 +27,9 @@ public class ObjectStore {
 
 	public static string GetEnemyTag (){
 		return ENEMY_TAG;
+	}
+
+	public static string GetBulletTag(){
+		return BULLET_TAG;
 	}
 }
