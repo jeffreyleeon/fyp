@@ -40,18 +40,17 @@ public class Enemy : HittableObject {
 
 
 	// Update is called once per frame
-	void Update () {
+	virtual protected void Update () {
 		if (this.photonView.isMine) {
 			Move ();
 		}
-
 	}
 
 
 	/// <summary>
 	/// Move this object.
 	/// </summary>
-	private void Move() {
+	virtual protected void Move() {
 		bool outOfBound = transform.position.x < minX || transform.position.x > maxX ||
 			transform.position.y < minY || transform.position.y > maxY ||
 			transform.position.z < minZ || transform.position.z > maxZ;
@@ -59,10 +58,6 @@ public class Enemy : HittableObject {
 			this.Kill ();
 		} else {
 			float move = moveSpeed * Time.deltaTime;
-			//transform.Translate(Vector3.up * jumpHeight * Time.deltaTime, Space.World);
-			if (transform.position.y < minY + 3) {
-				gameObject.GetComponent<Rigidbody> ().AddForce(new Vector3(0, jumpingForce, 0));
-			}
 			transform.position = Vector3.MoveTowards(transform.position, track.position, move);
 		}
 	}
