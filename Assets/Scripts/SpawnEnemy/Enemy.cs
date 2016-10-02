@@ -66,4 +66,14 @@ public class Enemy : HittableObject {
 			transform.position = Vector3.MoveTowards(transform.position, track.position, move);
 		}
 	}
+
+	/// <summary>
+	/// when enemy collide with bullet.
+	/// </summary>
+	/// <param name="collision">Collision.</param>
+	void OnCollisionEnter(Collision collision){
+		if (collision.gameObject.tag == ObjectStore.GetBulletTag ()) {
+			PhotonNetwork.Destroy (this.gameObject);
+		}
+	}
 }
