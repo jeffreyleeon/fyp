@@ -26,7 +26,9 @@ public class Enemy : HittableObject {
 	[Tooltip("Boundary of Z-cor that an enemy to destroy")]
 	public int minZ = 2;
 	[Tooltip("Boundary of Z-cor that an enemy to destroy")]
-	public int maxZ = 40; 
+	public int maxZ = 40;
+	[Tooltip("Audio of enemy being hit")]
+	public AudioClip hitAudio;
 
 	#endregion
 
@@ -68,7 +70,15 @@ public class Enemy : HittableObject {
 	/// <param name="collision">Collision.</param>
 	void OnCollisionEnter(Collision collision){
 		if (collision.gameObject.tag == ObjectStore.GetBulletTag ()) {
+			PlayHitSound ();
 			PhotonNetwork.Destroy (this.gameObject);
+		}
+	}
+
+	void PlayHitSound () {
+		if (hitAudio != null) {
+			AudioSource audio = GetComponent<AudioSource>();
+			audio.PlayOneShot(hitAudio);
 		}
 	}
 }
