@@ -9,6 +9,7 @@ public class ObjectStore {
 	private const string ENEMY_MANAGER_NAME = "EnemyManager";
 	private const string TRINUS_NAME = "Trinus";
 	private const string BULLET_TAG = "Bullet";
+	private const string PLAYER_TAG = "Player";
 
 	private static readonly Dictionary<string, int> ScoreDictionary = new Dictionary<string, int>{
 		{ENEMY_TAG, 10}
@@ -29,6 +30,10 @@ public class ObjectStore {
 	public static GameObject FindTrinus () {
 		return GameObject.Find (TRINUS_NAME);
 	}
+
+	public static GameObject[] FindAllPlayers () {
+		return GameObject.FindGameObjectsWithTag (PLAYER_TAG);
+	}	
 
 	public static string GetEnemyTag (){
 		return ENEMY_TAG;
