@@ -11,7 +11,7 @@ public abstract class HittableObject : Photon.MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () {
+	void OnEnable () {
 		currentHealth = maxHealth;
 	}
 
