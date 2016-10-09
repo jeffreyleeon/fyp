@@ -71,7 +71,7 @@ public class Enemy : HittableObject {
 	void OnCollisionEnter(Collision collision){
 		if (collision.gameObject.tag == ObjectStore.GetBulletTag ()) {
 			PlayHitSound ();
-			PhotonNetwork.Destroy (this.gameObject);
+			this.Kill ();
 		}
 	}
 
