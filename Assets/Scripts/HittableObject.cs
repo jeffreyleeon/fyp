@@ -27,9 +27,9 @@ public abstract class HittableObject : Photon.MonoBehaviour {
 
 	/// <summary>
 	/// Object get hit by damage.
-	/// Autocatically call <c>Kill()</c> when Health less than or equal zero
 	/// </summary>
 	/// <param name="damage">Damage.</param>
+	/// <returns>remain health</returns>
 	public virtual void HitBy(int damage){
 		if (damage < 0) {
 			Debug.LogError ("Cannot have negative damage.");
@@ -37,7 +37,6 @@ public abstract class HittableObject : Photon.MonoBehaviour {
 		currentHealth -= damage;
 		if (currentHealth < 0) {
 			currentHealth = 0;
-			Kill ();
 		}
 	}
 

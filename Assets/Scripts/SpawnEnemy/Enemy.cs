@@ -73,6 +73,9 @@ public class Enemy : HittableObject {
 			PlayHitSound ();
 			Bullet b = collision.gameObject.GetComponent<Bullet> ();
 			HitBy (b.Attack);
+			if (this.GetCurrentHealth () == 0) {
+				this.Kill ();
+			}
 		}
 	}
 
