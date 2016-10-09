@@ -74,6 +74,10 @@ public class Enemy : HittableObject {
 			Bullet b = collision.gameObject.GetComponent<Bullet> ();
 			HitBy (b.Attack);
 			if (this.GetCurrentHealth () == 0) {
+				if (b.owner == PhotonNetwork.player.name) {
+					PhotonNetwork.player.AddScore (ObjectStore.GetScoreByTag (this.tag));
+				}
+				Debug.Log ("Local player score: " + PhotonNetwork.player.GetScore ());
 				this.Kill ();
 			}
 		}
