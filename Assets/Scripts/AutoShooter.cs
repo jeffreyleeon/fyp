@@ -4,6 +4,8 @@ using Leap;
 
 [RequireComponent(typeof(PhotonView))]
 public class AutoShooter : Photon.MonoBehaviour {
+	[Tooltip("Activate autoshooter")]
+	public bool active = false;
 
 	[Tooltip("Prefab of bullet to be spawned")]
 	public GameObject bulletPrefab;
@@ -17,9 +19,11 @@ public class AutoShooter : Photon.MonoBehaviour {
 
 
 	void Start () {
-		float rate = 1.0f / numOfBulletPerSecond;
-		InvokeRepeating ("Shoot", 0, rate);
-		Debug.Log ("autoshooter started, rate: "+rate);
+		if (active) {
+			float rate = 1.0f / numOfBulletPerSecond;
+			InvokeRepeating ("Shoot", 0, rate);
+			Debug.Log ("autoshooter started, rate: " + rate);
+		}
 	}
 
 
