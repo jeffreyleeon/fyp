@@ -71,8 +71,10 @@ public class Enemy : HittableObject {
 	void OnCollisionEnter(Collision collision){
 		if (collision.gameObject.tag == ObjectStore.GetBulletTag ()) {
 			PlayHitSound ();
+<<<<<<< HEAD
 			Bullet b = collision.gameObject.GetComponent<Bullet> ();
 			HitBy (b.Attack);
+>>>>>>> 57f17615cd15713e04378414dfdde6362b559558
 		}
 	}
 
