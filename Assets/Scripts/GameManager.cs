@@ -21,6 +21,10 @@ public class GameManager : Photon.PunBehaviour {
 		}
 	}
 
+	void Start () {
+		PlayBackgroundMusic ();
+	}
+
 	void JoinGameRoom () {
 		if (roomName == "") {
 			NetworkManager.JoinRandomRoom ();
@@ -34,6 +38,17 @@ public class GameManager : Photon.PunBehaviour {
 		trinus.transform.parent = player.transform;
 		enemyManager.GetComponent<Spawn> ().enabled = true;
 	}
+
+	#region Background music
+
+	void PlayBackgroundMusic () {
+		AudioSource audio = GetComponent<AudioSource>();
+		if (audio != null) {
+			audio.Play();
+		}
+	}
+
+	#endregion
 
 	#region PUN callbacks
 
