@@ -13,7 +13,6 @@ public class HpBarUpdate : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		hpBar.sizeDelta = new Vector2( hpBar.rect.width - 0.2f, hpBar.rect.height);
-		print ("Hehe================" + hpBar.rect.width);
+		hpBar.sizeDelta = new Vector2(Mathf.Clamp(hpBar.rect.width - 0.2f, 0, 100), hpBar.rect.height);
 	}
 }
