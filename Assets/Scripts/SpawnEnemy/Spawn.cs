@@ -7,7 +7,7 @@ public class Spawn : MonoBehaviour {
 	public GameObject[] enemies;
 
 	//the current amount of enemies on screen
-	[Tooltip("Current amount of enemier")]
+	[Tooltip("Current amount of enemies")]
 	public int amount;
 
 	[Tooltip("Max no. of enemies that appear at the same time")]
