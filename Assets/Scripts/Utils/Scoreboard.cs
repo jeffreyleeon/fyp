@@ -12,10 +12,20 @@ namespace FYP.Score{
 	};
 
 	public sealed class Scoreboard : MonoBehaviour {
-		
+
+		static List<ScoreObserver> ScoreObservers = new List<ScoreObserver>();
+
+		public static void AddObserver(ScoreObserver observer){
+			ScoreObservers.Add (observer);
+		}
+
+		public static void RemoveObserver(ScoreObserver observer){
+			ScoreObservers.Remove (observer);
+		}
+			
 		public static void  AddLocalPlayerScore(int score){
 			PhotonNetwork.player.AddScore (score);
-			Debug.Log ("all player score: " + GetAllPlayerScore ());
+			NotifyAllObservers ();
 		}
 
 		public static int GetLocalPlayerScore(){
@@ -31,6 +41,15 @@ namespace FYP.Score{
 				scoreList.Add (temp);
 			}
 			return scoreList;
+		}
+
+		/// <summary>
+		/// Notifies all observers by GetLocalPlayerScore()
+		/// </summary>
+		private static void NotifyAllObservers(){
+			foreach (ScoreObserver observer in ScoreObservers) {
+				observer.UpdateScore (GetLocalPlayerScore ());
+			}
 		}
 	}
 
