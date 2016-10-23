@@ -15,18 +15,12 @@ public class ScoreText : ScoreObserver {
 
 	void Start(){
 		Scoreboard.AddObserver (this);
-		Debug.Log ("ScoreText start");
 	}
 
 	public override void UpdateScore (int new_score)
 	{
-		Debug.Log ("ScoreText: updating score");
 		score = new_score;
 		txt.text = score.ToString();
 	}
 
-	void Update () {
-//		score = Scoreboard.GetLocalPlayerScore ();
-		txt.text = score.ToString ();
-	}
 }
