@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using FYP.Score;
 
 public class Enemy : HittableObject {
 
