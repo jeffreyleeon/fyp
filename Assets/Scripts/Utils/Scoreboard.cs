@@ -13,14 +13,14 @@ namespace FYP.Score{
 
 	public sealed class Scoreboard : MonoBehaviour {
 
-		static List<ScoreObserver> ScoreObservers = new List<ScoreObserver>();
+		static List<ScoreObserver> scoreObservers = new List<ScoreObserver>();
 
 		public static void AddObserver(ScoreObserver observer){
-			ScoreObservers.Add (observer);
+			scoreObservers.Add (observer);
 		}
 
 		public static void RemoveObserver(ScoreObserver observer){
-			ScoreObservers.Remove (observer);
+			scoreObservers.Remove (observer);
 		}
 			
 		public static void  AddLocalPlayerScore(int score){
@@ -47,7 +47,7 @@ namespace FYP.Score{
 		/// Notifies all observers by GetLocalPlayerScore()
 		/// </summary>
 		private static void NotifyAllObservers(){
-			foreach (ScoreObserver observer in ScoreObservers) {
+			foreach (ScoreObserver observer in scoreObservers) {
 				observer.UpdateScore (GetLocalPlayerScore ());
 			}
 		}

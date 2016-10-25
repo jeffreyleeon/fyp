@@ -13,6 +13,10 @@ public class Bullet : MonoBehaviour {
 		owner = ownerName;
 	}
 
+	public bool IsOwnBy(string name){
+		return (owner == name);
+	}
+
 	public int Attack {
 		get {
 			return attack;

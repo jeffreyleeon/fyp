@@ -74,8 +74,8 @@ public class Enemy : HittableObject {
 			PlayHitSound ();
 			Bullet b = collision.gameObject.GetComponent<Bullet> ();
 			HitBy (b.Attack);
-			if (this.GetCurrentHealth () == 0) {
-				if (b.owner == PhotonNetwork.player.name) {
+			if (this.IsDead()) {
+				if (b.IsOwnBy(PhotonNetwork.player.name)) {
 					Scoreboard.AddLocalPlayerScore (ObjectStore.GetScoreByTag (this.tag));
 				}
 				Debug.Log ("Local player score: " + Scoreboard.GetLocalPlayerScore());
@@ -89,5 +89,9 @@ public class Enemy : HittableObject {
 			AudioSource audio = GetComponent<AudioSource>();
 			audio.PlayOneShot(hitAudio);
 		}
+	}
+
+	bool IsDead(){
+		return (this.GetCurrentHealth () <= 0);
 	}
 }

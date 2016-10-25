@@ -20,7 +20,7 @@ public abstract class HittableObject : Photon.MonoBehaviour {
 	/// Gets the current health.
 	/// </summary>
 	/// <returns>The current health.</returns>
-	public  int GetCurrentHealth(){
+	public int GetCurrentHealth(){
 		return currentHealth;
 	}
 
@@ -29,7 +29,6 @@ public abstract class HittableObject : Photon.MonoBehaviour {
 	/// Object get hit by damage.
 	/// </summary>
 	/// <param name="damage">Damage.</param>
-	/// <returns>remain health</returns>
 	public virtual void HitBy(int damage){
 		if (damage < 0) {
 			Debug.LogError ("Cannot have negative damage.");

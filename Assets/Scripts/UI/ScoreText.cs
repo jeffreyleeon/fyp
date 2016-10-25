@@ -17,9 +17,9 @@ public class ScoreText : ScoreObserver {
 		Scoreboard.AddObserver (this);
 	}
 
-	public override void UpdateScore (int new_score)
+	public override void UpdateScore (int newScore)
 	{
-		score = new_score;
+		score = newScore;
 		txt.text = score.ToString();
 	}
 
