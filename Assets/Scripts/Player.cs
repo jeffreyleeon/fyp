@@ -15,6 +15,7 @@ public class Player : HittableObject {
 
 	void Start(){
 		SetUserName ();
+		PhotonNetwork.player.SetScore (0);
 	}
 
 	// Update is called once per frame
@@ -43,7 +44,6 @@ public class Player : HittableObject {
 	private void SetUserName(){
 		// TODO: get username from UI
 		userName = "Default" + Random.Range(1,100);
-
 		PhotonNetwork.player.name = userName;
 	}
 

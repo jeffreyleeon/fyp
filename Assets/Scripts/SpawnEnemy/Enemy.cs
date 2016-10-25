@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using FYP.Score;
 
 public class Enemy : HittableObject {
 
@@ -73,6 +74,13 @@ public class Enemy : HittableObject {
 			PlayHitSound ();
 			Bullet b = collision.gameObject.GetComponent<Bullet> ();
 			HitBy (b.Attack);
+			if (this.IsDead()) {
+				if (b.IsOwnBy(PhotonNetwork.player.name)) {
+					Scoreboard.AddLocalPlayerScore (ObjectStore.GetScoreByTag (this.tag));
+				}
+				Debug.Log ("Local player score: " + Scoreboard.GetLocalPlayerScore());
+				this.Kill ();
+			}
 		}
 	}
 
@@ -81,5 +89,9 @@ public class Enemy : HittableObject {
 			AudioSource audio = GetComponent<AudioSource>();
 			audio.PlayOneShot(hitAudio);
 		}
+	}
+
+	bool IsDead(){
+		return (this.GetCurrentHealth () <= 0);
 	}
 }

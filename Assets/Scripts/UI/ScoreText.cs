@@ -1,14 +1,31 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using FYP.Score;
 
-public class ScoreText : MonoBehaviour {
+public abstract class ScoreObserver : MonoBehaviour {
+
+	public abstract void UpdateScore (int new_score);
+}
+
+public class ScoreText : ScoreObserver {
 
 	public Text txt;
 	private int score = 0;
-	
-	void Update () {
-//		score = Scoreboard.GetLocalPlayerScore ();
-		txt.text = score.ToString ();
+
+	void Start(){
+		Scoreboard.AddObserver (this);
+		UpdateScore (score);
 	}
+
+	void OnDestroy () {
+		Scoreboard.RemoveObserver (this);
+	}
+
+	public override void UpdateScore (int newScore)
+	{
+		score = newScore;
+		txt.text = score.ToString();
+	}
+
 }

@@ -20,14 +20,13 @@ public abstract class HittableObject : Photon.MonoBehaviour {
 	/// Gets the current health.
 	/// </summary>
 	/// <returns>The current health.</returns>
-	public  int GetCurrentHealth(){
+	public int GetCurrentHealth(){
 		return currentHealth;
 	}
 
 
 	/// <summary>
 	/// Object get hit by damage.
-	/// Autocatically call <c>Kill()</c> when Health less than or equal zero
 	/// </summary>
 	/// <param name="damage">Damage.</param>
 	public virtual void HitBy(int damage){
@@ -37,7 +36,6 @@ public abstract class HittableObject : Photon.MonoBehaviour {
 		currentHealth -= damage;
 		if (currentHealth < 0) {
 			currentHealth = 0;
-			Kill ();
 		}
 	}
 
