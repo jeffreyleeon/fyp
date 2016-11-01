@@ -9,7 +9,6 @@ public class WalkingEnemy : Enemy {
 	[Tooltip("Whether the enemy is rotating right direction")]
 	private bool isRotatingRight = true;
 
-
 	void Awake () {
 		transform.Rotate(0, 0, paddlingDegree / 2);
 		InvokeRepeating("SwitchRotatingDirection", 0, 1);
