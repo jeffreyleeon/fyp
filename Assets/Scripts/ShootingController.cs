@@ -48,7 +48,7 @@ public class ShootingController : Photon.MonoBehaviour {
 		Vector3 palmNormal = handModel.GetPalmNormal();
 		Vector3 bulletVelocity = palmNormal * 100;
 		//hard code prefab path
-		this.photonView.RPC ("SpawnBullet", PhotonTargets.AllViaServer, PhotonNetwork.player.name, "bullet", (palmPosition + palmNormal * 2), bulletRotation, bulletVelocity);
+		this.photonView.RPC ("SpawnBullet", PhotonTargets.AllViaServer, PhotonNetwork.player.name, bulletPrefab.name, (palmPosition + palmNormal * 2), bulletRotation, bulletVelocity);
 
 	}
 
