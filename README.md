@@ -34,7 +34,11 @@ Installation
 
 Configuration
 ------------------
-NA
+###Bullet types
+To update bullet type, change <b>bulletPrefab</b> and <b>numOfBulletPerSecond</b> in ShootingManager
+
+1. Bullet (numOfBulletPerSecond = 60)
+2. BloodyKnife (numOfBulletPerSecond = 3)
 
 
 Troubleshooting
