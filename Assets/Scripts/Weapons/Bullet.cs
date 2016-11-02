@@ -9,6 +9,9 @@ public class Bullet : MonoBehaviour {
 	//public for debugging, will be private
 	public string owner;
 
+	[Tooltip("Initial speed of the bullet")]
+	public float speed;
+
 	public void SetOwner(string ownerName){
 		owner = ownerName;
 	}
