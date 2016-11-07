@@ -33,7 +33,7 @@ public class AutoShooter : Photon.MonoBehaviour {
 	/// </summary>
 	private void Shoot() {
 		if (PhotonNetwork.inRoom) {
-			this.photonView.RPC ("SpawnBullet", PhotonTargets.AllViaServer, PhotonNetwork.player.name, "TestingBullet", new Vector3(0, -8, 0), bulletRotation, new Vector3 (0, 0, 200));
+			this.photonView.RPC ("SpawnBullet", PhotonTargets.AllViaServer, PhotonNetwork.player.name, bulletPrefab.name, new Vector3(0, -8, 0), bulletRotation, new Vector3 (0, 0, 200));
 		}
 	}
 

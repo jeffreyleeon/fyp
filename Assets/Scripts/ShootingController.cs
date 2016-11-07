@@ -46,15 +46,14 @@ public class ShootingController : Photon.MonoBehaviour {
 		}
 		Vector3 palmPosition = handModel.GetPalmPosition();
 		Vector3 palmNormal = handModel.GetPalmNormal();
-		Vector3 bulletVelocity = palmNormal * 100;
+		Vector3 bulletDirection = palmNormal;
 		//hard code prefab path
-		this.photonView.RPC ("SpawnBullet", PhotonTargets.AllViaServer, PhotonNetwork.player.name, "bullet", (palmPosition + palmNormal * 2), bulletRotation, bulletVelocity);
-
+		this.photonView.RPC ("SpawnBullet", PhotonTargets.AllViaServer, PhotonNetwork.player.name, bulletPrefab.name, (palmPosition + palmNormal * 2), bulletRotation, bulletDirection);
 	}
 
 
 	[PunRPC]
-	void SpawnBullet(string owner, string bulletPrefabPath, Vector3 bulletPosition, Quaternion bulletRotation, Vector3 bulletVelocity){
+	void SpawnBullet(string owner, string bulletPrefabPath, Vector3 bulletPosition, Quaternion bulletRotation, Vector3 bulletDirection){
 		GameObject bulletPrefab = Resources.Load (bulletPrefabPath) as GameObject;
 		GameObject bulletGO = Instantiate (bulletPrefab, bulletPosition, bulletRotation) as GameObject;
 		Bullet bullet = bulletGO.GetComponent<Bullet> ();
@@ -62,7 +61,7 @@ public class ShootingController : Photon.MonoBehaviour {
 		bullet.gameObject.layer = LayerMask.NameToLayer("Bullet");
 		// Place the bullet a bit in front of the palm
 		Rigidbody rigidBody = bullet.GetComponent<Rigidbody> ();
-		rigidBody.velocity = bulletVelocity;
+		rigidBody.velocity = bulletDirection * bullet.speed;
 	}
 
 
