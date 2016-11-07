@@ -13,6 +13,10 @@ public class RayCast : MonoBehaviour {
         if (Physics.Raycast(transform.position, forward, out hit)) {
             print("=================hitting " + hit.collider.gameObject.name);
             print("LINE BREAK\n" + Time.time);
+
+			if (hit.collider.gameObject.name == "StartButton") {
+				StartSceneManager.addCount();
+			}
         }
 	}
 }
