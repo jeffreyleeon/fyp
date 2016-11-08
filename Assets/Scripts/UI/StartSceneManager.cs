@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class StartSceneManager : MonoBehaviour {
 
 	public static int startCount = 0;
-	public static int sceneNo = 1;
+	public static int sceneIndex = 1;
 
 	// Use this for initialization
 	void Start () {
@@ -15,7 +15,7 @@ public class StartSceneManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (startCount == 60) {
-			ChangeScene.changeToScene (sceneNo);
+			ChangeScene.changeToScene (sceneIndex);
 		}
 	}
 
