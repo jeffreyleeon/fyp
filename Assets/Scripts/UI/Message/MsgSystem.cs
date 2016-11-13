@@ -14,10 +14,15 @@ public sealed class MsgSystem : MonoBehaviour {
 		msgObservers.Remove (observer);
 	}
 
-	public static void ShowMsg(string msgToShow){
+	public static void ShowMsg(string msgToShow, float duration){
 		foreach( MsgObserver observer in msgObservers){
-			observer.ShowMessage (msgToShow);
+			observer.ShowMessage (msgToShow, duration);
 		}
+	}
 
+	public static void StopMsg(){
+		foreach( MsgObserver observer in msgObservers){
+			observer.StopMessage ();
+		}
 	}
 }
