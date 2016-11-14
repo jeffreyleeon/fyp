@@ -24,8 +24,7 @@ public class MsgText : MsgObserver {
 	void Start(){
 		MsgSystem.AddObserver (this);
 		txtColor = txt.color;
-		txtColor.a = 0.0f;					//set color alpha to zero
-		txt.color = txtColor;
+		SetTextAlpha (0.0f);
 		txt.alignment = TextAnchor.MiddleCenter;
 	}
 
@@ -33,15 +32,12 @@ public class MsgText : MsgObserver {
 		//Time.time
 		if (timerOn) {
 			timer += Time.deltaTime;
-			if (timer <= fadeTime) {
-				txtColor.a = Mathf.Lerp (0, 1, timer / fadeTime);
-				txt.color = txtColor;
-			} else if (timer >= fadeTime + showDuration) {
-				txtColor.a = Mathf.Lerp (1, 0, (timer - fadeTime - showDuration) / fadeTime);
-				txt.color = txtColor;
-				if (txtColor.a <= 0.0f) {
-					timer = 0.0f;
-					timerOn = false;
+			if (IsEntering ()) {
+				SetTextAlpha (Mathf.Lerp (0, 1, timer / fadeTime));
+			} else if (IsLeaving ()) {
+				SetTextAlpha (Mathf.Lerp (1, 0, (timer - fadeTime - showDuration) / fadeTime));
+				if (IsInvisible ()) {
+					TurnOffTimer ();
 				}
 			}
 		}
@@ -58,9 +54,31 @@ public class MsgText : MsgObserver {
 	}
 
 	public override void StopMessage (){
-		timerOn = false;
-		timer = 0.0f;
+		TurnOffTimer ();
+		SetTextAlpha (0.0f);
 		txtColor.a = 0.0f;
+		txt.color = txtColor;
+	}
+
+	private bool IsEntering () {
+		return timer <= fadeTime;
+	}
+
+	private bool IsLeaving () {
+		return timer >= fadeTime + showDuration;
+	}
+
+	private bool IsInvisible () {
+		return txtColor.a <= 0.0f;
+	}
+
+	private void TurnOffTimer () {
+		timer = 0.0f;
+		timerOn = false;
+	}
+
+	private void SetTextAlpha (float alpha) {
+		txtColor.a = alpha;
 		txt.color = txtColor;
 	}
 }
