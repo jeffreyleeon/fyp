@@ -21,6 +21,7 @@ public class StartSceneManager : MonoBehaviour {
 
 	public static void addCount() {
 		startCount++;
+		LoadingBar.currentAmount++;
 		print ("count added" + startCount);
 	}
 }
