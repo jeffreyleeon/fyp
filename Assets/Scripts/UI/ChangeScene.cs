@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour {
 
-	public static void changeToScene (int sceneIndex) {
+	public static void ChangeToScene (int sceneIndex) {
 		SceneManager.LoadScene (sceneIndex);
 	}
 }

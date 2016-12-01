@@ -15,10 +15,10 @@ public class RayCast : MonoBehaviour {
             print("LINE BREAK\n" + Time.time);
 
 			if (hit.collider.gameObject.name == "StartButton") {
-				StartSceneManager.enableLoading();
-				StartSceneManager.addCount();
+				StartSceneManager.EnableLoading();
+				StartSceneManager.AddCount();
 			} else {
-				StartSceneManager.disableLoading();
+				StartSceneManager.DisableLoading();
 			}
         }
 	}

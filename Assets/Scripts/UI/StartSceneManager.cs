@@ -17,15 +17,15 @@ public class StartSceneManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (startCount == 60) {
-			ChangeScene.changeToScene (sceneIndex);
+			ChangeScene.ChangeToScene (sceneIndex);
 		}
 	}
 
-	public static void enableLoading() {
+	public static void EnableLoading() {
 		loadingPanel.SetActive(true);
 	}
 
-	public static void disableLoading() {
+	public static void DisableLoading() {
 		loadingPanel.SetActive(false);
 
 		//reset current amount
@@ -33,7 +33,7 @@ public class StartSceneManager : MonoBehaviour {
 		LoadingBar.currentAmount = 0;
 	}
 
-	public static void addCount() {
+	public static void AddCount() {
 		startCount++;
 		LoadingBar.currentAmount++;
 		print ("count added" + startCount);
