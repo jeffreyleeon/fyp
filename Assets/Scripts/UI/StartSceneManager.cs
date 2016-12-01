@@ -22,10 +22,16 @@ public class StartSceneManager : MonoBehaviour {
 	}
 
 	public static void EnableLoading() {
+		if (loadingPanel == null) {
+			return;
+		}
 		loadingPanel.SetActive(true);
 	}
 
 	public static void DisableLoading() {
+		if (loadingPanel == null) {
+			return;
+		}
 		loadingPanel.SetActive(false);
 
 		//reset current amount
