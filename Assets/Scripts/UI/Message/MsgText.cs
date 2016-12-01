@@ -21,7 +21,7 @@ public class MsgText : MsgObserver {
 	private float showDuration = 0.0f;
 	private bool timerOn = false;
 
-	void Start(){
+	void Awake(){
 		MsgSystem.AddObserver (this);
 		txtColor = txt.color;
 		SetTextAlpha (0.0f);
