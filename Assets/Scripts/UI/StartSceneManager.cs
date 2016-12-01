@@ -19,6 +19,16 @@ public class StartSceneManager : MonoBehaviour {
 		if (startCount == 60) {
 			ChangeScene.ChangeToScene (sceneIndex);
 		}
+
+		// Debug usage
+		ListenKeyboard ();
+	}
+
+	void ListenKeyboard () {
+		if (Input.GetKey (KeyCode.S)) {
+			// Enter bright scene directly
+			ChangeScene.ChangeToScene (sceneIndex);
+		}
 	}
 
 	public static void EnableLoading() {
