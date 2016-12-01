@@ -31,9 +31,6 @@ public class Spawn : MonoBehaviour {
 	[Tooltip("Max time for new enemy to appear")]
 	public int maxSpawnTime = 5;
 
-	[Tooltip("Prefab name of the enemy spawn")]
-	public string enemyPrefabName = "Enemy";
-
 	private Vector3 spawnPoint;
 
 	void Start () {
@@ -48,10 +45,11 @@ public class Spawn : MonoBehaviour {
 		spawnPoint.y = Random.Range (minY, maxY);
 		spawnPoint.z = Random.Range (minZ, maxZ);
 	
-		enemies = ObjectStore.FindEnemies ();
-		amount = enemies.Length + 1;
+		GameObject[] existingEnemies = ObjectStore.FindEnemies ();
+		amount = existingEnemies.Length + 1;
 		if (amount < maxEnemy) {
-			PhotonNetwork.Instantiate(enemyPrefabName, spawnPoint, Quaternion.identity, 0);
+			int index = Random.Range (0, enemies.Length);
+			PhotonNetwork.Instantiate(enemies [index].gameObject.name, spawnPoint, Quaternion.identity, 0);
 		}
 		Invoke ("SpawnEnemy", Random.Range(minSpawnTime, maxSpawnTime));
 	}
