@@ -10,6 +10,7 @@ public class ObjectStore {
 	private const string TRINUS_NAME = "Trinus";
 	private const string BULLET_TAG = "Bullet";
 	private const string PLAYER_TAG = "Player";
+	private const string START_BUTTON_NAME = "StartButton";
 
 	private static readonly Dictionary<string, int> ScoreDictionary = new Dictionary<string, int>{
 		{ENEMY_TAG, 10}
@@ -41,6 +42,10 @@ public class ObjectStore {
 
 	public static string GetBulletTag(){
 		return BULLET_TAG;
+	}
+
+	public static string GetStartButtonName() {
+		return START_BUTTON_NAME;
 	}
 
 	public static int GetScoreByTag(string tag){

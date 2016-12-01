@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 public class StartSceneManager : MonoBehaviour {
 
 	public static int startCount = 0;
-	public static int sceneIndex = 1;
+	public static int BRIGHT_SCENE = 1;
+	public static int sceneIndex = -1;
 	public static GameObject loadingPanel;
 
 	// Use this for initialization
@@ -19,13 +20,33 @@ public class StartSceneManager : MonoBehaviour {
 		if (startCount == 60) {
 			ChangeScene.ChangeToScene (sceneIndex);
 		}
+
+		// Debug usage
+		ListenKeyboard ();
+	}
+
+	void ListenKeyboard () {
+		if (Input.GetKey (KeyCode.S)) {
+			// Enter bright scene directly
+			ChangeScene.ChangeToScene (sceneIndex);
+		}
+	}
+
+	public static void SetTargetScene (int targetSceneIndex) {
+		sceneIndex = targetSceneIndex;
 	}
 
 	public static void EnableLoading() {
+		if (loadingPanel == null) {
+			return;
+		}
 		loadingPanel.SetActive(true);
 	}
 
 	public static void DisableLoading() {
+		if (loadingPanel == null) {
+			return;
+		}
 		loadingPanel.SetActive(false);
 
 		//reset current amount
