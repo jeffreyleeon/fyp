@@ -5,13 +5,17 @@ public class TutorManager : MonoBehaviour {
 
 	enum TutorState {
 		SHOW_HAND_STATE,
+		DISMISS_HAND_STATE,
 		SHOOT_BULLET_STATE,
 		END_STATE,
 	};
 	TutorState currentState;
 
+	private HandStore handStore;
+
 	// Use this for initialization
 	void Start () {
+		handStore = HandStore.GetInstance ();
 		InitialState ();
 	}
 	
@@ -20,6 +24,16 @@ public class TutorManager : MonoBehaviour {
 		switch (currentState) {
 		case TutorState.SHOW_HAND_STATE:
 			{
+				if (handStore.handNum >= 2) {
+					ProceedState ();
+				}
+				break;
+			}
+		case TutorState.DISMISS_HAND_STATE:
+			{
+				if (handStore.handNum <= 0) {
+					ProceedState ();
+				}
 				break;
 			}
 		case TutorState.SHOOT_BULLET_STATE:
@@ -55,8 +69,14 @@ public class TutorManager : MonoBehaviour {
 				MsgSystem.ShowMsg (MsgStore.GetShowHandTutorMsg (), 30);
 				break;
 			}
+		case TutorState.DISMISS_HAND_STATE:
+			{
+				MsgSystem.ShowMsg (MsgStore.GetDismissHandTutorMsg (), 30);
+				break;
+			}
 		case TutorState.SHOOT_BULLET_STATE:
 			{
+				MsgSystem.ShowMsg (MsgStore.GetShootingTutorMsg (), 30);
 				break;
 			}
 		case TutorState.END_STATE:
