@@ -3,6 +3,9 @@ using System.Collections;
 
 public class TutorManager : MonoBehaviour {
 
+	[Tooltip("Number of seconds that checkings are inactive to prevent falling to the next tutorial before user realize")]
+	public int inactiveSeconds;
+
 	enum TutorState {
 		SHOW_HAND_STATE,
 		DISMISS_HAND_STATE,
@@ -12,6 +15,7 @@ public class TutorManager : MonoBehaviour {
 	TutorState currentState;
 
 	private HandStore handStore;
+	private int inactiveCount;
 
 	// Use this for initialization
 	void Start () {
@@ -21,6 +25,10 @@ public class TutorManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (inactiveCount > 0) {
+			inactiveCount--;
+			return;
+		}
 		switch (currentState) {
 		case TutorState.SHOW_HAND_STATE:
 			{
@@ -59,7 +67,12 @@ public class TutorManager : MonoBehaviour {
 
 	void ProceedState () {
 		currentState++;
+		ResetInactiveCount ();
 		OnUpdateState ();
+	}
+
+	void ResetInactiveCount () {
+		inactiveCount = 60 * inactiveSeconds;
 	}
 
 	void OnUpdateState () {
