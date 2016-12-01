@@ -28,7 +28,7 @@ public class StartSceneManager : MonoBehaviour {
 	void ListenKeyboard () {
 		if (Input.GetKey (KeyCode.S)) {
 			// Enter bright scene directly
-			ChangeScene.ChangeToScene (sceneIndex);
+			ChangeScene.ChangeToScene (BRIGHT_SCENE);
 		}
 	}
 
