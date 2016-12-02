@@ -5,7 +5,7 @@ using FYP.Score;
 public class Enemy : HittableObject {
 
 
-
+	public int attack = 10;
 
 	#region movement param
 
