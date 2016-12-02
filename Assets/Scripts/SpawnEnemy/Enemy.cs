@@ -34,7 +34,7 @@ public class Enemy : HittableObject {
 	#endregion
 
 	// Use this for initialization
-	void Start () {
+	virtual public void Start () {
 		if (trackObj == null) {
 			trackObj = GameObject.Find("Track");
 		}
@@ -43,7 +43,7 @@ public class Enemy : HittableObject {
 
 
 	// Update is called once per frame
-	virtual protected void Update () {
+	virtual public void Update () {
 		if (this.photonView.isMine) {
 			Move ();
 		}
