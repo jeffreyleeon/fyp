@@ -66,4 +66,13 @@ public class Player : HittableObject {
 	}
 
 	#endregion
+
+	void OnCollisionEnter(Collision collision){
+		print ("hit something");
+		if (collision.gameObject.tag == ObjectStore.GetEnemyTag ()) {
+			Enemy enemy = collision.gameObject.GetComponent<Enemy> ();
+			HitBy (enemy.attack);
+			print ("hit by enemy");
+		}
+	}
 }

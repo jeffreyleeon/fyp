@@ -56,4 +56,15 @@ public class ObjectStore {
 		Debug.Log ("/FYP/ObjectStore/GetScoreByTag: Given tag " + tag + " not found.");
 		return 0;
 	}
+
+	public static Player FindMyPlayer(){
+		GameObject[] players = ObjectStore.FindAllPlayers ();
+		foreach (GameObject tempGO in players) {
+			Player tempPlayer = tempGO.GetComponent<Player> ();
+			if (tempPlayer.photonView.isMine) {
+				return tempPlayer;
+			}
+		}
+		return null;
+	}
 }
