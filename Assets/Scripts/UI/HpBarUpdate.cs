@@ -6,18 +6,27 @@ public class HpBarUpdate : MonoBehaviour {
 
 	public RectTransform hpBar;
 	public int currHP;
-	public int maxHP = 100;
+	public int maxHP;
 	public float maxRectWidth;
+	Player player;
 
 	// Use this for initialization
 	void Start () {
-		currHP = maxHP;
+		SetupPlayer ();
 		maxRectWidth = hpBar.rect.width;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		float hpBarRatio = ((float)currHP / (float)maxHP) * maxRectWidth;
-		hpBar.sizeDelta = new Vector2(Mathf.Clamp(hpBarRatio, 0, maxRectWidth), hpBar.rect.height);
+		if (player != null) {
+			float hpBarRatio = ((float)player.GetCurrentHealth () / (float)player.maxHealth) * maxRectWidth;
+			hpBar.sizeDelta = new Vector2 (Mathf.Clamp (hpBarRatio, 0, maxRectWidth), hpBar.rect.height);
+		} else {
+			SetupPlayer ();
+		}
+	}
+
+	private void SetupPlayer(){
+		player = ObjectStore.FindMyPlayer ();
 	}
 }
