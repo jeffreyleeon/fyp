@@ -20,6 +20,10 @@ public class ObjectStore {
 		return GameObject.FindGameObjectWithTag (LEAP_MOTION_CONTROLLER_TAG);
 	}
 
+	public static GameObject FindShootingController (){
+		return GameObject.Find ("ShootingManager");
+	}
+
 	public static GameObject[] FindEnemies () {
 		return GameObject.FindGameObjectsWithTag (ENEMY_TAG);
 	}
