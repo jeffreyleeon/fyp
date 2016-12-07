@@ -40,11 +40,12 @@ public class RayCast : MonoBehaviour {
 
 	void DisableLoading () {
 		if (disableCount >= 0) {
-			print (disableCount);
+//			print (disableCount);
 			disableCount = disableCount - 1;
 			return;
 		}
 		// print (disableCount);
+
 		StartSceneManager.DisableLoading ();
 	}
 }
