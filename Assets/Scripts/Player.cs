@@ -5,10 +5,15 @@ public class Player : HittableObject {
 	
 	#region public param
 	public int playerId;
+	public enum WeaponType{
+		bullet,
+		knife
+	}
 	#endregion 
 
 
 	#region private param
+	private IWeapon weaponBehv;
 	private string userName;
 	private int score;
 	#endregion
@@ -16,6 +21,8 @@ public class Player : HittableObject {
 	void Start(){
 		SetUserName ();
 		PhotonNetwork.player.SetScore (0);
+		SetWeaponBehv(WeaponType.bullet);
+		
 	}
 
 	// Update is called once per frame
@@ -36,6 +43,23 @@ public class Player : HittableObject {
 
 	public string GetUserName(){
 		return userName;
+	}
+
+	public void SetWeaponBehv (WeaponType newWeapon){
+		if (weaponBehv != null) {
+			Destroy (gameObject.GetComponent(weaponBehv.GetType()));
+		}
+
+		switch (newWeapon) {
+			case WeaponType.bullet:
+				weaponBehv = (IWeapon) gameObject.AddComponent<BulletBehv>();
+				break;
+			case WeaponType.knife:
+				weaponBehv = (IWeapon) gameObject.AddComponent<KnifeBehv>();
+				break;
+		}
+		weaponBehv.SetShootingController ();
+
 	}
 	#endregion
 
@@ -73,6 +97,8 @@ public class Player : HittableObject {
 			Enemy enemy = collision.gameObject.GetComponent<Enemy> ();
 			HitBy (enemy.attack);
 			print ("hit by enemy");
+			SetWeaponBehv (WeaponType.knife);
 		}
 	}
+		
 }
