@@ -45,7 +45,7 @@ public class ShootingController : Photon.MonoBehaviour {
 	/// </summary>
 	/// <param name="handModel">Hand model.</param>
 	private void SpawnBulletFromHand(HandModel handModel) {
-		if (!handStore.IsOpenHand (handModel)) {
+		if (!handStore.IsOpenHand (handModel) || bulletPrefab == null) {
 			// Returning if hand is not opened
 			return;
 		}
