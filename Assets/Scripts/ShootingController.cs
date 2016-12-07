@@ -18,9 +18,8 @@ public class ShootingController : Photon.MonoBehaviour {
 
 	void Start () {
 		handStore = HandStore.GetInstance ();
+		Shoot ();
 
-		float rate = 1.0f / numOfBulletPerSecond;
-		InvokeRepeating ("Shoot", 0, rate);
 	}
 
 	/// <summary>
@@ -32,6 +31,9 @@ public class ShootingController : Photon.MonoBehaviour {
 		foreach (HandModel handmod in handModels) {
 			SpawnBulletFromHand (handmod);
 		}
+
+		float rate = 1.0f / numOfBulletPerSecond;
+		Invoke ("Shoot", rate);
 	}
 
 
