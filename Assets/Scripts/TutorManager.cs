@@ -17,6 +17,7 @@ public class TutorManager : MonoBehaviour {
 
 	private HandStore handStore;
 	private GameObject shootingManager;
+	GameObject[] enemies;
 	private int inactiveCount;
 
 	// Use this for initialization
@@ -25,6 +26,9 @@ public class TutorManager : MonoBehaviour {
 
 		shootingManager = ObjectStore.FindShootingManager ();
 		shootingManager.SetActive (false);
+
+		enemies = ObjectStore.FindEnemies ();
+		ShowEnemies (false);
 
 		InitialState ();
 	}
@@ -60,6 +64,9 @@ public class TutorManager : MonoBehaviour {
 			}
 		case TutorState.SHOOT_ENEMIES_STATE:
 			{
+				if (ObjectStore.FindEnemies ().Length <= 0) {
+					ProceedState ();
+				}
 				break;
 			}
 		case TutorState.END_STATE:
@@ -109,12 +116,14 @@ public class TutorManager : MonoBehaviour {
 			}
 		case TutorState.SHOOT_ENEMIES_STATE:
 			{
+				ShowEnemies (true);
 				MsgSystem.ShowMsg (MsgStore.GetShootingEnemiesTutorMsg (), 30);
 				break;
 			}
 		case TutorState.END_STATE:
 			{
-				
+				StartCoroutine (LeaveTutorialScene());
+				MsgSystem.ShowMsg (MsgStore.GetTutorialEndMsg (), 30);
 				break;
 			}
 		default:
@@ -123,6 +132,17 @@ public class TutorManager : MonoBehaviour {
 				break;
 			}
 		}
+	}
+
+	void ShowEnemies (bool show) {
+		foreach (GameObject enemy in enemies) {
+			enemy.SetActive (show);
+		}
+	}
+
+	IEnumerator LeaveTutorialScene () {
+		yield return new WaitForSeconds (10);
+		ChangeScene.ChangeToScene (ChangeScene.BRIGHT_SCENE);
 	}
 
 }

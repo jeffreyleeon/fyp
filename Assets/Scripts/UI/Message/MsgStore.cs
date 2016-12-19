@@ -6,7 +6,8 @@ public class MsgStore {
 	private const string showHandTutorMsg = "Place your hands in front of the camera to see your hands";
 	private const string dismissHandTutorMsg = "Put down your hands and you will not see them in the screen";
 	private const string shootingTutorMsg = "Open your palm to shoot bullets";
-	private const string shootingEnemiesTutorMsg = "Aim and shoot 5 enemies";
+	private const string shootingEnemiesTutorMsg = "Aim and kill all the enemies!";
+	private const string tutorialEndMsg = "End of the tutorial, ready to start the first stage in 10 seconds!";
 
 	public static string GetWelcomeMsg(){
 		return welcomeMsg;
@@ -26,5 +27,9 @@ public class MsgStore {
 
 	public static string GetShootingEnemiesTutorMsg () {
 		return shootingEnemiesTutorMsg;
+	}
+
+	public static string GetTutorialEndMsg () {
+		return tutorialEndMsg;
 	}
 }
