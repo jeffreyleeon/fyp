@@ -25,6 +25,10 @@ public class ObjectStore {
 		return GameObject.FindGameObjectsWithTag (ENEMY_TAG);
 	}
 
+	public static GameObject[] FindBullets () {
+		return GameObject.FindGameObjectsWithTag (BULLET_TAG);
+	}
+
 	public static GameObject FindShootingManager () {
 		return GameObject.Find (SHOOTING_MANAGER_NAME);
 	}

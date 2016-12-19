@@ -10,6 +10,7 @@ public class TutorManager : MonoBehaviour {
 		SHOW_HAND_STATE,
 		DISMISS_HAND_STATE,
 		SHOOT_BULLET_STATE,
+		SHOOT_ENEMIES_STATE,
 		END_STATE,
 	};
 	TutorState currentState;
@@ -51,6 +52,13 @@ public class TutorManager : MonoBehaviour {
 				break;
 			}
 		case TutorState.SHOOT_BULLET_STATE:
+			{
+				if (ObjectStore.FindBullets ().Length > 0) {
+					ProceedState ();
+				}
+				break;
+			}
+		case TutorState.SHOOT_ENEMIES_STATE:
 			{
 				break;
 			}
@@ -99,8 +107,14 @@ public class TutorManager : MonoBehaviour {
 				MsgSystem.ShowMsg (MsgStore.GetShootingTutorMsg (), 30);
 				break;
 			}
+		case TutorState.SHOOT_ENEMIES_STATE:
+			{
+				MsgSystem.ShowMsg (MsgStore.GetShootingEnemiesTutorMsg (), 30);
+				break;
+			}
 		case TutorState.END_STATE:
 			{
+				
 				break;
 			}
 		default:
