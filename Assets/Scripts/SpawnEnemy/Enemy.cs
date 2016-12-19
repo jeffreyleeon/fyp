@@ -73,7 +73,7 @@ public class Enemy : HittableObject {
 		if (collision.gameObject.tag == ObjectStore.GetBulletTag ()) {
 			PlayHitSound ();
 			Bullet b = collision.gameObject.GetComponent<Bullet> ();
-			HitBy (b.Attack);
+			hitBehv.HitBy (b.Attack);
 			if (this.IsDead()) {
 				if (b.IsOwnBy(PhotonNetwork.player.name)) {
 					Scoreboard.AddLocalPlayerScore (ObjectStore.GetScoreByTag (this.tag));

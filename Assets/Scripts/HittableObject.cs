@@ -5,8 +5,33 @@ using System.Collections;
 public abstract class HittableObject : Photon.MonoBehaviour {
 
 	public int maxHealth = 100;
+	public enum HitType{
+		normal,
+		invulnerable,
+		absorb
+	}
 
 	private int currentHealth;
+	protected IHitBehv hitBehv;
+
+	public void SetHitBehv (HitType newHitBehv){
+		if (hitBehv != null) {
+			Destroy (gameObject.GetComponent(hitBehv.GetType()));
+		}
+
+		switch (newHitBehv) {
+			case HitType.normal:
+				hitBehv = (IHitBehv) gameObject.AddComponent<NormalHitBehv>();
+				break;
+			case HitType.invulnerable:
+				hitBehv = (IHitBehv) gameObject.AddComponent<InvulnerableHitBehv>();
+				break;
+			case HitType.absorb:
+				hitBehv = (IHitBehv) gameObject.AddComponent<AbsorbHitBehv>();
+				break;
+		}
+
+	}
 
 
 
@@ -25,16 +50,22 @@ public abstract class HittableObject : Photon.MonoBehaviour {
 	}
 
 
-	/// <summary>
-	/// Object get hit by damage.
-	/// </summary>
-	/// <param name="damage">Damage.</param>
-	public virtual void HitBy(int damage){
-		if (damage < 0) {
-			Debug.LogError ("Cannot have negative damage.");
+	public void AddHealth(int num){
+		if (num < 0) {
+			print ("HittableObject.cs: Add negative health");
 		}
-		currentHealth -= damage;
-		if (currentHealth < 0) {
+		currentHealth += num;
+		if (currentHealth > maxHealth) {
+			currentHealth = maxHealth;
+		}
+	}
+
+	public void DeductHealth(int num){
+		if (num < 0) {
+			print ("HittableObject.cs: Deduct negative health");
+		}
+		currentHealth -= num;
+		if (currentHealth <= 0) {
 			currentHealth = 0;
 		}
 	}

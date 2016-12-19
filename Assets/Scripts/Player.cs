@@ -22,7 +22,8 @@ public class Player : HittableObject {
 		SetUserName ();
 		PhotonNetwork.player.SetScore (0);
 		SetWeaponBehv(WeaponType.bullet);
-		
+		SetHitBehv (HitType.normal);
+			
 	}
 
 	// Update is called once per frame
@@ -92,13 +93,12 @@ public class Player : HittableObject {
 	#endregion
 
 	void OnCollisionEnter(Collision collision){
-		print ("hit something");
 		if (collision.gameObject.tag == ObjectStore.GetEnemyTag ()) {
 			Enemy enemy = collision.gameObject.GetComponent<Enemy> ();
-			HitBy (enemy.attack);
-			print ("hit by enemy");
+			hitBehv.HitBy (enemy.attack);
 			SetWeaponBehv (WeaponType.knife);
 		}
+
 	}
 		
 }
