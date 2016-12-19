@@ -43,7 +43,12 @@ public abstract class HittableObject : Photon.MonoBehaviour {
 	/// Kill this object.
 	/// </summary>
 	public virtual void Kill(){
-        NetworkManager.DestroyNetworkObject(this.gameObject);
+		if (NetworkManager.IsServerConnected) {
+			NetworkManager.DestroyNetworkObject(this.gameObject);
+		} else {
+			Destroy (this.gameObject);
+		}
+        
 	}
 
 	public bool IsAlive(){
