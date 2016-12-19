@@ -15,11 +15,16 @@ public class TutorManager : MonoBehaviour {
 	TutorState currentState;
 
 	private HandStore handStore;
+	private GameObject shootingManager;
 	private int inactiveCount;
 
 	// Use this for initialization
 	void Start () {
 		handStore = HandStore.GetInstance ();
+
+		shootingManager = ObjectStore.FindShootingManager ();
+		shootingManager.SetActive (false);
+
 		InitialState ();
 	}
 	
@@ -39,6 +44,7 @@ public class TutorManager : MonoBehaviour {
 			}
 		case TutorState.DISMISS_HAND_STATE:
 			{
+				print ("FYP/TutorManager/Update/DISMISS_HAND_STATE: handNum = " + handStore.handNum);
 				if (handStore.handNum <= 0) {
 					ProceedState ();
 				}
@@ -89,6 +95,7 @@ public class TutorManager : MonoBehaviour {
 			}
 		case TutorState.SHOOT_BULLET_STATE:
 			{
+				shootingManager.SetActive (true);
 				MsgSystem.ShowMsg (MsgStore.GetShootingTutorMsg (), 30);
 				break;
 			}
