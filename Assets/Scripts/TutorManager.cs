@@ -39,6 +39,8 @@ public class TutorManager : MonoBehaviour {
 			inactiveCount--;
 			return;
 		}
+		// Debug usage
+		ListenKeyboard ();
 		switch (currentState) {
 		case TutorState.SHOW_HAND_STATE:
 			{
@@ -78,6 +80,12 @@ public class TutorManager : MonoBehaviour {
 				print ("FYP/TutorManager/Update: Invalid tutorial state");
 				break;
 			}
+		}
+	}
+
+	void ListenKeyboard () {
+		if (Input.GetKey (KeyCode.Space)) {
+			ProceedState ();
 		}
 	}
 
