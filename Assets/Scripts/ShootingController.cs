@@ -19,7 +19,10 @@ public class ShootingController : Photon.MonoBehaviour {
 	void Start () {
 		handStore = HandStore.GetInstance ();
 		Shoot ();
+	}
 
+	void Update () {
+		CheckChangeWeapon ();
 	}
 
 	/// <summary>
@@ -70,6 +73,14 @@ public class ShootingController : Photon.MonoBehaviour {
 		// Place the bullet a bit in front of the palm
 		Rigidbody rigidBody = bullet.GetComponent<Rigidbody> ();
 		rigidBody.velocity = bulletDirection * bullet.speed;
+	}
+
+
+	/// <summary>
+	/// Check if the user is intended to change weapon
+	/// </summary>
+	private void CheckChangeWeapon() {
+		print ("==============should change " + handStore.AreThumbsTouchingIndexFinger ());
 	}
 
 

@@ -54,6 +54,28 @@ public sealed class HandStore{
 		return handNum != 0;
 	}
 
+	// check if thumb is touching index finger
+	public bool AreThumbsTouchingIndexFinger () {
+		HandModel[] handModels = new HandModel[handNum];
+		allHandModels.CopyTo (handModels, 0);
+		bool isTouching = false;
+		foreach (HandModel handmod in handModels) {
+			Hand leapHand = handmod.GetLeapHand ();
+			isTouching = IsThumbTouchingIndexFinger (leapHand);
+		}
+		return isTouching;
+	}
+
+	private bool IsThumbTouchingIndexFinger (Hand hand) {
+		bool isTouching = false;
+		foreach (Finger finger in hand.Fingers) {
+			if (finger.Type != Finger.FingerType.TYPE_INDEX && finger.Type != Finger.FingerType.TYPE_THUMB) {
+				continue;
+			}
+		}
+		return isTouching;
+	}
+
 	/*
 	public Vector3 GetPalmPosition (HandModel handmod) {
 		return handmod.GetPalmPosition();
