@@ -53,6 +53,7 @@ public abstract class HittableObject : Photon.MonoBehaviour {
 	public void AddHealth(int num){
 		if (num < 0) {
 			print ("HittableObject.cs: Add negative health");
+
 		}
 		currentHealth += num;
 		if (currentHealth > maxHealth) {

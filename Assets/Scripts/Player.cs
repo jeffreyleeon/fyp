@@ -97,6 +97,7 @@ public class Player : HittableObject {
 			Enemy enemy = collision.gameObject.GetComponent<Enemy> ();
 			hitBehv.HitBy (enemy.attack);
 		}
+
 	}
 		
 }
