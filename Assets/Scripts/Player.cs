@@ -6,8 +6,8 @@ public class Player : HittableObject {
 	#region public param
 	public int playerId;
 	public enum WeaponType{
-		bullet,
-		knife
+		Bullet,
+		Knife
 	}
 	#endregion 
 
@@ -21,8 +21,8 @@ public class Player : HittableObject {
 	void Start(){
 		SetUserName ();
 		PhotonNetwork.player.SetScore (0);
-		SetWeaponBehv(WeaponType.bullet);
-		SetHitBehv (HitType.normal);
+		SetWeaponBehv(WeaponType.Bullet);
+		SetHitBehv (HitType.Normal);
 			
 	}
 
@@ -47,15 +47,18 @@ public class Player : HittableObject {
 	}
 
 	public void SetWeaponBehv (WeaponType newWeapon){
+		if (newWeapon == null) {
+			return;
+		}
 		if (weaponBehv != null) {
 			Destroy (gameObject.GetComponent(weaponBehv.GetType()));
 		}
 
 		switch (newWeapon) {
-			case WeaponType.bullet:
+			case WeaponType.Bullet:
 				weaponBehv = (IWeapon) gameObject.AddComponent<BulletBehv>();
 				break;
-			case WeaponType.knife:
+			case WeaponType.Knife:
 				weaponBehv = (IWeapon) gameObject.AddComponent<KnifeBehv>();
 				break;
 		}
