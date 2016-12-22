@@ -96,9 +96,7 @@ public class Player : HittableObject {
 		if (collision.gameObject.tag == ObjectStore.GetEnemyTag ()) {
 			Enemy enemy = collision.gameObject.GetComponent<Enemy> ();
 			hitBehv.HitBy (enemy.attack);
-			SetWeaponBehv (WeaponType.knife);
 		}
-
 	}
 		
 }
