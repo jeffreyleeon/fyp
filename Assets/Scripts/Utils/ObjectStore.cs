@@ -6,6 +6,7 @@ public class ObjectStore {
 
 	private const string LEAP_MOTION_CONTROLLER_TAG = "LeapMotionController";
 	private const string ENEMY_TAG = "Enemy";
+	private const string SHOOTING_MANAGER_NAME = "ShootingManager";
 	private const string ENEMY_MANAGER_NAME = "EnemyManager";
 	private const string TRINUS_NAME = "Trinus";
 	private const string BULLET_TAG = "Bullet";
@@ -20,8 +21,20 @@ public class ObjectStore {
 		return GameObject.FindGameObjectWithTag (LEAP_MOTION_CONTROLLER_TAG);
 	}
 
+	public static GameObject FindShootingController (){
+		return GameObject.Find ("ShootingManager");
+	}
+
 	public static GameObject[] FindEnemies () {
 		return GameObject.FindGameObjectsWithTag (ENEMY_TAG);
+	}
+
+	public static GameObject[] FindBullets () {
+		return GameObject.FindGameObjectsWithTag (BULLET_TAG);
+	}
+
+	public static GameObject FindShootingManager () {
+		return GameObject.Find (SHOOTING_MANAGER_NAME);
 	}
 
 	public static GameObject FindEnemyManager () {

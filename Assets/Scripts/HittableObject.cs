@@ -5,8 +5,36 @@ using System.Collections;
 public abstract class HittableObject : Photon.MonoBehaviour {
 
 	public int maxHealth = 100;
+	public enum HitType{
+		Normal,
+		Invulnerable,
+		Absorb
+	}
 
 	private int currentHealth;
+	protected IHitBehv hitBehv;
+
+	public void SetHitBehv (HitType newHitBehv){
+		if (newHitBehv == null) {
+			return;
+		}
+		if (hitBehv != null) {
+			Destroy (gameObject.GetComponent(hitBehv.GetType()));
+		}
+
+		switch (newHitBehv) {
+			case HitType.Normal:
+				hitBehv = (IHitBehv) gameObject.AddComponent<NormalHitBehv>();
+				break;
+			case HitType.Invulnerable:
+				hitBehv = (IHitBehv) gameObject.AddComponent<InvulnerableHitBehv>();
+				break;
+			case HitType.Absorb:
+				hitBehv = (IHitBehv) gameObject.AddComponent<AbsorbHitBehv>();
+				break;
+		}
+
+	}
 
 
 
@@ -25,16 +53,24 @@ public abstract class HittableObject : Photon.MonoBehaviour {
 	}
 
 
-	/// <summary>
-	/// Object get hit by damage.
-	/// </summary>
-	/// <param name="damage">Damage.</param>
-	public virtual void HitBy(int damage){
-		if (damage < 0) {
-			Debug.LogError ("Cannot have negative damage.");
+	public void AddHealth(int num){
+		if (num < 0) {
+			print ("HittableObject.cs: Add negative health");
+			return;
 		}
-		currentHealth -= damage;
-		if (currentHealth < 0) {
+		currentHealth += num;
+		if (currentHealth > maxHealth) {
+			currentHealth = maxHealth;
+		}
+	}
+
+	public void DeductHealth(int num){
+		if (num < 0) {
+			print ("HittableObject.cs: Deduct negative health");
+			return;
+		}
+		currentHealth -= num;
+		if (currentHealth <= 0) {
 			currentHealth = 0;
 		}
 	}
@@ -43,7 +79,12 @@ public abstract class HittableObject : Photon.MonoBehaviour {
 	/// Kill this object.
 	/// </summary>
 	public virtual void Kill(){
-        NetworkManager.DestroyNetworkObject(this.gameObject);
+		if (NetworkManager.IsServerConnected) {
+			NetworkManager.DestroyNetworkObject(this.gameObject);
+		} else {
+			Destroy (this.gameObject);
+		}
+        
 	}
 
 	public bool IsAlive(){

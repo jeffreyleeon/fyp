@@ -19,8 +19,8 @@ public class RayCast : MonoBehaviour {
 
 		if (Physics.Raycast (transform.position, forward, out hit)) {
 			RestartDisableCount ();
-			print ("=================hitting " + hit.collider.gameObject.name);
-			print ("LINE BREAK\n" + Time.time);
+//			print ("=================hitting " + hit.collider.gameObject.name);
+//			print ("LINE BREAK\n" + Time.time);
 
 			if (hit.collider.gameObject.name == ObjectStore.GetStartButtonName ()) {
 				StartSceneManager.EnableLoading ();
@@ -40,11 +40,12 @@ public class RayCast : MonoBehaviour {
 
 	void DisableLoading () {
 		if (disableCount >= 0) {
-			print (disableCount);
+//			print (disableCount);
 			disableCount = disableCount - 1;
 			return;
 		}
-		print (disableCount);
+		// print (disableCount);
+
 		StartSceneManager.DisableLoading ();
 	}
 }

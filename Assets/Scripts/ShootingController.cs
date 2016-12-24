@@ -18,20 +18,25 @@ public class ShootingController : Photon.MonoBehaviour {
 
 	void Start () {
 		handStore = HandStore.GetInstance ();
+		Shoot ();
 
-		float rate = 1.0f / numOfBulletPerSecond;
-		InvokeRepeating ("Shoot", 0, rate);
 	}
 
 	/// <summary>
 	/// Shoot by passing in handmod
 	/// </summary>
 	private void Shoot() {
+		if (!isActiveAndEnabled) {
+			return;
+		}
 		HandModel[] handModels = new HandModel[handStore.handNum];
 		handStore.GetHands ().CopyTo (handModels, 0);
 		foreach (HandModel handmod in handModels) {
 			SpawnBulletFromHand (handmod);
 		}
+
+		float rate = 1.0f / numOfBulletPerSecond;
+		Invoke ("Shoot", rate);
 	}
 
 
@@ -40,7 +45,7 @@ public class ShootingController : Photon.MonoBehaviour {
 	/// </summary>
 	/// <param name="handModel">Hand model.</param>
 	private void SpawnBulletFromHand(HandModel handModel) {
-		if (!handStore.IsOpenHand (handModel)) {
+		if (!handStore.IsOpenHand (handModel) || bulletPrefab == null) {
 			// Returning if hand is not opened
 			return;
 		}
@@ -48,7 +53,11 @@ public class ShootingController : Photon.MonoBehaviour {
 		Vector3 palmNormal = handModel.GetPalmNormal();
 		Vector3 bulletDirection = palmNormal;
 		//hard code prefab path
-		this.photonView.RPC ("SpawnBullet", PhotonTargets.AllViaServer, PhotonNetwork.player.name, bulletPrefab.name, (palmPosition + palmNormal * 2), bulletRotation, bulletDirection);
+		if (NetworkManager.IsServerConnected) {
+			this.photonView.RPC ("SpawnBullet", PhotonTargets.AllViaServer, PhotonNetwork.player.name, bulletPrefab.name, (palmPosition + palmNormal * 2), bulletRotation, bulletDirection);
+		} else {
+			SpawnBullet ("Default User", bulletPrefab.name, (palmPosition + palmNormal * 2), bulletRotation, bulletDirection);
+		}
 	}
 
 
