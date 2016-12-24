@@ -26,6 +26,8 @@ public class ShootingController : Photon.MonoBehaviour {
 	/// Shoot by passing in handmod
 	/// </summary>
 	private void Shoot() {
+		float rate = 1.0f / numOfBulletPerSecond;
+		Invoke ("Shoot", rate);
 		if (!isActiveAndEnabled) {
 			return;
 		}
@@ -34,9 +36,6 @@ public class ShootingController : Photon.MonoBehaviour {
 		foreach (HandModel handmod in handModels) {
 			SpawnBulletFromHand (handmod);
 		}
-
-		float rate = 1.0f / numOfBulletPerSecond;
-		Invoke ("Shoot", rate);
 	}
 
 
