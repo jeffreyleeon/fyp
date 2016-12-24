@@ -68,11 +68,24 @@ public sealed class HandStore{
 
 	private bool IsThumbTouchingIndexFinger (Hand hand) {
 		bool isTouching = false;
-		foreach (Finger finger in hand.Fingers) {
-			if (finger.Type != Finger.FingerType.TYPE_INDEX && finger.Type != Finger.FingerType.TYPE_THUMB) {
-				continue;
-			}
-		}
+		Finger thumb = hand.Fingers [0];
+		Finger index = hand.Fingers [1];
+		// From inside to outside: TYPE_METACARPAL, TYPE_PROXIMAL, TYPE_INTERMEDIATE, TYPE_DISTAL
+		Bone thumbDistal = thumb.Bone (Bone.BoneType.TYPE_DISTAL);
+		Bone indexDistal = index.Bone (Bone.BoneType.TYPE_DISTAL);
+		Bone indexIntermediate = index.Bone (Bone.BoneType.TYPE_INTERMEDIATE);
+		Bone indexProximal = index.Bone (Bone.BoneType.TYPE_PROXIMAL);
+
+		float distalDistance = thumbDistal.Center.DistanceTo(indexDistal.Center);
+		float intermediateDistance = thumbDistal.Center.DistanceTo(indexIntermediate.Center);
+		float proximalDistance = thumbDistal.Center.DistanceTo(indexProximal.Center);
+
+		float minDistance;
+		minDistance = Mathf.Min (distalDistance, intermediateDistance);
+		minDistance = Mathf.Min (minDistance, proximalDistance);
+
+		Debug.Log ("------minDistance: " + minDistance);
+
 		return isTouching;
 	}
 
