@@ -90,6 +90,11 @@ public class Player : HittableObject {
 		if (Input.GetKey(KeyCode.Space)){
 			Debug.Log ("Input Key: Space Down");
 			rigidbody.velocity = rigidbody.velocity + (Vector3.up * 50 * Time.fixedDeltaTime);
+		}else if(Input.GetKey(KeyCode.I)){
+			// debug for score scene
+			GameObject trinus = ObjectStore.FindTrinus();
+			trinus.transform.parent = null;
+			ChangeScene.ChangeToScene(ChangeScene.SCORE_SCENE);
 		}
 	}
 
