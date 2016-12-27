@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Player : HittableObject {
@@ -100,10 +101,25 @@ public class Player : HittableObject {
 
 	#endregion
 
+	public override void Kill ()
+	{
+		print ("zero health");
+		GameObject trinus = ObjectStore.FindTrinus();
+		trinus.transform.parent = null;
+		base.Kill ();
+		ChangeScene.ChangeToScene (ChangeScene.SCORE_SCENE);
+	}
+
 	void OnCollisionEnter(Collision collision){
+		GameObject deathPanel = GameObject.Find("Death");
+		deathPanel.GetComponent<Image> ().fillCenter = true;
+
 		if (collision.gameObject.tag == ObjectStore.GetEnemyTag ()) {
 			Enemy enemy = collision.gameObject.GetComponent<Enemy> ();
 			hitBehv.HitBy (enemy.attack);
+			if (GetCurrentHealth () == 0) {
+				Kill ();
+			}
 		}
 
 	}
