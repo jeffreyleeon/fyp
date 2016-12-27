@@ -7,6 +7,7 @@ public class StartSceneManager : MonoBehaviour {
 	public static int startCount = 0;
 	public static int BRIGHT_SCENE = ChangeScene.BRIGHT_SCENE;
 	public static int TUTORIAL_SCENE = ChangeScene.TUTORIAL_SCENE;
+	public static int SCORE_SCENE = ChangeScene.SCORE_SCENE;
 	public static int sceneIndex = -1;
 	public static GameObject loadingPanel;
 
