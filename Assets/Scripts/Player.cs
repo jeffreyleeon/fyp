@@ -111,17 +111,29 @@ public class Player : HittableObject {
 	}
 
 	void OnCollisionEnter(Collision collision){
-		GameObject deathPanel = GameObject.Find("Death");
-		deathPanel.GetComponent<Image> ().fillCenter = true;
 
 		if (collision.gameObject.tag == ObjectStore.GetEnemyTag ()) {
 			Enemy enemy = collision.gameObject.GetComponent<Enemy> ();
 			hitBehv.HitBy (enemy.attack);
 			if (GetCurrentHealth () == 0) {
-				Kill ();
+				StartCoroutine ("activateDeathPanel");
 			}
+
 		}
 
 	}
+
+	IEnumerator activateDeathPanel(){
+		GameObject deathPanel = GameObject.Find("Death");
+		deathPanel.GetComponent<Image> ().fillCenter = true;
+		deathPanel.GetComponent<Image> ().CrossFadeColor (Color.red, 1.0f, false, false);
+		yield return new WaitForSeconds (1.0f);
+		deathPanel.GetComponent<Image> ().CrossFadeColor (Color.black, 0.5f, false, false);
+		yield return new WaitForSeconds (0.5f);
+		deathPanel.GetComponent<Image> ().CrossFadeAlpha (150.0f, 1.0f, false);
+		yield return new WaitForSeconds (1.0f);
+		Kill ();
+	}
+		
 		
 }
