@@ -20,11 +20,14 @@ public class Player : HittableObject {
 	#endregion
 
 	void Start(){
-		SetUserName ();
-		PhotonNetwork.player.SetScore (0);
-		SetWeaponBehv(WeaponType.Bullet);
-		SetHitBehv (HitType.Normal);
-			
+		if (this.photonView.isMine) {
+			SetUserName ();
+			PhotonNetwork.player.SetScore (0);
+			SetWeaponBehv (WeaponType.Bullet);
+			SetHitBehv (HitType.Normal);
+		} else {
+			userName = this.photonView.owner.name;
+		}
 	}
 
 	// Update is called once per frame
@@ -110,7 +113,6 @@ public class Player : HittableObject {
 	}
 
 	void OnCollisionEnter(Collision collision){
-
 		if (collision.gameObject.tag == ObjectStore.GetEnemyTag ()) {
 			Enemy enemy = collision.gameObject.GetComponent<Enemy> ();
 			hitBehv.HitBy (enemy.attack);
