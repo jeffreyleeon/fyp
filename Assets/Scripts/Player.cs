@@ -107,7 +107,6 @@ public class Player : HittableObject {
 		GameObject trinus = ObjectStore.FindTrinus();
 		trinus.transform.parent = null;
 		base.Kill ();
-		ChangeScene.ChangeToScene (ChangeScene.SCORE_SCENE);
 	}
 
 	void OnCollisionEnter(Collision collision){
@@ -115,15 +114,15 @@ public class Player : HittableObject {
 		if (collision.gameObject.tag == ObjectStore.GetEnemyTag ()) {
 			Enemy enemy = collision.gameObject.GetComponent<Enemy> ();
 			hitBehv.HitBy (enemy.attack);
-			if (GetCurrentHealth () == 0) {
-				StartCoroutine ("activateDeathPanel");
+			if (GetCurrentHealth () == 0 && userName == PhotonNetwork.player.name) {
+				StartCoroutine ("activateDeath");
 			}
 
 		}
 
 	}
 
-	IEnumerator activateDeathPanel(){
+	IEnumerator activateDeath(){
 		GameObject deathPanel = GameObject.Find("Death");
 		deathPanel.GetComponent<Image> ().fillCenter = true;
 		deathPanel.GetComponent<Image> ().CrossFadeColor (Color.red, 1.0f, false, false);
@@ -132,8 +131,11 @@ public class Player : HittableObject {
 		yield return new WaitForSeconds (0.5f);
 		deathPanel.GetComponent<Image> ().CrossFadeAlpha (150.0f, 1.0f, false);
 		yield return new WaitForSeconds (1.0f);
+		this.photonView.RPC ("BroadcastChangeToScene", PhotonTargets.AllViaServer, ChangeScene.SCORE_SCENE);
 		Kill ();
 	}
+
+
 		
 		
 }
