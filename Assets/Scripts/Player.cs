@@ -102,15 +102,18 @@ public class Player : HittableObject {
 		}
 	}
 
-	#endregion
-
-	public override void Kill ()
-	{
-		print ("zero health");
-		GameObject trinus = ObjectStore.FindTrinus();
-		trinus.transform.parent = null;
-		base.Kill ();
+	private bool allPlayerDie(){
+		GameObject[] allPlayers = ObjectStore.FindAllPlayers ();
+		foreach (GameObject plyrGO in allPlayers) {
+			Player plyr = plyrGO.GetComponent<Player> ();
+			if (plyr.GetCurrentHealth() > 0) {
+				return false;
+			}
+		}
+		return true;
 	}
+
+	#endregion
 
 	void OnCollisionEnter(Collision collision){
 		if (collision.gameObject.tag == ObjectStore.GetEnemyTag ()) {
@@ -119,9 +122,7 @@ public class Player : HittableObject {
 			if (GetCurrentHealth () == 0 && userName == PhotonNetwork.player.name) {
 				StartCoroutine ("activateDeath");
 			}
-
 		}
-
 	}
 
 	IEnumerator activateDeath(){
@@ -133,11 +134,23 @@ public class Player : HittableObject {
 		yield return new WaitForSeconds (0.5f);
 		deathPanel.GetComponent<Image> ().CrossFadeAlpha (150.0f, 1.0f, false);
 		yield return new WaitForSeconds (1.0f);
-		this.photonView.RPC ("BroadcastChangeToScene", PhotonTargets.AllViaServer, ChangeScene.SCORE_SCENE);
-		Kill ();
+
+		GameObject trinus = ObjectStore.FindTrinus();
+		trinus.transform.parent = null;
+		if (allPlayerDie()) {
+			this.photonView.RPC ("BroadcastChangeToScene", PhotonTargets.AllViaServer, ChangeScene.SCORE_SCENE);
+		} else {
+			deathPanel.GetComponent<Image> ().CrossFadeAlpha (0f, 1.0f, false);
+			trinus.transform.position = new Vector3 (0, 10, -10);
+			this.GetComponent<MeshRenderer> ().enabled = false;
+			this.GetComponent<CapsuleCollider> ().enabled = false;
+		}
 	}
 
-
+	[PunRPC]
+	public void BroadcastChangeToScene(int sceneIndex) {
+		ChangeScene.ChangeToScene (sceneIndex);
+	}
 		
 		
 }
