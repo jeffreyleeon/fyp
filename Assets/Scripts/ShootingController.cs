@@ -3,6 +3,7 @@ using System.Collections;
 using Leap;
 
 [RequireComponent(typeof(PhotonView))]
+[RequireComponent(typeof(SceneWeaponsList))]
 public class ShootingController : Photon.MonoBehaviour {
 
 	[Tooltip("Prefab of bullet to be spawned")]
@@ -97,8 +98,28 @@ public class ShootingController : Photon.MonoBehaviour {
 
 	private void ChangeWeapon () {
 		Player player = ObjectStore.FindMyPlayer ();
+		if (!player) {
+			Debug.Log ("/FYP/ShootingController/ChangeWeapon: player is null");
+			return;
+		}
 		Constants.WeaponType currentWeaponType = player.GetWeaponBehv ().WeaponType ();
-		print ("=========behv " + currentWeaponType);
+		// Get scene weapons list
+		Constants.WeaponType[] weaponsList = GetWeaponsList ();
+		// Update to the next weapon
+		int index = System.Array.IndexOf (weaponsList, currentWeaponType);
+		index = (index + 1) % weaponsList.Length;
+		player.SetWeaponBehv (weaponsList [index]);
+	}
+
+	private Constants.WeaponType[] GetWeaponsList () {
+		SceneWeaponsList weaponsListComponent = GetComponent<SceneWeaponsList> ();
+		Constants.WeaponType[] sceneWeaponsList;
+		if (weaponsListComponent) {
+			sceneWeaponsList = weaponsListComponent.weaponsList;
+		} else {
+			sceneWeaponsList = new Constants.WeaponType[] { Constants.WeaponType.Bullet };
+		}
+		return sceneWeaponsList;
 	}
 
 	private IEnumerator UnlockChangeWeaponMutex () {
