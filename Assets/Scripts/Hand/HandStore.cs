@@ -75,41 +75,6 @@ public sealed class HandStore{
 		return handNum != 0;
 	}
 
-	// check if thumb is touching index finger
-	[System.Obsolete("HandStore.AreThumbsTouchingIndexFinger function is deprecated")]
-	public bool AreThumbsTouchingIndexFinger () {
-		HandModel[] handModels = new HandModel[handNum];
-		allHandModels.CopyTo (handModels, 0);
-		bool isTouching = false;
-		foreach (HandModel handmod in handModels) {
-			Hand leapHand = handmod.GetLeapHand ();
-			isTouching = IsThumbTouchingIndexFinger (leapHand);
-		}
-		return isTouching;
-	}
-
-	[System.Obsolete("HandStore.IsThumbTouchingIndexFinger function is deprecated")]
-	private bool IsThumbTouchingIndexFinger (Hand hand) {
-		bool isTouching = false;
-		Finger thumb = hand.Fingers [0];
-		Finger index = hand.Fingers [1];
-		// From inside to outside: TYPE_METACARPAL, TYPE_PROXIMAL, TYPE_INTERMEDIATE, TYPE_DISTAL
-		Bone thumbDistal = thumb.Bone (Bone.BoneType.TYPE_DISTAL);
-		Bone indexDistal = index.Bone (Bone.BoneType.TYPE_DISTAL);
-		Bone indexIntermediate = index.Bone (Bone.BoneType.TYPE_INTERMEDIATE);
-		Bone indexProximal = index.Bone (Bone.BoneType.TYPE_PROXIMAL);
-
-		float distalDistance = thumbDistal.Center.DistanceTo(indexDistal.Center);
-		float intermediateDistance = thumbDistal.Center.DistanceTo(indexIntermediate.Center);
-		float proximalDistance = thumbDistal.Center.DistanceTo(indexProximal.Center);
-
-		float minDistance;
-		minDistance = Mathf.Min (distalDistance, intermediateDistance);
-		minDistance = Mathf.Min (minDistance, proximalDistance);
-
-		return isTouching;
-	}
-
 	public bool IsHandSwipingAndClosed () {
 		bool isSwiping = false;
 		HandModel[] handModels = new HandModel[handNum];
