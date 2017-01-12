@@ -75,6 +75,14 @@ public abstract class HittableObject : Photon.MonoBehaviour {
 		}
 	}
 
+	public void SetHealth(int num){
+		if (num < 0 || num > maxHealth) {
+			print ("HittableObject.cs: Set invalid health");
+			return;
+		}
+		currentHealth = num;
+	}
+
 	/// <summary>
 	/// Kill this object.
 	/// </summary>
