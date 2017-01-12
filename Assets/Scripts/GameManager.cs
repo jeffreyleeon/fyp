@@ -57,6 +57,7 @@ public class GameManager : Photon.PunBehaviour {
 	}
 
 	override public void OnFailedToConnectToPhoton (DisconnectCause cause) {
+		PhotonNetwork.offlineMode = true;
 		Debug.LogError ("FYP/OnFailedToConnectToPhoton " + cause);
 		Debug.LogError ("Please check network connection and app id");
 	}
