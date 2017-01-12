@@ -80,7 +80,7 @@ public class ShootingController : Photon.MonoBehaviour {
 	/// Check if the user is intended to change weapon
 	/// </summary>
 	private void CheckChangeWeapon() {
-		print ("==============should change " + handStore.AreThumbsTouchingIndexFinger ());
+		print ("==============should change " + handStore.IsHandSwipingAndClosed ());
 	}
 
 

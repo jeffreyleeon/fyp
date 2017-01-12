@@ -49,12 +49,34 @@ public sealed class HandStore{
 		return false;
 	}
 
+	// check if hand is closed
+	public bool IsCloseHand(HandModel handModel) {
+		int extendCount = 0;
+		Hand leapHand = handModel.GetLeapHand ();
+		foreach (Finger finger in leapHand.Fingers) {
+			if (finger.IsExtended) {
+				extendCount++;
+			}
+		}
+		if (extendCount <= 1) {
+			return true;
+		}
+		return false;
+	}
+
+	public float PalmVelocity (HandModel handmod) {
+		Hand leapHand = handmod.GetLeapHand ();
+		Vector handSpeedVector = leapHand.PalmVelocity;
+		return handSpeedVector.Magnitude;
+	}
+
 	// check if hand appear
 	public bool IsHandAppear(){
 		return handNum != 0;
 	}
 
 	// check if thumb is touching index finger
+	[System.Obsolete("HandStore.AreThumbsTouchingIndexFinger function is deprecated")]
 	public bool AreThumbsTouchingIndexFinger () {
 		HandModel[] handModels = new HandModel[handNum];
 		allHandModels.CopyTo (handModels, 0);
@@ -66,6 +88,7 @@ public sealed class HandStore{
 		return isTouching;
 	}
 
+	[System.Obsolete("HandStore.IsThumbTouchingIndexFinger function is deprecated")]
 	private bool IsThumbTouchingIndexFinger (Hand hand) {
 		bool isTouching = false;
 		Finger thumb = hand.Fingers [0];
@@ -84,9 +107,17 @@ public sealed class HandStore{
 		minDistance = Mathf.Min (distalDistance, intermediateDistance);
 		minDistance = Mathf.Min (minDistance, proximalDistance);
 
-		Debug.Log ("------minDistance: " + minDistance);
-
 		return isTouching;
+	}
+
+	public bool IsHandSwipingAndClosed () {
+		bool isSwiping = false;
+		HandModel[] handModels = new HandModel[handNum];
+		allHandModels.CopyTo (handModels, 0);
+		foreach (HandModel handmod in handModels) {
+			isSwiping = PalmVelocity (handmod) > 900f && IsCloseHand (handmod);
+		}
+		return isSwiping;
 	}
 
 	/*
