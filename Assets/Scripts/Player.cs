@@ -6,10 +6,6 @@ public class Player : HittableObject {
 	
 	#region public param
 	public int playerId;
-	public enum WeaponType{
-		Bullet,
-		Knife
-	}
 	#endregion 
 
 
@@ -22,7 +18,7 @@ public class Player : HittableObject {
 		if (this.photonView.isMine) {
 			SetUserName ();
 			PhotonNetwork.player.SetScore (0);
-			SetWeaponBehv (WeaponType.Bullet);
+			SetWeaponBehv (Constants.WeaponType.Bullet);
 			SetHitBehv (HitType.Normal);
 		} else {
 			userName = this.photonView.owner.name;
@@ -41,7 +37,7 @@ public class Player : HittableObject {
 		return userName;
 	}
 
-	public void SetWeaponBehv (WeaponType newWeapon){
+	public void SetWeaponBehv (Constants.WeaponType newWeapon){
 		if (newWeapon == null) {
 			return;
 		}
@@ -50,10 +46,10 @@ public class Player : HittableObject {
 		}
 
 		switch (newWeapon) {
-			case WeaponType.Bullet:
+			case Constants.WeaponType.Bullet:
 				weaponBehv = (IWeapon) gameObject.AddComponent<BulletBehv>();
 				break;
-			case WeaponType.Knife:
+			case Constants.WeaponType.Knife:
 				weaponBehv = (IWeapon) gameObject.AddComponent<KnifeBehv>();
 				break;
 		}
