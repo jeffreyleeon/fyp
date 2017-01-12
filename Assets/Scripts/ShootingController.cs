@@ -84,15 +84,21 @@ public class ShootingController : Photon.MonoBehaviour {
 	/// Check if the user is intended to change weapon
 	/// </summary>
 	private void CheckChangeWeapon() {
-		print ("==============should change " + handStore.IsHandSwipingAndClosed ());
+		// print ("==============should change " + handStore.IsHandSwipingAndClosed ());
 		if (!handStore.IsHandSwipingAndClosed () || changingWeaponMutexLock == true) {
 			return;
 		}
 		changingWeaponMutexLock = true;
 		// Do change weapon logic
-
+		ChangeWeapon ();
 		// Release mutex lock
 		StartCoroutine (UnlockChangeWeaponMutex());
+	}
+
+	private void ChangeWeapon () {
+		Player player = ObjectStore.FindMyPlayer ();
+		Constants.WeaponType currentWeaponType = player.GetWeaponBehv ().WeaponType ();
+		print ("=========behv " + currentWeaponType);
 	}
 
 	private IEnumerator UnlockChangeWeaponMutex () {

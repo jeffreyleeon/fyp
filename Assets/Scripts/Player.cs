@@ -37,6 +37,10 @@ public class Player : HittableObject {
 		return userName;
 	}
 
+	public IWeapon GetWeaponBehv () {
+		return weaponBehv;
+	}
+
 	public void SetWeaponBehv (Constants.WeaponType newWeapon){
 		if (newWeapon == null) {
 			return;
