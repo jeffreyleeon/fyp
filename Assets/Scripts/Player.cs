@@ -16,7 +16,6 @@ public class Player : HittableObject {
 	#region private param
 	private IWeapon weaponBehv;
 	private string userName;
-	private int score;
 	#endregion
 
 	void Start(){
@@ -36,13 +35,7 @@ public class Player : HittableObject {
 	}
 
 	#region public method
-	public int GetScore(){
-		return score;
-	}
 
-	public void AddScore(int mark){
-		score += mark;
-	}
 
 	public string GetUserName(){
 		return userName;
