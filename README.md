@@ -46,7 +46,8 @@ To update bullet type, change <b>bulletPrefab</b> and <b>numOfBulletPerSecond</b
 2. Update WeaponType Enum in <b>Constants.cs</b>
 3. In every scene, <b>ShootingManager</b> must require a script component of <b>SceneWeaponsList.cs</b>
 4. Edit weaponsList in <b>SceneWeaponsList</b> script component
-5. Play the game and try to change weapon(Wave hand with hand closed)!
+5. Edit <b>Player.cs</b>, <b>SetWeaponBehv</b> function to include the new behavior
+6. Play the game and try to change weapon(Wave hand with hand closed)!
 
 Troubleshooting
 ------------------
