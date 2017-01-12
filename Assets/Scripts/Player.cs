@@ -33,9 +33,7 @@ public class Player : HittableObject {
 	// Update is called once per frame
 	void FixedUpdate () {
 		MovementControl ();
-
 	}
-
 
 	#region public method
 	public int GetScore(){
@@ -116,12 +114,13 @@ public class Player : HittableObject {
 	#endregion
 
 	void OnCollisionEnter(Collision collision){
+		//TODO: should check photonview.isMine? could reduce some computation
 		if (collision.gameObject.tag == ObjectStore.GetEnemyTag ()) {
 			Enemy enemy = collision.gameObject.GetComponent<Enemy> ();
 			hitBehv.HitBy (enemy.attack);
-			if (GetCurrentHealth () == 0 && userName == PhotonNetwork.player.name) {
-				StartCoroutine ("activateDeath");
-			}
+		}
+		if (GetCurrentHealth () == 0 && userName == PhotonNetwork.player.name) {
+			StartCoroutine ("activateDeath");
 		}
 	}
 
