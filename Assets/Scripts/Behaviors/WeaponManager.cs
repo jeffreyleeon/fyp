@@ -7,7 +7,8 @@ public class WeaponManager : MonoBehaviour {
 	static public string defaultWeaponIconFilePath = "Assets/UI/weapon_bullet.png";
 	public enum WeaponType {
 		Bullet,
-		Knife
+		Knife,
+		LightingShot
 	}
 }
 
@@ -39,5 +40,18 @@ public class KnifeBehv : MonoBehaviour, IWeapon{
 		shootControler.bulletPrefab = (Object)Resources.Load("BloodyKnife") as GameObject;
 		shootControler.numOfBulletPerSecond = 5;
 		shootControler.UpdateWeaponIcon (WeaponManager.weaponIconBasePath + "weapon_knife.png");
+	}
+}
+
+public class LightingShotBehv : MonoBehaviour, IWeapon {
+	public WeaponManager.WeaponType WeaponType () {
+		return WeaponManager.WeaponType.LightingShot;
+	}
+
+	public void SetShootingController (){
+		ShootingController shootControler=  ObjectStore.FindShootingManager ().GetComponent<ShootingController>();
+		shootControler.bulletPrefab = (Object)Resources.Load("LightingShot") as GameObject;
+		shootControler.numOfBulletPerSecond = 3;
+		shootControler.UpdateWeaponIcon (WeaponManager.weaponIconBasePath + "weapon_bg.png"); // TODO: Update image when it is ready
 	}
 }
