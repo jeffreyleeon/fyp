@@ -16,6 +16,10 @@ public class ShootingController : Photon.MonoBehaviour {
 
 	private HandStore handStore;
 
+	[Tooltip("A mutex lock to prevent calling multiple change weapon at the same time")]
+	private bool changingWeaponMutexLock = false; // True is changing weapon, False is not changing weapon
+	private int mutexLockTimer = 3; // A timer to unlock after weapon is changed
+
 	void Start () {
 		handStore = HandStore.GetInstance ();
 		Shoot ();
@@ -81,8 +85,19 @@ public class ShootingController : Photon.MonoBehaviour {
 	/// </summary>
 	private void CheckChangeWeapon() {
 		print ("==============should change " + handStore.IsHandSwipingAndClosed ());
+		if (!handStore.IsHandSwipingAndClosed () || changingWeaponMutexLock == true) {
+			return;
+		}
+		changingWeaponMutexLock = true;
+		// Do change weapon logic
+
+		// Release mutex lock
+		StartCoroutine (UnlockChangeWeaponMutex());
 	}
 
-
+	private IEnumerator UnlockChangeWeaponMutex () {
+		yield return new WaitForSeconds (mutexLockTimer);
+		changingWeaponMutexLock = false;
+	}
 
 }
