@@ -125,6 +125,7 @@ public class Player : HittableObject {
 	}
 
 	IEnumerator activateDeath(){
+		//not in object store
 		GameObject deathPanel = GameObject.Find("Death");
 		deathPanel.GetComponent<Image> ().fillCenter = true;
 		deathPanel.GetComponent<Image> ().CrossFadeColor (Color.red, 1.0f, false, false);
@@ -137,12 +138,13 @@ public class Player : HittableObject {
 		GameObject trinus = ObjectStore.FindTrinus();
 		trinus.transform.parent = null;
 		if (allPlayerDie()) {
-			this.photonView.RPC ("BroadcastChangeToScene", PhotonTargets.AllViaServer, ChangeScene.SCORE_SCENE);
+			//not in object store
+			GameObject sceneMan = GameObject.Find("SceneManager");
+			sceneMan.GetPhotonView().RPC ("BroadcastChangeToScene", PhotonTargets.AllViaServer, ChangeScene.SCORE_SCENE);
 		} else {
 			deathPanel.GetComponent<Image> ().CrossFadeAlpha (0f, 1.0f, false);
 			trinus.transform.position = new Vector3 (0, 10, -10);
-			this.GetComponent<MeshRenderer> ().enabled = false;
-			this.GetComponent<CapsuleCollider> ().enabled = false;
+			this.Kill ();
 		}
 	}
 
