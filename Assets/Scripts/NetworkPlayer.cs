@@ -20,7 +20,9 @@ public class NetworkPlayer : MonoBehaviour {
 			stream.SendNext (player.GetCurrentHealth());
 		} else {
 			// Network player, receive data
-			player.SetHealth((int)stream.ReceiveNext ());
+			if (player != null) {
+				player.SetHealth ((int)stream.ReceiveNext ());
+			}
 		}
 	}
 	

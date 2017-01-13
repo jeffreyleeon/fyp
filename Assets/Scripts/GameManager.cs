@@ -43,10 +43,10 @@ public class GameManager : Photon.PunBehaviour {
 	#region PlayerDie
 
 	public void PlayerDie(){
-		StartCoroutine ("activateDeath");
+		StartCoroutine ("ActivateDeath");
 	}
 
-	private bool allPlayerDie(){
+	private bool AllPlayerDie(){
 		bool allDie = true;
 		GameObject[] allPlayers = ObjectStore.FindAllPlayers ();
 		foreach (GameObject plyrGO in allPlayers) {
@@ -58,7 +58,7 @@ public class GameManager : Photon.PunBehaviour {
 		return allDie;
 	}
 
-	IEnumerator activateDeath(){
+	IEnumerator ActivateDeath(){
 		//Fading in death panel
 		GameObject deathPanel = ObjectStore.FindDeathPanel();
 		deathPanel.GetComponent<Image> ().fillCenter = true;
@@ -73,7 +73,7 @@ public class GameManager : Photon.PunBehaviour {
 		//extract trinus from player and destroy player object
 		GameObject trinus = ObjectStore.FindTrinus();
 		trinus.transform.parent = null;
-		if (allPlayerDie()) {
+		if (AllPlayerDie()) {
 			//not in object store
 			GameObject sceneMan = ObjectStore.FindSceneManager();
 			sceneMan.GetPhotonView().RPC ("BroadcastChangeToScene", PhotonTargets.AllViaServer, ChangeScene.SCORE_SCENE);
