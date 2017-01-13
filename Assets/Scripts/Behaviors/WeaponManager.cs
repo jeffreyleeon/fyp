@@ -11,7 +11,7 @@ public interface IWeapon {
 
 public class BulletBehv : MonoBehaviour, IWeapon{
 	public void SetShootingController (){
-		ShootingController shootControler=  ObjectStore.FindShootingController ().GetComponent<ShootingController>();
+		ShootingController shootControler=  ObjectStore.FindShootingManager ().GetComponent<ShootingController>();
 		shootControler.bulletPrefab = (Object)Resources.Load("Bullet") as GameObject;
 		shootControler.numOfBulletPerSecond = 10;
 	}
@@ -19,7 +19,7 @@ public class BulletBehv : MonoBehaviour, IWeapon{
 
 public class KnifeBehv : MonoBehaviour, IWeapon{
 	public void SetShootingController (){
-		ShootingController shootControler=  ObjectStore.FindShootingController ().GetComponent<ShootingController>();
+		ShootingController shootControler=  ObjectStore.FindShootingManager ().GetComponent<ShootingController>();
 		shootControler.bulletPrefab = (Object)Resources.Load("BloodyKnife") as GameObject;
 		shootControler.numOfBulletPerSecond = 5;
 
