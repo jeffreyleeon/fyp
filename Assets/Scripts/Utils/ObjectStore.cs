@@ -12,6 +12,9 @@ public class ObjectStore {
 	private const string BULLET_TAG = "Bullet";
 	private const string PLAYER_TAG = "Player";
 	private const string START_BUTTON_NAME = "StartButton";
+	private const string SCENE_MANAGER_NAME = "SceneManager";
+	private const string GAME_MANAGER_NAME = "GameManager";
+	private const string DEATH_PANEL_NAME = "Death";
 
 	private static readonly Dictionary<string, int> ScoreDictionary = new Dictionary<string, int>{
 		{ENEMY_TAG, 10}
@@ -20,11 +23,7 @@ public class ObjectStore {
 	public static GameObject FindLeapMotionController () {
 		return GameObject.FindGameObjectWithTag (LEAP_MOTION_CONTROLLER_TAG);
 	}
-
-	public static GameObject FindShootingController (){
-		return GameObject.Find ("ShootingManager");
-	}
-
+		
 	public static GameObject[] FindEnemies () {
 		return GameObject.FindGameObjectsWithTag (ENEMY_TAG);
 	}
@@ -37,12 +36,24 @@ public class ObjectStore {
 		return GameObject.Find (SHOOTING_MANAGER_NAME);
 	}
 
+	public static GameObject FindGameManager(){
+		return GameObject.Find (GAME_MANAGER_NAME);
+	}
+
 	public static GameObject FindEnemyManager () {
 		return GameObject.Find (ENEMY_MANAGER_NAME);
 	}
 
 	public static GameObject FindTrinus () {
 		return GameObject.Find (TRINUS_NAME);
+	}
+
+	public static GameObject FindSceneManager () {
+		return GameObject.Find (SCENE_MANAGER_NAME);
+	}
+
+	public static GameObject FindDeathPanel () {
+		return GameObject.Find(DEATH_PANEL_NAME);
 	}
 
 	public static GameObject[] FindAllPlayers () {

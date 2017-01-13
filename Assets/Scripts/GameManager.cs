@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GameManager : Photon.PunBehaviour {
 	GameObject trinus;
-	GameObject player;
 	GameObject enemyManager;
 
 	[Tooltip("Room Name, empty for joining random room. If failed, create one with random name. Specifiying roomName will try to connect to that room, if NOT EXIST, create room with that name")]
@@ -34,10 +34,60 @@ public class GameManager : Photon.PunBehaviour {
 	}
 
 	void StartGame () {
+		GameObject player;
 		player = PhotonNetwork.Instantiate ("Player", new Vector3(0, 0, 0), Quaternion.identity, 0);
 		trinus.transform.parent = player.transform;
 		enemyManager.GetComponent<Spawn> ().enabled = true;
 	}
+
+	#region PlayerDie
+
+	public void PlayerDie(){
+		StartCoroutine ("ActivateDeath");
+	}
+
+	private bool AllPlayerDie(){
+		bool allDie = true;
+		GameObject[] allPlayers = ObjectStore.FindAllPlayers ();
+		foreach (GameObject plyrGO in allPlayers) {
+			Player plyr = plyrGO.GetComponent<Player> ();
+			if (plyr.GetCurrentHealth() > 0) {
+				allDie = false;
+				break;
+			}
+		}
+		return allDie;
+	}
+
+	IEnumerator ActivateDeath(){
+		//Fading in death panel
+		GameObject deathPanel = ObjectStore.FindDeathPanel();
+		deathPanel.GetComponent<Image> ().fillCenter = true;
+		deathPanel.GetComponent<Image> ().CrossFadeColor (Color.red, 1.0f, false, false);
+		yield return new WaitForSeconds (1.0f);
+		deathPanel.GetComponent<Image> ().CrossFadeColor (Color.black, 0.5f, false, false);
+		yield return new WaitForSeconds (0.5f);
+		deathPanel.GetComponent<Image> ().CrossFadeAlpha (150.0f, 1.0f, false);
+		yield return new WaitForSeconds (1.0f);
+
+
+		//extract trinus from player and destroy player object
+		GameObject trinus = ObjectStore.FindTrinus();
+		trinus.transform.parent = null;
+		if (AllPlayerDie()) {
+			//not in object store
+			GameObject sceneMan = ObjectStore.FindSceneManager();
+			sceneMan.GetPhotonView().RPC ("BroadcastChangeToScene", PhotonTargets.AllViaServer, ChangeScene.SCORE_SCENE);
+		} else {
+			deathPanel.GetComponent<Image> ().CrossFadeAlpha (0f, 1.0f, false);
+			trinus.transform.position = new Vector3 (0, 10, -10);
+			ObjectStore.FindMyPlayer().Kill();
+		}
+
+
+	}
+
+	#endregion
 
 	#region Background music
 

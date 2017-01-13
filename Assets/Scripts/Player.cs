@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Player : HittableObject {
@@ -15,32 +16,26 @@ public class Player : HittableObject {
 	#region private param
 	private IWeapon weaponBehv;
 	private string userName;
-	private int score;
 	#endregion
 
 	void Start(){
-		SetUserName ();
-		PhotonNetwork.player.SetScore (0);
-		SetWeaponBehv(WeaponType.Bullet);
-		SetHitBehv (HitType.Normal);
-			
+		if (this.photonView.isMine) {
+			SetUserName ();
+			PhotonNetwork.player.SetScore (0);
+			SetWeaponBehv (WeaponType.Bullet);
+			SetHitBehv (HitType.Normal);
+		} else {
+			userName = this.photonView.owner.name;
+		}
 	}
 
 	// Update is called once per frame
 	void FixedUpdate () {
 		MovementControl ();
-
 	}
-
 
 	#region public method
-	public int GetScore(){
-		return score;
-	}
 
-	public void AddScore(int mark){
-		score += mark;
-	}
 
 	public string GetUserName(){
 		return userName;
@@ -90,17 +85,28 @@ public class Player : HittableObject {
 		if (Input.GetKey(KeyCode.Space)){
 			Debug.Log ("Input Key: Space Down");
 			rigidbody.velocity = rigidbody.velocity + (Vector3.up * 50 * Time.fixedDeltaTime);
+		}else if(Input.GetKey(KeyCode.I)){
+			// debug for score scene
+			GameObject trinus = ObjectStore.FindTrinus();
+			trinus.transform.parent = null;
+			ChangeScene.ChangeToScene(ChangeScene.SCORE_SCENE);
 		}
 	}
+		
 
 	#endregion
 
 	void OnCollisionEnter(Collision collision){
+		//TODO: should check photonview.isMine? could reduce some computation
 		if (collision.gameObject.tag == ObjectStore.GetEnemyTag ()) {
 			Enemy enemy = collision.gameObject.GetComponent<Enemy> ();
 			hitBehv.HitBy (enemy.attack);
 		}
-
+		if (GetCurrentHealth () == 0 && userName == PhotonNetwork.player.name) {
+			GameManager gm = ObjectStore.FindGameManager ().GetComponent<GameManager> ();
+			gm.PlayerDie ();
+		}
 	}
+		
 		
 }
