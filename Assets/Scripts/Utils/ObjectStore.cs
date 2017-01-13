@@ -13,6 +13,7 @@ public class ObjectStore {
 	private const string PLAYER_TAG = "Player";
 	private const string START_BUTTON_NAME = "StartButton";
 	private const string SCENE_MANAGER_NAME = "SceneManager";
+	private const string GAME_MANAGER_NAME = "GameManager";
 	private const string DEATH_PANEL_NAME = "Death";
 
 	private static readonly Dictionary<string, int> ScoreDictionary = new Dictionary<string, int>{
@@ -33,6 +34,10 @@ public class ObjectStore {
 
 	public static GameObject FindShootingManager () {
 		return GameObject.Find (SHOOTING_MANAGER_NAME);
+	}
+
+	public static GameObject FindGameManager(){
+		return GameObject.Find (GAME_MANAGER_NAME);
 	}
 
 	public static GameObject FindEnemyManager () {
