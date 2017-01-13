@@ -42,6 +42,7 @@ public class Enemy : HittableObject {
 			track = trackObj.transform;
 		}
 		SetHitBehv (HitType.Normal);
+
 	}
 
 
