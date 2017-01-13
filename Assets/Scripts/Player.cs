@@ -92,58 +92,23 @@ public class Player : HittableObject {
 			ChangeScene.ChangeToScene(ChangeScene.SCORE_SCENE);
 		}
 	}
-
-	private bool allPlayerDie(){
-		GameObject[] allPlayers = ObjectStore.FindAllPlayers ();
-		foreach (GameObject plyrGO in allPlayers) {
-			Player plyr = plyrGO.GetComponent<Player> ();
-			if (plyr.GetCurrentHealth() > 0) {
-				return false;
-			}
-		}
-		return true;
-	}
+		
 
 	#endregion
 
 	void OnCollisionEnter(Collision collision){
+		if (photonView.isMine) {
+			hitBehv.HitBy (35);
+		}
 		//TODO: should check photonview.isMine? could reduce some computation
 		if (collision.gameObject.tag == ObjectStore.GetEnemyTag ()) {
 			Enemy enemy = collision.gameObject.GetComponent<Enemy> ();
 			hitBehv.HitBy (enemy.attack);
 		}
 		if (GetCurrentHealth () == 0 && userName == PhotonNetwork.player.name) {
-			StartCoroutine ("activateDeath");
+			GameManager gm = ObjectStore.FindGameManager ().GetComponent<GameManager> ();
+			gm.PlayerDie ();
 		}
-	}
-
-	IEnumerator activateDeath(){
-		//not in object store
-		GameObject deathPanel = GameObject.Find("Death");
-		deathPanel.GetComponent<Image> ().fillCenter = true;
-		deathPanel.GetComponent<Image> ().CrossFadeColor (Color.red, 1.0f, false, false);
-		yield return new WaitForSeconds (1.0f);
-		deathPanel.GetComponent<Image> ().CrossFadeColor (Color.black, 0.5f, false, false);
-		yield return new WaitForSeconds (0.5f);
-		deathPanel.GetComponent<Image> ().CrossFadeAlpha (150.0f, 1.0f, false);
-		yield return new WaitForSeconds (1.0f);
-
-		GameObject trinus = ObjectStore.FindTrinus();
-		trinus.transform.parent = null;
-		if (allPlayerDie()) {
-			//not in object store
-			GameObject sceneMan = GameObject.Find("SceneManager");
-			sceneMan.GetPhotonView().RPC ("BroadcastChangeToScene", PhotonTargets.AllViaServer, ChangeScene.SCORE_SCENE);
-		} else {
-			deathPanel.GetComponent<Image> ().CrossFadeAlpha (0f, 1.0f, false);
-			trinus.transform.position = new Vector3 (0, 10, -10);
-			this.Kill ();
-		}
-	}
-
-	[PunRPC]
-	public void BroadcastChangeToScene(int sceneIndex) {
-		ChangeScene.ChangeToScene (sceneIndex);
 	}
 		
 		
