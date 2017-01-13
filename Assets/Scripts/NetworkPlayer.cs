@@ -17,7 +17,9 @@ public class NetworkPlayer : MonoBehaviour {
 	{
 		if (stream.isWriting) {
 			// We own this player: send the others our data
-			stream.SendNext (player.GetCurrentHealth());
+			if (player != null) {
+				stream.SendNext (player.GetCurrentHealth ());
+			}
 		} else {
 			// Network player, receive data
 			if (player != null) {

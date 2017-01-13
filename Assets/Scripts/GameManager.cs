@@ -53,6 +53,7 @@ public class GameManager : Photon.PunBehaviour {
 			Player plyr = plyrGO.GetComponent<Player> ();
 			if (plyr.GetCurrentHealth() > 0) {
 				allDie = false;
+				break;
 			}
 		}
 		return allDie;
