@@ -4,9 +4,9 @@ using System.Collections;
 public class SceneWeaponsList : MonoBehaviour {
 
 	[Tooltip("Weapons for specific game scene")]
-	public Constants.WeaponType[] weaponsList = new Constants.WeaponType[] {
-		Constants.WeaponType.Bullet,
-		Constants.WeaponType.Knife,
+	public WeaponManager.WeaponType[] weaponsList = new WeaponManager.WeaponType[] {
+		WeaponManager.WeaponType.Bullet,
+		WeaponManager.WeaponType.Knife,
 	};
 
 }

@@ -3,16 +3,20 @@ using System.Collections;
 
 public class WeaponManager : MonoBehaviour {
 
+	public enum WeaponType {
+		Bullet,
+		Knife
+	}
 }
 
 public interface IWeapon {
-	Constants.WeaponType WeaponType ();
+	WeaponManager.WeaponType WeaponType ();
 	void SetShootingController ();
 }
 
 public class BulletBehv : MonoBehaviour, IWeapon{
-	public Constants.WeaponType WeaponType () {
-		return Constants.WeaponType.Bullet;
+	public WeaponManager.WeaponType WeaponType () {
+		return WeaponManager.WeaponType.Bullet;
 	}
 
 	public void SetShootingController (){
@@ -23,8 +27,8 @@ public class BulletBehv : MonoBehaviour, IWeapon{
 }
 
 public class KnifeBehv : MonoBehaviour, IWeapon{
-	public Constants.WeaponType WeaponType () {
-		return Constants.WeaponType.Knife;
+	public WeaponManager.WeaponType WeaponType () {
+		return WeaponManager.WeaponType.Knife;
 	}
 
 	public void SetShootingController (){

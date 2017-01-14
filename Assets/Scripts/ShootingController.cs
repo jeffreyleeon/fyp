@@ -102,22 +102,22 @@ public class ShootingController : Photon.MonoBehaviour {
 			Debug.Log ("/FYP/ShootingController/ChangeWeapon: player is null");
 			return;
 		}
-		Constants.WeaponType currentWeaponType = player.GetWeaponBehv ().WeaponType ();
+		WeaponManager.WeaponType currentWeaponType = player.GetWeaponBehv ().WeaponType ();
 		// Get scene weapons list
-		Constants.WeaponType[] weaponsList = GetWeaponsList ();
+		WeaponManager.WeaponType[] weaponsList = GetWeaponsList ();
 		// Update to the next weapon
 		int index = System.Array.IndexOf (weaponsList, currentWeaponType);
 		index = (index + 1) % weaponsList.Length;
 		player.SetWeaponBehv (weaponsList [index]);
 	}
 
-	private Constants.WeaponType[] GetWeaponsList () {
+	private WeaponManager.WeaponType[] GetWeaponsList () {
 		SceneWeaponsList weaponsListComponent = GetComponent<SceneWeaponsList> ();
-		Constants.WeaponType[] sceneWeaponsList;
+		WeaponManager.WeaponType[] sceneWeaponsList;
 		if (weaponsListComponent) {
 			sceneWeaponsList = weaponsListComponent.weaponsList;
 		} else {
-			sceneWeaponsList = new Constants.WeaponType[] { Constants.WeaponType.Bullet };
+			sceneWeaponsList = new WeaponManager.WeaponType[] { WeaponManager.WeaponType.Bullet };
 		}
 		return sceneWeaponsList;
 	}
