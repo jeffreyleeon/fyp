@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Leap;
+using UnityEngine.UI;
+using System.IO;
 
 [RequireComponent(typeof(PhotonView))]
 [RequireComponent(typeof(SceneWeaponsList))]
@@ -109,6 +111,22 @@ public class ShootingController : Photon.MonoBehaviour {
 		int index = System.Array.IndexOf (weaponsList, currentWeaponType);
 		index = (index + 1) % weaponsList.Length;
 		player.SetWeaponBehv (weaponsList [index]);
+	}
+
+	public void UpdateWeaponIcon (string filePath) {
+		GameObject[] bulletTypeImages = ObjectStore.FindBulletTypeImages ();
+		foreach (GameObject imageGO in bulletTypeImages) {
+			RawImage image = (RawImage)imageGO.GetComponent<RawImage>();
+
+			string _filePath = filePath;
+			if (!File.Exists (filePath)) {
+				_filePath = WeaponManager.defaultWeaponIconFilePath;
+			}
+			byte[] fileData = File.ReadAllBytes(_filePath);
+			Texture2D texture = new Texture2D(128, 128);
+			texture.LoadImage (fileData);
+			image.texture = (Texture) texture;
+		}
 	}
 
 	private WeaponManager.WeaponType[] GetWeaponsList () {

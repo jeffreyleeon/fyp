@@ -15,6 +15,7 @@ public class ObjectStore {
 	private const string SCENE_MANAGER_NAME = "SceneManager";
 	private const string GAME_MANAGER_NAME = "GameManager";
 	private const string DEATH_PANEL_NAME = "Death";
+	private const string BULLET_TYPE_IMAGE = "BulletTypeImage";
 
 	private static readonly Dictionary<string, int> ScoreDictionary = new Dictionary<string, int>{
 		{ENEMY_TAG, 10}
@@ -54,6 +55,10 @@ public class ObjectStore {
 
 	public static GameObject FindDeathPanel () {
 		return GameObject.Find(DEATH_PANEL_NAME);
+	}
+
+	public static GameObject[] FindBulletTypeImages () {
+		return GameObject.FindGameObjectsWithTag (BULLET_TYPE_IMAGE);
 	}
 
 	public static GameObject[] FindAllPlayers () {
