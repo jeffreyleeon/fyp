@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Leap;
+using UnityEngine.UI;
+using System.IO;
 
 [RequireComponent(typeof(PhotonView))]
+[RequireComponent(typeof(SceneWeaponsList))]
 public class ShootingController : Photon.MonoBehaviour {
 
 	[Tooltip("Prefab of bullet to be spawned")]
@@ -16,10 +19,17 @@ public class ShootingController : Photon.MonoBehaviour {
 
 	private HandStore handStore;
 
+	[Tooltip("A mutex lock to prevent calling multiple change weapon at the same time")]
+	private bool changingWeaponMutexLock = false; // True is changing weapon, False is not changing weapon
+	private int mutexLockTimer = 3; // A timer to unlock after weapon is changed
+
 	void Start () {
 		handStore = HandStore.GetInstance ();
 		Shoot ();
+	}
 
+	void Update () {
+		CheckChangeWeapon ();
 	}
 
 	/// <summary>
@@ -73,5 +83,66 @@ public class ShootingController : Photon.MonoBehaviour {
 	}
 
 
+	/// <summary>
+	/// Check if the user is intended to change weapon
+	/// </summary>
+	private void CheckChangeWeapon() {
+		// print ("==============should change " + handStore.IsHandSwipingAndClosed ());
+		if (!handStore.IsHandSwipingAndClosed () || changingWeaponMutexLock == true) {
+			return;
+		}
+		changingWeaponMutexLock = true;
+		// Do change weapon logic
+		ChangeWeapon ();
+		// Release mutex lock
+		StartCoroutine (UnlockChangeWeaponMutex());
+	}
+
+	private void ChangeWeapon () {
+		Player player = ObjectStore.FindMyPlayer ();
+		if (!player) {
+			Debug.Log ("/FYP/ShootingController/ChangeWeapon: player is null");
+			return;
+		}
+		WeaponManager.WeaponType currentWeaponType = player.GetWeaponBehv ().WeaponType ();
+		// Get scene weapons list
+		WeaponManager.WeaponType[] weaponsList = GetWeaponsList ();
+		// Update to the next weapon
+		int index = System.Array.IndexOf (weaponsList, currentWeaponType);
+		index = (index + 1) % weaponsList.Length;
+		player.SetWeaponBehv (weaponsList [index]);
+	}
+
+	public void UpdateWeaponIcon (string filePath) {
+		GameObject[] bulletTypeImages = ObjectStore.FindBulletTypeImages ();
+		foreach (GameObject imageGO in bulletTypeImages) {
+			RawImage image = (RawImage)imageGO.GetComponent<RawImage>();
+
+			string _filePath = filePath;
+			if (!File.Exists (filePath)) {
+				_filePath = WeaponManager.defaultWeaponIconFilePath;
+			}
+			byte[] fileData = File.ReadAllBytes(_filePath);
+			Texture2D texture = new Texture2D(128, 128);
+			texture.LoadImage (fileData);
+			image.texture = (Texture) texture;
+		}
+	}
+
+	private WeaponManager.WeaponType[] GetWeaponsList () {
+		SceneWeaponsList weaponsListComponent = GetComponent<SceneWeaponsList> ();
+		WeaponManager.WeaponType[] sceneWeaponsList;
+		if (weaponsListComponent) {
+			sceneWeaponsList = weaponsListComponent.weaponsList;
+		} else {
+			sceneWeaponsList = new WeaponManager.WeaponType[] { WeaponManager.WeaponType.Bullet };
+		}
+		return sceneWeaponsList;
+	}
+
+	private IEnumerator UnlockChangeWeaponMutex () {
+		yield return new WaitForSeconds (mutexLockTimer);
+		changingWeaponMutexLock = false;
+	}
 
 }
