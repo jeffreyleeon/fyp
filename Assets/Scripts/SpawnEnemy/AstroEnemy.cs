@@ -4,7 +4,7 @@ using System.Collections;
 public class AstroEnemy : WalkingEnemy {
 
 	Animator anim;
-	int jumpHash = Animator.StringToHash("Base.Jump");
+	int swimHash = Animator.StringToHash("Swim 02");
 	int walkHash = Animator.StringToHash("Walk");
 	int count = 0;
 
@@ -14,16 +14,12 @@ public class AstroEnemy : WalkingEnemy {
 		// initialising reference variables
 		anim = gameObject.GetComponent<Animator>();					  
 		transform.rotation = Quaternion.AngleAxis(180, Vector3.up);
+
+		anim.Play (swimHash);
 	}
 
 	// Update is called once per frame
 	virtual public void Update () {
-		base.Update ();
-		if (count % 360 < 100) {
-			anim.SetTrigger (jumpHash);
-		} else {
-			anim.SetTrigger (walkHash);
-		}
-		count++;
+
 	}
 }

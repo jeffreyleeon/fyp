@@ -4,8 +4,8 @@ using System.Collections;
 public class AlienEnemy : WalkingEnemy {
 
 	Animator anim;
-	int jumpHash = Animator.StringToHash("Base.Jump");
-	int walkHash = Animator.StringToHash("Walk");
+	int walkHash = Animator.StringToHash("Walk 02");
+	int attackHash = Animator.StringToHash("Boxing 01");
 	int count = 0;
 
 	// Use this for initialization
@@ -14,16 +14,11 @@ public class AlienEnemy : WalkingEnemy {
 		// initialising reference variables
 		anim = gameObject.GetComponent<Animator>();					  
 		transform.rotation = Quaternion.AngleAxis(180, Vector3.up);
+
+		anim.Play (walkHash);
 	}
 
 	// Update is called once per frame
 	virtual public void Update () {
-		base.Update ();
-		if (count % 360 < 100) {
-			anim.SetTrigger (jumpHash);
-		} else {
-			anim.SetTrigger (walkHash);
-		}
-		count++;
 	}
 }
