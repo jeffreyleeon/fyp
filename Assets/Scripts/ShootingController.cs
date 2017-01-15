@@ -70,11 +70,22 @@ public class ShootingController : Photon.MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// API for PatchedSpawner.cs from Magical Library, SHOULD NOT call manually
+	/// </summary>
+	public void SpawnMagicalLibraryOnDirectionBullet (string magicalBulletName, Vector3 position, Quaternion rotation, Vector3 direction) {
+		if (NetworkManager.IsServerConnected) {
+			this.photonView.RPC ("SpawnBullet", PhotonTargets.AllViaServer, PhotonNetwork.player.name, magicalBulletName, position, rotation, direction);
+		} else {
+			SpawnBullet ("Default User", magicalBulletName, position, rotation, direction);
+		}
+	}
 
 	[PunRPC]
 	void SpawnBullet(string owner, string bulletPrefabPath, Vector3 bulletPosition, Quaternion bulletRotation, Vector3 bulletDirection){
 		GameObject bulletPrefab = Resources.Load (bulletPrefabPath) as GameObject;
 		GameObject bulletGO = Instantiate (bulletPrefab, bulletPosition, bulletRotation) as GameObject;
+		bulletGO.transform.forward = bulletDirection;
 		SetupOnDirectionBullet (bulletGO, bulletDirection);
 		Bullet bullet = bulletGO.GetComponent<Bullet> ();
 		bullet.SetOwner (owner);

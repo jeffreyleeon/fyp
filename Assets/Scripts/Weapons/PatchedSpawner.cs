@@ -16,19 +16,7 @@ namespace MagicalFX
 		{
 			timeTemp = Time.time;
 			if (FXSpawn != null && TimeSpawn <= 0) {
-				Quaternion rotate = this.transform.rotation;
-				if (!FixRotation)
-					rotate = FXSpawn.transform.rotation;
-
-				GameObject fx = (GameObject)GameObject.Instantiate (FXSpawn, this.transform.position, rotate);
-				fx.layer = LayerMask.NameToLayer("Bullet");
-				Bullet ownBullet = GetComponent <Bullet> ();
-				Bullet otherBullet = fx.GetComponent <Bullet> ();
-				otherBullet.SetOwner (ownBullet.owner);
-				if (Normal)
-					fx.transform.forward = this.transform.forward;
-				if (LifeTime > 0)
-					GameObject.Destroy (fx.gameObject, LifeTime);
+				SpawnBullet ();
 			}
 		}
 
@@ -38,22 +26,20 @@ namespace MagicalFX
 				if (Time.time > timeTemp + TimeSpawn) {
 					timeTemp = Time.time;
 					if (FXSpawn != null) {
-						Quaternion rotate = this.transform.rotation;
-						if (!FixRotation)
-							rotate = FXSpawn.transform.rotation;
-
-						GameObject fx = (GameObject)GameObject.Instantiate (FXSpawn, this.transform.position, rotate);
-						fx.layer = LayerMask.NameToLayer("Bullet");
-						Bullet ownBullet = GetComponent <Bullet> ();
-						Bullet otherBullet = fx.GetComponent <Bullet> ();
-						otherBullet.SetOwner (ownBullet.owner);
-						if (Normal)
-							fx.transform.forward = this.transform.forward;
-						if (LifeTime > 0)
-							GameObject.Destroy (fx.gameObject, LifeTime);
+						SpawnBullet ();
 					}
 				}
 			}
+		}
+
+		void SpawnBullet () {
+			Quaternion rotate = this.transform.rotation;
+			if (!FixRotation)
+				rotate = FXSpawn.transform.rotation;
+
+			// Spawn bullet delegate back to shooting controller
+			ShootingController shootControler =  ObjectStore.FindShootingManager ().GetComponent<ShootingController>();
+			shootControler.SpawnMagicalLibraryOnDirectionBullet (FXSpawn.name, this.transform.position, rotate, this.transform.forward);
 		}
 
 	}
