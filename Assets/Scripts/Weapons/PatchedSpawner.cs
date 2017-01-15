@@ -6,9 +6,7 @@ namespace MagicalFX
 	public class PatchedSpawner : MonoBehaviour
 	{
 		public bool FixRotation = false;
-		public bool Normal;
 		public GameObject FXSpawn;
-		public float LifeTime = 0;
 		public float TimeSpawn = 0;
 		private float timeTemp;
 
