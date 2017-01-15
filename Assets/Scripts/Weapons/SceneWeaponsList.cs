@@ -8,6 +8,7 @@ public class SceneWeaponsList : MonoBehaviour {
 		WeaponManager.WeaponType.Bullet,
 		WeaponManager.WeaponType.Knife,
 		WeaponManager.WeaponType.LightingShot,
+		WeaponManager.WeaponType.FireFissure,
 	};
 
 }

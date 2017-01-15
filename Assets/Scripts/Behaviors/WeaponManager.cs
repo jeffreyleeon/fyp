@@ -8,7 +8,8 @@ public class WeaponManager : MonoBehaviour {
 	public enum WeaponType {
 		Bullet,
 		Knife,
-		LightingShot
+		LightingShot,
+		FireFissure,
 	}
 }
 
@@ -53,5 +54,18 @@ public class LightingShotBehv : MonoBehaviour, IWeapon {
 		shootControler.bulletPrefab = (Object)Resources.Load("LightingShot") as GameObject;
 		shootControler.numOfBulletPerSecond = 3;
 		shootControler.UpdateWeaponIcon (WeaponManager.weaponIconBasePath + "weapon_bg.png"); // TODO: Update image when it is ready
+	}
+}
+
+public class FireFissureBehv : MonoBehaviour, IWeapon {
+	public WeaponManager.WeaponType WeaponType () {
+		return WeaponManager.WeaponType.FireFissure;
+	}
+
+	public void SetShootingController (){
+		ShootingController shootControler=  ObjectStore.FindShootingManager ().GetComponent<ShootingController>();
+		shootControler.bulletPrefab = (Object)Resources.Load("FireFissure") as GameObject;
+		shootControler.numOfBulletPerSecond = 1;
+		shootControler.UpdateWeaponIcon (WeaponManager.weaponIconBasePath + "loading.png"); // TODO: Update image when it is ready
 	}
 }
