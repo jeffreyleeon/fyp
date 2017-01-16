@@ -10,6 +10,9 @@ public class WeaponManager : MonoBehaviour {
 		Knife,
 		LightingShot,
 		FireFissure,
+		DarkMissile,
+		FireRock,
+		IceWave,
 	}
 }
 
@@ -66,6 +69,45 @@ public class FireFissureBehv : MonoBehaviour, IWeapon {
 		ShootingController shootControler=  ObjectStore.FindShootingManager ().GetComponent<ShootingController>();
 		shootControler.bulletPrefab = (Object)Resources.Load("FireFissure") as GameObject;
 		shootControler.numOfBulletPerSecond = 1;
+		shootControler.UpdateWeaponIcon (WeaponManager.weaponIconBasePath + "loading.png"); // TODO: Update image when it is ready
+	}
+}
+
+public class DarkMissileBehv : MonoBehaviour, IWeapon {
+	public WeaponManager.WeaponType WeaponType () {
+		return WeaponManager.WeaponType.DarkMissile;
+	}
+
+	public void SetShootingController (){
+		ShootingController shootControler=  ObjectStore.FindShootingManager ().GetComponent<ShootingController>();
+		shootControler.bulletPrefab = (Object)Resources.Load("DarkMissile") as GameObject;
+		shootControler.numOfBulletPerSecond = 5;
+		shootControler.UpdateWeaponIcon (WeaponManager.weaponIconBasePath + "loading.png"); // TODO: Update image when it is ready
+	}
+}
+
+public class FireRockBehv : MonoBehaviour, IWeapon {
+	public WeaponManager.WeaponType WeaponType () {
+		return WeaponManager.WeaponType.FireRock;
+	}
+
+	public void SetShootingController (){
+		ShootingController shootControler=  ObjectStore.FindShootingManager ().GetComponent<ShootingController>();
+		shootControler.bulletPrefab = (Object)Resources.Load("FireRock") as GameObject;
+		shootControler.numOfBulletPerSecond = 2;
+		shootControler.UpdateWeaponIcon (WeaponManager.weaponIconBasePath + "loading.png"); // TODO: Update image when it is ready
+	}
+}
+
+public class IceWaveBehv : MonoBehaviour, IWeapon {
+	public WeaponManager.WeaponType WeaponType () {
+		return WeaponManager.WeaponType.IceWave;
+	}
+
+	public void SetShootingController (){
+		ShootingController shootControler=  ObjectStore.FindShootingManager ().GetComponent<ShootingController>();
+		shootControler.bulletPrefab = (Object)Resources.Load("IceWave") as GameObject;
+		shootControler.numOfBulletPerSecond = 6;
 		shootControler.UpdateWeaponIcon (WeaponManager.weaponIconBasePath + "loading.png"); // TODO: Update image when it is ready
 	}
 }

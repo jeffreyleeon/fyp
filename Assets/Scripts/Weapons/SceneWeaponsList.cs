@@ -9,6 +9,9 @@ public class SceneWeaponsList : MonoBehaviour {
 		WeaponManager.WeaponType.Knife,
 		WeaponManager.WeaponType.LightingShot,
 		WeaponManager.WeaponType.FireFissure,
+		WeaponManager.WeaponType.DarkMissile,
+		WeaponManager.WeaponType.FireRock,
+		WeaponManager.WeaponType.IceWave,
 	};
 
 }
