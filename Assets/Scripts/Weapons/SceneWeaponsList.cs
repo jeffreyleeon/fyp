@@ -7,6 +7,12 @@ public class SceneWeaponsList : MonoBehaviour {
 	public WeaponManager.WeaponType[] weaponsList = new WeaponManager.WeaponType[] {
 		WeaponManager.WeaponType.Bullet,
 		WeaponManager.WeaponType.Knife,
+		WeaponManager.WeaponType.LightingShot,
+		WeaponManager.WeaponType.FireFissure,
+		WeaponManager.WeaponType.DarkMissile,
+		WeaponManager.WeaponType.FireRock,
+		WeaponManager.WeaponType.IceWave,
+		WeaponManager.WeaponType.LightingFissure,
 	};
 
 }

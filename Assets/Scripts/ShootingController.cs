@@ -3,6 +3,7 @@ using System.Collections;
 using Leap;
 using UnityEngine.UI;
 using System.IO;
+using MagicalFX;
 
 [RequireComponent(typeof(PhotonView))]
 [RequireComponent(typeof(SceneWeaponsList))]
@@ -15,7 +16,7 @@ public class ShootingController : Photon.MonoBehaviour {
     public Quaternion bulletRotation = Quaternion.identity;
 
 	[Tooltip("Number of bullets to be spawned per second")]
-	public int numOfBulletPerSecond;
+	public float numOfBulletPerSecond;
 
 	private HandStore handStore;
 
@@ -69,17 +70,39 @@ public class ShootingController : Photon.MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// API for PatchedSpawner.cs from Magical Library, SHOULD NOT call manually
+	/// </summary>
+	public void SpawnMagicalLibraryOnDirectionBullet (string magicalBulletName, Vector3 position, Quaternion rotation, Vector3 direction) {
+		if (NetworkManager.IsServerConnected) {
+			this.photonView.RPC ("SpawnBullet", PhotonTargets.AllViaServer, PhotonNetwork.player.name, magicalBulletName, position, rotation, direction);
+		} else {
+			SpawnBullet ("Default User", magicalBulletName, position, rotation, direction);
+		}
+	}
 
 	[PunRPC]
 	void SpawnBullet(string owner, string bulletPrefabPath, Vector3 bulletPosition, Quaternion bulletRotation, Vector3 bulletDirection){
 		GameObject bulletPrefab = Resources.Load (bulletPrefabPath) as GameObject;
 		GameObject bulletGO = Instantiate (bulletPrefab, bulletPosition, bulletRotation) as GameObject;
+		bulletGO.transform.forward = bulletDirection;
+		SetupOnDirectionBullet (bulletGO, bulletDirection);
 		Bullet bullet = bulletGO.GetComponent<Bullet> ();
 		bullet.SetOwner (owner);
 		bullet.gameObject.layer = LayerMask.NameToLayer("Bullet");
 		// Place the bullet a bit in front of the palm
 		Rigidbody rigidBody = bullet.GetComponent<Rigidbody> ();
 		rigidBody.velocity = bulletDirection * bullet.speed;
+	}
+
+	/// <summary>
+	/// Mgical Library directional bullets required setting transform.forward [Jeffrey]
+	/// </summary>
+	void SetupOnDirectionBullet (GameObject bulletGO, Vector3 bulletDirection) {
+		FX_Position fx = bulletGO.GetComponent<FX_Position> ();
+		if (fx && fx.Mode == SpawnMode.OnDirection) {
+			fx.transform.forward = bulletDirection;
+		}
 	}
 
 
