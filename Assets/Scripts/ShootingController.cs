@@ -16,7 +16,7 @@ public class ShootingController : Photon.MonoBehaviour {
     public Quaternion bulletRotation = Quaternion.identity;
 
 	[Tooltip("Number of bullets to be spawned per second")]
-	public int numOfBulletPerSecond;
+	public float numOfBulletPerSecond;
 
 	private HandStore handStore;
 
