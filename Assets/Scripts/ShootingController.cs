@@ -142,13 +142,11 @@ public class ShootingController : Photon.MonoBehaviour {
 			RawImage image = (RawImage)imageGO.GetComponent<RawImage>();
 
 			string _filePath = filePath;
-			if (!File.Exists (filePath)) {
+			if (!Resources.Load(_filePath)) {
 				_filePath = WeaponManager.defaultWeaponIconFilePath;
 			}
-			byte[] fileData = File.ReadAllBytes(_filePath);
-			Texture2D texture = new Texture2D(128, 128);
-			texture.LoadImage (fileData);
-			image.texture = (Texture) texture;
+			Texture texture = Resources.Load(_filePath) as Texture;
+			image.texture = texture;
 		}
 	}
 
