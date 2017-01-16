@@ -71,6 +71,12 @@ public class Player : HittableObject {
 			case WeaponManager.WeaponType.IceWave:
 				weaponBehv = (IWeapon) gameObject.AddComponent<IceWaveBehv>();
 				break;
+			case WeaponManager.WeaponType.FireBurn:
+				weaponBehv = (IWeapon) gameObject.AddComponent<FireBurnBehv>();
+				break;
+			case WeaponManager.WeaponType.LightingFissure:
+				weaponBehv = (IWeapon) gameObject.AddComponent<LightingFissureBehv>();
+				break;
 		}
 		weaponBehv.SetShootingController ();
 

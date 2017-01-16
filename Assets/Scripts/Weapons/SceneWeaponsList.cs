@@ -12,6 +12,7 @@ public class SceneWeaponsList : MonoBehaviour {
 		WeaponManager.WeaponType.DarkMissile,
 		WeaponManager.WeaponType.FireRock,
 		WeaponManager.WeaponType.IceWave,
+		WeaponManager.WeaponType.LightingFissure,
 	};
 
 }
