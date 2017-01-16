@@ -20,5 +20,6 @@ public class AlienEnemy : WalkingEnemy {
 
 	// Update is called once per frame
 	virtual public void Update () {
+		base.Update ();
 	}
 }

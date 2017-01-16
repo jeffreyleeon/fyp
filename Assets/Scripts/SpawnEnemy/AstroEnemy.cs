@@ -4,7 +4,7 @@ using System.Collections;
 public class AstroEnemy : WalkingEnemy {
 
 	Animator anim;
-	int swimHash = Animator.StringToHash("Swim 02");
+	string swimHash = "Swim 02";
 	int walkHash = Animator.StringToHash("Walk");
 	int count = 0;
 
@@ -20,6 +20,6 @@ public class AstroEnemy : WalkingEnemy {
 
 	// Update is called once per frame
 	virtual public void Update () {
-
+		base.Update ();
 	}
 }
