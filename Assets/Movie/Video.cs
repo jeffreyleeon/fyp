@@ -9,7 +9,10 @@ public class Video : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Renderer renderer = GetComponent<Renderer> ();
+		AudioSource audio = GetComponent<AudioSource> ();
+		audio.clip = movie.audioClip;
 		renderer.material.mainTexture = movie as MovieTexture;
 		movie.Play ();
+		audio.Play ();
 	}
 }
