@@ -84,7 +84,7 @@ public class DarkMissileBehv : MonoBehaviour, IWeapon {
 		ShootingController shootControler=  ObjectStore.FindShootingManager ().GetComponent<ShootingController>();
 		shootControler.bulletPrefab = (Object)Resources.Load("DarkMissile") as GameObject;
 		shootControler.numOfBulletPerSecond = 5;
-		shootControler.UpdateWeaponIcon (WeaponManager.weaponIconBasePath + "loading"); // TODO: Update image when it is ready
+		shootControler.UpdateWeaponIcon (WeaponManager.weaponIconBasePath + "weapon_dark_missle"); // TODO: Update image when it is ready
 	}
 }
 
@@ -97,7 +97,7 @@ public class FireRockBehv : MonoBehaviour, IWeapon {
 		ShootingController shootControler=  ObjectStore.FindShootingManager ().GetComponent<ShootingController>();
 		shootControler.bulletPrefab = (Object)Resources.Load("FireRock") as GameObject;
 		shootControler.numOfBulletPerSecond = 2;
-		shootControler.UpdateWeaponIcon (WeaponManager.weaponIconBasePath + "loading"); // TODO: Update image when it is ready
+		shootControler.UpdateWeaponIcon (WeaponManager.weaponIconBasePath + "weapon_fire_rock"); // TODO: Update image when it is ready
 	}
 }
 
@@ -110,7 +110,7 @@ public class IceWaveBehv : MonoBehaviour, IWeapon {
 		ShootingController shootControler=  ObjectStore.FindShootingManager ().GetComponent<ShootingController>();
 		shootControler.bulletPrefab = (Object)Resources.Load("IceWave") as GameObject;
 		shootControler.numOfBulletPerSecond = 6;
-		shootControler.UpdateWeaponIcon (WeaponManager.weaponIconBasePath + "loading"); // TODO: Update image when it is ready
+		shootControler.UpdateWeaponIcon (WeaponManager.weaponIconBasePath + "weapon_ice_wave"); // TODO: Update image when it is ready
 	}
 }
 
@@ -123,7 +123,7 @@ public class FireBurnBehv : MonoBehaviour, IWeapon {
 		ShootingController shootControler=  ObjectStore.FindShootingManager ().GetComponent<ShootingController>();
 		shootControler.bulletPrefab = (Object)Resources.Load("FireBurn") as GameObject;
 		shootControler.numOfBulletPerSecond = 10;
-		shootControler.UpdateWeaponIcon (WeaponManager.weaponIconBasePath + "loading"); // TODO: Update image when it is ready
+		shootControler.UpdateWeaponIcon (WeaponManager.weaponIconBasePath + "weapon_fire_burn"); // TODO: Update image when it is ready
 	}
 }
 
@@ -136,6 +136,6 @@ public class LightingFissureBehv : MonoBehaviour, IWeapon {
 		ShootingController shootControler=  ObjectStore.FindShootingManager ().GetComponent<ShootingController>();
 		shootControler.bulletPrefab = (Object)Resources.Load("LightingFissure") as GameObject;
 		shootControler.numOfBulletPerSecond = 1;
-		shootControler.UpdateWeaponIcon (WeaponManager.weaponIconBasePath + "loading"); // TODO: Update image when it is ready
+		shootControler.UpdateWeaponIcon (WeaponManager.weaponIconBasePath + "weapon_lighting_fissure"); // TODO: Update image when it is ready
 	}
 }
