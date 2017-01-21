@@ -30,6 +30,8 @@ public class Enemy : HittableObject {
 	public int maxZ = 40;
 	[Tooltip("Audio of enemy being hit")]
 	public AudioClip hitAudio;
+	[Tooltip("Is enemy in idle state")]
+	public bool isIdle = false;
 
 	#endregion
 
