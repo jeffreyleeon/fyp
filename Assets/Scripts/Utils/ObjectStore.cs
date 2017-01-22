@@ -12,6 +12,7 @@ public class ObjectStore {
 	private const string BULLET_TAG = "Bullet";
 	private const string PLAYER_TAG = "Player";
 	private const string START_BUTTON_NAME = "StartButton";
+	private const string MAP_BUTTON_NAME = "MapButton";
 	private const string SCENE_MANAGER_NAME = "SceneManager";
 	private const string GAME_MANAGER_NAME = "GameManager";
 	private const string DEATH_PANEL_NAME = "Death";
@@ -75,6 +76,10 @@ public class ObjectStore {
 
 	public static string GetStartButtonName() {
 		return START_BUTTON_NAME;
+	}
+
+	public static string GetMapButtonName() {
+		return MAP_BUTTON_NAME;
 	}
 
 	public static int GetScoreByTag(string tag){
