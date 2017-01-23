@@ -7,19 +7,26 @@ public class SnowyEnemy : WalkingEnemy {
 	//string swimHash = "Swim 02";
 	string idleHash = "Idle 02";
 	string walkHash = "Run 01";
-	int count = 0;
 
 	// Use this for initialization
 	virtual public void Start () {
 		base.Start ();
 		// initialising reference variables
-		anim = gameObject.GetComponent<Animator>();	
+		anim = gameObject.GetComponent<Animator>();
+
+		transform.rotation = Quaternion.AngleAxis (180, Vector3.up);
+		string action = GetInitialAction ();
+		anim.Play (action);
+	}
+
+	string GetInitialAction () {
+		string ret = idleHash;
+
 		if (!isIdle) {
-			 transform.rotation = Quaternion.AngleAxis (180, Vector3.up);
-			 anim.Play (walkHash);
-		} else {
-			 anim.Play (idleHash);
+			ret = walkHash;
 		}
+
+		return ret;
 	}
 
 	// Update is called once per frame
