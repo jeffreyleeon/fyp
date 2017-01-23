@@ -26,6 +26,11 @@ public class RayCast : MonoBehaviour {
 				StartSceneManager.EnableLoading ();
 				StartSceneManager.SetTargetScene (StartSceneManager.BRIGHT_SCENE);
 				StartSceneManager.AddCount ();
+			} else if (hit.collider.gameObject.name == ObjectStore.GetMapButtonName ()) {
+				StartSceneManager.EnableLoading ();
+				StartSceneManager.SetTargetScene (StartSceneManager.MAP_SCENE);
+				StartSceneManager.AddCount ();
+				//print ("=================MAP " + hit.collider.gameObject.name);
 			} else {
 				StartSceneManager.DisableLoading ();
 			}

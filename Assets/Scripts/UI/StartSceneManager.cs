@@ -8,6 +8,7 @@ public class StartSceneManager : MonoBehaviour {
 	public static int BRIGHT_SCENE = ChangeScene.BRIGHT_SCENE;
 	public static int TUTORIAL_SCENE = ChangeScene.TUTORIAL_SCENE;
 	public static int SCORE_SCENE = ChangeScene.SCORE_SCENE;
+	public static int MAP_SCENE = ChangeScene.MAP_SCENE;
 	public static int sceneIndex = -1;
 	public static GameObject loadingPanel;
 
@@ -34,6 +35,8 @@ public class StartSceneManager : MonoBehaviour {
 		} else if (Input.GetKey (KeyCode.T)) {
 			// Enter tutorial scene directly
 			ChangeScene.ChangeToScene (TUTORIAL_SCENE);
+		} else if (Input.GetKey (KeyCode.M)) {
+			ChangeScene.ChangeToScene (MAP_SCENE);
 		}
 	}
 
