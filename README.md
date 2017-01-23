@@ -49,6 +49,13 @@ To update bullet type, change <b>bulletPrefab</b> and <b>numOfBulletPerSecond</b
 5. Edit <b>Player.cs</b>, <b>SetWeaponBehv</b> function to include the new behavior
 6. Play the game and try to change weapon(Wave hand with hand closed)!
 
+###Add new scene
+
+1. Add components: <b>ShootingManager</b>, <b>EnemyManager</b>, <b>GameManager</b>, <b>InfoPanel</b>, <b>SceneManager</b> and <b>Track</b> in the new scene
+2. Decorate the scene, save the decoration as a prefab and put it into folder <b>Asset -> Prefab -> Decoration</b>
+3. Import background music into folder <b>Asset -> Music</b>
+4. Update music by draging it to the field <b>AudioClip</b> in <b>GameManager</b> component and edit attributes
+
 Troubleshooting
 ------------------
 Q: Internet connection loss when USB Tethering turn on
