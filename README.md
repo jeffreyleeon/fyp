@@ -55,6 +55,16 @@ To update bullet type, change <b>bulletPrefab</b> and <b>numOfBulletPerSecond</b
 2. Decorate the scene, save the decoration as a prefab and put it into folder <b>Asset -> Prefab -> Decoration</b>
 3. Import background music into folder <b>Asset -> Music</b>
 4. Update music by draging it to the field <b>AudioClip</b> in <b>GameManager</b> component and edit attributes
+5. Add <b>Photon Tranform View</b> and <b>Photon View</b> components to new enemy prefab
+6. Drag the <b>Photon Tranform View</b> as the field <b>Observed Components</b> in <b>Photon View</b>
+7. Check <b>Synchronize Position</b> inside <b>Photon Tranform View</b>
+8. Change the Tag to <b>Enemy</b>
+9. Put the enemy prefab into <b>Asset -> Resources</b>
+10. For enemy using <b>ToonAnimations CTRL v1.0</b> as animation controller, uncheck <b>Apply Root Motion</b>; otherwise it will ignore Gravity
+11. In <b>EnemyManager</b>, Drag enemy prefab from folder <b>Asset -> Resources</b> into the field <b>Enemies -> Element</b>
+12. Update the boundary for spawning of enemy in <b>EnemyManager</b> if needed
+13. Add the current scene into <b>Build Settings</b>
+14. Add scene number into <b>ChangeScene.cs</b>
 
 Troubleshooting
 ------------------
