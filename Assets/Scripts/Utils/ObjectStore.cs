@@ -17,6 +17,9 @@ public class ObjectStore {
 	private const string GAME_MANAGER_NAME = "GameManager";
 	private const string DEATH_PANEL_NAME = "Death";
 	private const string BULLET_TYPE_IMAGE = "BulletTypeImage";
+	private const string UI_WEAPON_TAG = "UI_Weapon";
+	private const string UI_SCORE_TAG = "UI_Score";
+	private const string UI_HP_TAG = "UI_HP";
 
 	private static readonly Dictionary<string, int> ScoreDictionary = new Dictionary<string, int>{
 		{ENEMY_TAG, 10}
@@ -65,6 +68,18 @@ public class ObjectStore {
 	public static GameObject[] FindAllPlayers () {
 		return GameObject.FindGameObjectsWithTag (PLAYER_TAG);
 	}	
+
+	public static GameObject[] FindUIHP(){
+		return GameObject.FindGameObjectsWithTag (UI_HP_TAG);
+	}
+
+	public static GameObject[] FindUIScore(){
+		return GameObject.FindGameObjectsWithTag (UI_SCORE_TAG);
+	}
+
+	public static GameObject[] FindUIWeapon(){
+		return GameObject.FindGameObjectsWithTag (UI_WEAPON_TAG);
+	}
 
 	public static string GetEnemyTag (){
 		return ENEMY_TAG;
