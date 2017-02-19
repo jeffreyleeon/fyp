@@ -5,12 +5,10 @@ using FYP.Score;
 
 public class EndScore : MonoBehaviour {
 
-	public Text txt;
 	public List<PlayerScore> playersScore;
-
+	public TextMesh txt;
 	// Use this for initialization
 	void Start () {
-		
 		txt.text = "";
 		playersScore = Scoreboard.GetAllPlayerScore ();
 		foreach (PlayerScore player in playersScore) {
