@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class StartSceneManager : MonoBehaviour {
 
 	public static int startCount = 0;
+	public static int MENU_SCENE = ChangeScene.MENU_SCENE;
 	public static int BRIGHT_SCENE = ChangeScene.BRIGHT_SCENE;
 	public static int TUTORIAL_SCENE = ChangeScene.TUTORIAL_SCENE;
 	public static int SCORE_SCENE = ChangeScene.SCORE_SCENE;
@@ -16,6 +17,8 @@ public class StartSceneManager : MonoBehaviour {
 	void Start () {
 		loadingPanel = GameObject.Find ("LoadingPanel");
 		loadingPanel.SetActive(false);
+		//debug
+		print("loading panel set!");
 	}
 	
 	// Update is called once per frame
