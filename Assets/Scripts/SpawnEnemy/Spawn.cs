@@ -6,6 +6,9 @@ public class Spawn : MonoBehaviour {
 	[Tooltip("Array of game object: 'Enemy'")]
 	public GameObject[] enemies;
 
+	[Tooltip("Prefab of the big boss")]
+	public GameObject boss;
+
 	//the current amount of enemies on screen
 	[Tooltip("Current amount of enemies")]
 	public int amount;
@@ -52,5 +55,10 @@ public class Spawn : MonoBehaviour {
 			PhotonNetwork.Instantiate(enemies [index].gameObject.name, spawnPoint, Quaternion.identity, 0);
 		}
 		Invoke ("SpawnEnemy", Random.Range(minSpawnTime, maxSpawnTime));
+	}
+
+	void SpawnBoss () {
+		Vector3 point = new Vector3 (0, maxY, maxZ);
+		PhotonNetwork.Instantiate(boss.gameObject.name, point, Quaternion.identity, 0);
 	}
 }
