@@ -67,7 +67,7 @@ public class Enemy : HittableObject {
 			this.Kill ();
 		} else {
 			float move = moveSpeed * Time.deltaTime;
-			transform.position = Vector3.MoveTowards(transform.position, track.position, move);
+			//transform.position = Vector3.MoveTowards(transform.position, track.position, move);
 		}
 	}
 

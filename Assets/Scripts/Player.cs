@@ -118,6 +118,8 @@ public class Player : HittableObject {
 	#endregion
 
 	void OnCollisionEnter(Collision collision){
+		//for debug, bang tree
+		hitBehv.HitBy(35);
 		//TODO: should check photonview.isMine? could reduce some computation
 		if (collision.gameObject.tag == ObjectStore.GetEnemyTag ()) {
 			Enemy enemy = collision.gameObject.GetComponent<Enemy> ();

@@ -17,13 +17,11 @@ public class StartSceneManager : MonoBehaviour {
 	void Start () {
 		loadingPanel = GameObject.Find ("LoadingPanel");
 		loadingPanel.SetActive(false);
-		//debug
-		print("loading panel set!");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (startCount == 60) {
+		if (startCount >= 60) {
 			ChangeScene.ChangeToScene (sceneIndex);
 		}
 
@@ -50,6 +48,7 @@ public class StartSceneManager : MonoBehaviour {
 	public static void EnableLoading() {
 		if (loadingPanel == null) {
 			return;
+			print ("loading Panel not found");
 		}
 		loadingPanel.SetActive(true);
 	}
