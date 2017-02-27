@@ -50,7 +50,8 @@ public class Enemy : HittableObject {
 
 	// Update is called once per frame
 	virtual public void Update () {
-		if (this.photonView.isMine) {
+		bool isActive = !isIdle;
+		if (this.photonView.isMine && isActive) {
 			Move ();
 		}
 	}
@@ -67,7 +68,7 @@ public class Enemy : HittableObject {
 			this.Kill ();
 		} else {
 			float move = moveSpeed * Time.deltaTime;
-			//transform.position = Vector3.MoveTowards(transform.position, track.position, move);
+			transform.position = Vector3.MoveTowards(transform.position, track.position, move);
 		}
 	}
 
