@@ -10,6 +10,10 @@ public class GameManager : Photon.PunBehaviour {
 	public string roomName = "";
 
 	void Awake(){
+		if (PhotonNetwork.connected) {
+			//disconnect if return from score scene
+			PhotonNetwork.Disconnect ();
+		}
 		trinus = ObjectStore.FindTrinus ();
 		enemyManager = ObjectStore.FindEnemyManager ();
 

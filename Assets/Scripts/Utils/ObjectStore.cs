@@ -11,6 +11,7 @@ public class ObjectStore {
 	private const string TRINUS_NAME = "Trinus";
 	private const string BULLET_TAG = "Bullet";
 	private const string PLAYER_TAG = "Player";
+	private const string MENU_BUTTON_NAME = "MenuButton";
 	private const string START_BUTTON_NAME = "StartButton";
 	private const string MAP_BUTTON_NAME = "MapButton";
 	private const string SCENE_MANAGER_NAME = "SceneManager";
@@ -87,6 +88,10 @@ public class ObjectStore {
 
 	public static string GetBulletTag(){
 		return BULLET_TAG;
+	}
+
+	public static string GetMenuButtonName() {
+		return MENU_BUTTON_NAME;
 	}
 
 	public static string GetStartButtonName() {

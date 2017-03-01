@@ -31,7 +31,11 @@ public class RayCast : MonoBehaviour {
 				StartSceneManager.SetTargetScene (StartSceneManager.MAP_SCENE);
 				StartSceneManager.AddCount ();
 				//print ("=================MAP " + hit.collider.gameObject.name);
-			} else {
+			} else if (hit.collider.gameObject.name == ObjectStore.GetMenuButtonName ()) {
+				StartSceneManager.EnableLoading ();
+				StartSceneManager.SetTargetScene (StartSceneManager.MENU_SCENE);
+				StartSceneManager.AddCount ();
+			}else{
 				StartSceneManager.DisableLoading ();
 			}
 		} else {
@@ -50,7 +54,6 @@ public class RayCast : MonoBehaviour {
 			return;
 		}
 		// print (disableCount);
-
 		StartSceneManager.DisableLoading ();
 	}
 }

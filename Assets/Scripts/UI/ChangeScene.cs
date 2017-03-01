@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour {
 
+	public static int MENU_SCENE = 0;
 	public static int BRIGHT_SCENE = 1;
 	public static int TUTORIAL_SCENE = 2;
 	public static int SCORE_SCENE = 3;
