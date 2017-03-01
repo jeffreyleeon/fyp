@@ -103,14 +103,17 @@ public class Player : HittableObject {
 		Rigidbody rigidbody = gameObject.GetComponent<Rigidbody> ();
 		rigidbody.velocity = movement * 10.0f;
 
-		if (Input.GetKey(KeyCode.Space)){
+		if (Input.GetKey (KeyCode.Space)) {
 			Debug.Log ("Input Key: Space Down");
 			rigidbody.velocity = rigidbody.velocity + (Vector3.up * 50 * Time.fixedDeltaTime);
-		}else if(Input.GetKey(KeyCode.I)){
+		} else if (Input.GetKey (KeyCode.I)) {
 			// debug for score scene
-			GameObject trinus = ObjectStore.FindTrinus();
+			GameObject trinus = ObjectStore.FindTrinus ();
 			trinus.transform.parent = null;
-			ChangeScene.ChangeToScene(ChangeScene.SCORE_SCENE);
+			ChangeScene.ChangeToScene (ChangeScene.SCORE_SCENE);
+		} else if (Input.GetKey (KeyCode.Z)) {
+			// for debug, lower the player object to allow being hit by enemy
+			rigidbody.velocity = rigidbody.velocity + (Vector3.down * 50 * Time.fixedDeltaTime);
 		}
 	}
 		
@@ -118,8 +121,6 @@ public class Player : HittableObject {
 	#endregion
 
 	void OnCollisionEnter(Collision collision){
-		//for debug, bang tree
-		hitBehv.HitBy(35);
 		//TODO: should check photonview.isMine? could reduce some computation
 		if (collision.gameObject.tag == ObjectStore.GetEnemyTag ()) {
 			Enemy enemy = collision.gameObject.GetComponent<Enemy> ();
