@@ -82,17 +82,19 @@ public class GameManager : Photon.PunBehaviour {
 			deathPanel.GetComponent<Image> ().CrossFadeAlpha (0f, 1.0f, false);
 			trinus.transform.position = new Vector3 (0, 10, -10);
 			ObjectStore.FindMyPlayer().Kill();
-			GameObject[] UI_HP = ObjectStore.FindUIHP ();
-			foreach (GameObject i in UI_HP) {
-				i.gameObject.SetActive (false);
-			}
-			GameObject[] UI_Weapon = ObjectStore.FindUIWeapon ();
-			foreach (GameObject i in UI_Weapon) {
-				i.gameObject.SetActive (false);
-			}
+			DisableUI ();
 		}
+	}
 
-
+	private void DisableUI(){
+		GameObject[] UI_HP = ObjectStore.FindUIHP ();
+		foreach (GameObject i in UI_HP) {
+			i.gameObject.SetActive (false);
+		}
+		GameObject[] UI_Weapon = ObjectStore.FindUIWeapon ();
+		foreach (GameObject i in UI_Weapon) {
+			i.gameObject.SetActive (false);
+		}
 	}
 
 	#endregion
