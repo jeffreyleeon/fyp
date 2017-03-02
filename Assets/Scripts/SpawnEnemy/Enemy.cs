@@ -12,6 +12,8 @@ public class Enemy : HittableObject {
 	private Transform track;
 	[Tooltip("Game Object that the enemies move toward")]
 	public GameObject trackObj = null;
+	[Tooltip("Prefab of the score text")]
+	public GameObject scoreText;
 	[Tooltip("Moving speed of enemy")]
 	public float moveSpeed = 3f;
 	[Tooltip("Height that the enemy jump")]
@@ -119,6 +121,8 @@ public class Enemy : HittableObject {
 			GameManager gm = ObjectStore.FindGameManager ().GetComponent<GameManager> ();
 			gm.PlayerWin ();
 		}
+
+		DisplayScoreText ();
 	}
 	IEnumerator BaseClassKill () {
 		yield return new WaitForSeconds (2);
@@ -130,5 +134,14 @@ public class Enemy : HittableObject {
 		Rigidbody rb = GetComponent<Rigidbody>();
 		rb.isKinematic = true;
 		rb.detectCollisions = false;
+	}
+
+	private void DisplayScoreText () {
+		if (scoreText == null) {
+			return;
+		}
+		GameObject textObject = (GameObject)Instantiate(scoreText, transform.position, Quaternion.identity);
+		TextMesh textMesh = textObject.GetComponent<TextMesh> ();
+		textMesh.text = ObjectStore.GetScoreByTag (this.tag).ToString();
 	}
 }
