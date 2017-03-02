@@ -97,6 +97,10 @@ public class Enemy : HittableObject {
 		return (this.GetCurrentHealth () <= 0);
 	}
 
+	public bool IsBoss () {
+		return isBoss;
+	}
+
 	public virtual void Kill() {
 		base.Kill ();
 		if (isBoss) {
