@@ -101,11 +101,27 @@ public class Enemy : HittableObject {
 		return isBoss;
 	}
 
+	public virtual void RunDieAnimation () {}
+
 	public virtual void Kill() {
-		base.Kill ();
+		StartCoroutine (BaseClassKill ());
+
+		DisableMovementsAndCollisions ();
+		RunDieAnimation ();
 		if (isBoss) {
 			GameManager gm = ObjectStore.FindGameManager ().GetComponent<GameManager> ();
 			gm.PlayerWin ();
 		}
+	}
+	IEnumerator BaseClassKill () {
+		yield return new WaitForSeconds (2);
+		base.Kill ();
+	}
+
+	private void DisableMovementsAndCollisions () {
+		isIdle = true;
+		Rigidbody rb = GetComponent<Rigidbody>();
+		rb.isKinematic = true;
+		rb.detectCollisions = false;
 	}
 }
