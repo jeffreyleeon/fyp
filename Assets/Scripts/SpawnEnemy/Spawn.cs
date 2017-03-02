@@ -6,9 +6,11 @@ public class Spawn : MonoBehaviour {
 	[Tooltip("Array of game object: 'Enemy'")]
 	public GameObject[] enemies;
 
-	//the current amount of enemies on screen
-	[Tooltip("Current amount of enemies")]
-	public int amount;
+	[Tooltip("Prefab of the big boss")]
+	public GameObject boss;
+
+	[Tooltip("Amount of enemies to be spawned before spawning big boss")]
+	public int enemiesRemaining = 20;
 
 	[Tooltip("Max no. of enemies that appear at the same time")]
 	public int maxEnemy = 10;
@@ -41,16 +43,26 @@ public class Spawn : MonoBehaviour {
 	}
 
 	void SpawnEnemy() {
+		if (enemiesRemaining <= 0) {
+			SpawnBoss ();
+			return;
+		}
 		spawnPoint.x = Random.Range (minX, maxX);
 		spawnPoint.y = Random.Range (minY, maxY);
 		spawnPoint.z = Random.Range (minZ, maxZ);
 	
 		GameObject[] existingEnemies = ObjectStore.FindEnemies ();
-		amount = existingEnemies.Length + 1;
+		int amount = existingEnemies.Length + 1;
 		if (amount < maxEnemy) {
 			int index = Random.Range (0, enemies.Length);
 			PhotonNetwork.Instantiate(enemies [index].gameObject.name, spawnPoint, Quaternion.identity, 0);
+			enemiesRemaining--;
 		}
 		Invoke ("SpawnEnemy", Random.Range(minSpawnTime, maxSpawnTime));
+	}
+
+	void SpawnBoss () {
+		Vector3 point = new Vector3 (0, maxY, maxZ);
+		PhotonNetwork.Instantiate(boss.gameObject.name, point, Quaternion.identity, 0);
 	}
 }
