@@ -63,8 +63,15 @@ public class Enemy : HittableObject {
 	/// Move this object.
 	/// </summary>
 	virtual protected void Move() {
-		float move = moveSpeed * Time.deltaTime;
-		transform.position = Vector3.MoveTowards(transform.position, track.position, move);
+		bool outOfBound = transform.position.x < minX || transform.position.x > maxX ||
+			transform.position.y < minY || transform.position.y > maxY ||
+			transform.position.z < minZ || transform.position.z > maxZ;
+		if (outOfBound) {
+			this.Kill ();
+		} else {
+			float move = moveSpeed * Time.deltaTime;
+			transform.position = Vector3.MoveTowards(transform.position, track.position, move);
+		}
 	}
 
 	/// <summary>
