@@ -6,6 +6,7 @@ public class BadWizardEnemy  : WalkingEnemy {
 	Animator anim;
 	string walkHash = "Chubby 01 Walk";
 	string idleHash = "Idle 02";
+	string dieHash = "Fall 02";
 
 	// Use this for initialization
 	virtual public void Start () {
@@ -31,5 +32,9 @@ public class BadWizardEnemy  : WalkingEnemy {
 	// Update is called once per frame
 	virtual public void Update () {
 		base.Update ();
+	}
+
+	public override void RunDieAnimation () {
+		anim.Play (dieHash);
 	}
 }

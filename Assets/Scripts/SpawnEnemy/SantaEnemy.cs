@@ -6,6 +6,7 @@ public class SantaEnemy : WalkingEnemy {
 	Animator anim;
 	string idleHash = "Idle 02";
 	string walkHash = "Chubby 01 Walk";
+	string dieHash = "Fall 01";
 
 	// Use this for initialization
 	virtual public void Start () {
@@ -31,5 +32,9 @@ public class SantaEnemy : WalkingEnemy {
 	// Update is called once per frame
 	virtual public void Update () {
 		base.Update ();
+	}
+
+	public override void RunDieAnimation () {
+		anim.Play (dieHash);
 	}
 }

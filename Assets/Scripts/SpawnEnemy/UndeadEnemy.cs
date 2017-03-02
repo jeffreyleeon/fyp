@@ -6,6 +6,7 @@ public class UndeadEnemy : WalkingEnemy {
 	Animator anim;
 	string walkHash = "Animal 01 Gorilla";
 	string idleHash = "Idle 02";
+	string dieHash = "Fall 01";
 
 	// Use this for initialization
 	virtual public void Start () {
@@ -31,5 +32,9 @@ public class UndeadEnemy : WalkingEnemy {
 	// Update is called once per frame
 	virtual public void Update () {
 		base.Update ();
+	}
+
+	public override void RunDieAnimation () {
+		anim.Play (dieHash);
 	}
 }

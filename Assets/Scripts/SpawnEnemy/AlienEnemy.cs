@@ -7,6 +7,7 @@ public class AlienEnemy : WalkingEnemy {
 	int walkHash = Animator.StringToHash("Walk 02");
 	int attackHash = Animator.StringToHash("Boxing 01");
 	string idleHash = "Idle 03";
+	string dieHash = "Fall 01";
 	int count = 0;
 
 	// Use this for initialization
@@ -26,5 +27,9 @@ public class AlienEnemy : WalkingEnemy {
 	// Update is called once per frame
 	virtual public void Update () {
 		base.Update ();
+	}
+
+	public override void RunDieAnimation () {
+		anim.Play (dieHash);
 	}
 }

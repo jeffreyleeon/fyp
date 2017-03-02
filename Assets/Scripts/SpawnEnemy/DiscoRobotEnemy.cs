@@ -6,6 +6,7 @@ public class DiscoRobotEnemy  : WalkingEnemy {
 	Animator anim;
 	string walkHash = "Walk 13";
 	string idleHash = "Idle 02";
+	string dieHash = "Fall 04";
 
 	// Use this for initialization
 	virtual public void Start () {
@@ -31,5 +32,9 @@ public class DiscoRobotEnemy  : WalkingEnemy {
 	// Update is called once per frame
 	virtual public void Update () {
 		base.Update ();
+	}
+
+	public override void RunDieAnimation () {
+		anim.Play (dieHash);
 	}
 }
