@@ -9,6 +9,8 @@ public class GameManager : Photon.PunBehaviour {
 	[Tooltip("Room Name, empty for joining random room. If failed, create one with random name. Specifiying roomName will try to connect to that room, if NOT EXIST, create room with that name")]
 	public string roomName = "";
 
+	private bool playerWin = false;
+
 	void Awake(){
 		if (PhotonNetwork.connected) {
 			//disconnect if return from score scene
@@ -44,9 +46,31 @@ public class GameManager : Photon.PunBehaviour {
 		enemyManager.GetComponent<Spawn> ().enabled = true;
 	}
 
+	#region PlayerWin
+
+	public void PlayerWin() {
+		playerWin = true;
+		StartCoroutine ("ActivateWin");
+	}
+
+	IEnumerator ActivateWin() {
+		yield return new WaitForSeconds (5);
+		//extract trinus from player and destroy player object
+		GameObject trinus = ObjectStore.FindTrinus();
+		trinus.transform.parent = null;
+
+		GameObject sceneMan = ObjectStore.FindSceneManager();
+		sceneMan.GetPhotonView().RPC ("BroadcastChangeToScene", PhotonTargets.AllViaServer, ChangeScene.SCORE_SCENE);
+	}
+
+	#endregion
+
 	#region PlayerDie
 
 	public void PlayerDie(){
+		if (playerWin) {
+			return;
+		}
 		StartCoroutine ("ActivateDeath");
 	}
 

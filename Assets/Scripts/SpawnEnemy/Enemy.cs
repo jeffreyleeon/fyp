@@ -100,7 +100,8 @@ public class Enemy : HittableObject {
 	public virtual void Kill() {
 		base.Kill ();
 		if (isBoss) {
-			print ("=====testing");
+			GameManager gm = ObjectStore.FindGameManager ().GetComponent<GameManager> ();
+			gm.PlayerWin ();
 		}
 	}
 }
