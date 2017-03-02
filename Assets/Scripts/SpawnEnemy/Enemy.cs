@@ -32,6 +32,8 @@ public class Enemy : HittableObject {
 	public AudioClip hitAudio;
 	[Tooltip("Is enemy in idle state")]
 	public bool isIdle = false;
+	[Tooltip("Is enemy a boss")]
+	public bool isBoss = false;
 
 	#endregion
 
@@ -100,5 +102,12 @@ public class Enemy : HittableObject {
 
 	bool IsDead(){
 		return (this.GetCurrentHealth () <= 0);
+	}
+
+	public virtual void Kill() {
+		base.Kill ();
+		if (isBoss) {
+			print ("=====testing");
+		}
 	}
 }
