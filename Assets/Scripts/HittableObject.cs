@@ -96,7 +96,7 @@ public abstract class HittableObject : Photon.MonoBehaviour {
 	}
 
 	public bool IsAlive(){
-		return currentHealth >= 0;
+		return currentHealth > 0;
 	}
 
 	#endregion
