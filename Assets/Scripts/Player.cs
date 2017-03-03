@@ -125,12 +125,18 @@ public class Player : HittableObject {
 		if (collision.gameObject.tag == ObjectStore.GetEnemyTag ()) {
 			Enemy enemy = collision.gameObject.GetComponent<Enemy> ();
 			hitBehv.HitBy (enemy.attack);
+			if (enemy.IsBoss () && userName == PhotonNetwork.player.name) {
+				PlayerDie ();
+			}
 		}
 		if (GetCurrentHealth () == 0 && userName == PhotonNetwork.player.name) {
-			GameManager gm = ObjectStore.FindGameManager ().GetComponent<GameManager> ();
-			gm.PlayerDie ();
+			PlayerDie ();
 		}
 	}
-		
+
+	private void PlayerDie () {
+		GameManager gm = ObjectStore.FindGameManager ().GetComponent<GameManager> ();
+		gm.PlayerDie ();
+	}
 		
 }

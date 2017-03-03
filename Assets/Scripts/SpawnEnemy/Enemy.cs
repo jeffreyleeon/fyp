@@ -32,6 +32,8 @@ public class Enemy : HittableObject {
 	public AudioClip hitAudio;
 	[Tooltip("Is enemy in idle state")]
 	public bool isIdle = false;
+	[Tooltip("Is enemy a boss")]
+	public bool isBoss = false;
 
 	#endregion
 
@@ -61,15 +63,8 @@ public class Enemy : HittableObject {
 	/// Move this object.
 	/// </summary>
 	virtual protected void Move() {
-		bool outOfBound = transform.position.x < minX || transform.position.x > maxX ||
-			transform.position.y < minY || transform.position.y > maxY ||
-			transform.position.z < minZ || transform.position.z > maxZ;
-		if (outOfBound) {
-			this.Kill ();
-		} else {
-			float move = moveSpeed * Time.deltaTime;
-			transform.position = Vector3.MoveTowards(transform.position, track.position, move);
-		}
+		float move = moveSpeed * Time.deltaTime;
+		transform.position = Vector3.MoveTowards(transform.position, track.position, move);
 	}
 
 	/// <summary>
@@ -100,5 +95,17 @@ public class Enemy : HittableObject {
 
 	bool IsDead(){
 		return (this.GetCurrentHealth () <= 0);
+	}
+
+	public bool IsBoss () {
+		return isBoss;
+	}
+
+	public virtual void Kill() {
+		base.Kill ();
+		if (isBoss) {
+			GameManager gm = ObjectStore.FindGameManager ().GetComponent<GameManager> ();
+			gm.PlayerWin ();
+		}
 	}
 }

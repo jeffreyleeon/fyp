@@ -35,6 +35,8 @@ public class Spawn : MonoBehaviour {
 
 	private Vector3 spawnPoint;
 
+	private bool isBossSpawned = false;
+
 	void Start () {
 		if (PhotonNetwork.isMasterClient) {
 			Debug.Log ("MasterClient!");
@@ -43,9 +45,9 @@ public class Spawn : MonoBehaviour {
 	}
 
 	void SpawnEnemy() {
-		if (enemiesRemaining <= 0) {
+		if (enemiesRemaining <= 0 && !isBossSpawned) {
+			isBossSpawned = true;
 			SpawnBoss ();
-			return;
 		}
 		spawnPoint.x = Random.Range (minX, maxX);
 		spawnPoint.y = Random.Range (minY, maxY);
