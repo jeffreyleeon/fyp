@@ -1,18 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SantaEnemy : WalkingEnemy {
-	
+public class BadWizardEnemy  : WalkingEnemy {
+
 	Animator anim;
-	string idleHash = "Idle 02";
 	string walkHash = "Chubby 01 Walk";
-	string dieHash = "Fall 01";
+	string idleHash = "Idle 02";
+	string dieHash = "Fall 02";
 
 	// Use this for initialization
 	virtual public void Start () {
 		base.Start ();
 		// initialising reference variables
-		anim = gameObject.GetComponent<Animator>();	
+		anim = gameObject.GetComponent<Animator>();
 
 		transform.rotation = Quaternion.AngleAxis (180, Vector3.up);
 		string action = GetInitialAction ();

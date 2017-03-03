@@ -6,6 +6,7 @@ public class WoodEnemy : WalkingEnemy {
 	Animator anim;
 	string walkHash = "Walk 06";
 	string idleHash = "Idle 02";
+	string dieHash = "Fall 03";
 
 	// Use this for initialization
 	void Start () {
@@ -32,4 +33,9 @@ public class WoodEnemy : WalkingEnemy {
 	virtual public void Update () {
 		base.Update ();
 	}
+
+	public override void RunDieAnimation () {
+		anim.Play (dieHash);
+	}
+
 }

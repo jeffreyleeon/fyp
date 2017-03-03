@@ -7,6 +7,7 @@ public class SnowyEnemy : WalkingEnemy {
 	//string swimHash = "Swim 02";
 	string idleHash = "Idle 02";
 	string walkHash = "Run 01";
+	string dieHash = "Fall 01";
 
 	// Use this for initialization
 	virtual public void Start () {
@@ -32,5 +33,9 @@ public class SnowyEnemy : WalkingEnemy {
 	// Update is called once per frame
 	virtual public void Update () {
 		base.Update ();
+	}
+
+	public override void RunDieAnimation () {
+		anim.Play (dieHash);
 	}
 }

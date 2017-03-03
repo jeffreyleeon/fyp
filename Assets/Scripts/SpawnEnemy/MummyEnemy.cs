@@ -10,4 +10,10 @@ public class MummyEnemy : WalkingEnemy {
 		}
 	}
 
+	public override void RunDieAnimation () {
+		control_script controlScript = GetComponent<control_script> ();
+		controlScript.Run ();
+		controlScript.Death ();
+	}
+
 }

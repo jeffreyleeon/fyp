@@ -6,6 +6,7 @@ public class KnightEnemy : WalkingEnemy {
 	Animator anim;
 	int jumpHash = Animator.StringToHash("Jump");
 	int walkHash = Animator.StringToHash("Walk");
+	int dieHash = Animator.StringToHash("Die");
 	int count = 0;
 
 	// Use this for initialization
@@ -18,6 +19,9 @@ public class KnightEnemy : WalkingEnemy {
 	// Update is called once per frame
 	virtual public void Update () {
 		base.Update ();
+		if (!IsAlive ()) {
+			return;
+		}
 		if (count % 360 < 100) {
 			anim.SetTrigger (jumpHash);
 		} else {
@@ -25,4 +29,11 @@ public class KnightEnemy : WalkingEnemy {
 		}
 		count++;
 	}
+
+	public override void RunDieAnimation () {
+		anim.ResetTrigger (jumpHash);
+		anim.ResetTrigger (walkHash);
+		anim.SetTrigger (dieHash);
+	}
+
 }

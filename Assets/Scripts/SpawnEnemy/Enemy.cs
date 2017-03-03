@@ -63,8 +63,15 @@ public class Enemy : HittableObject {
 	/// Move this object.
 	/// </summary>
 	virtual protected void Move() {
-		float move = moveSpeed * Time.deltaTime;
-		transform.position = Vector3.MoveTowards(transform.position, track.position, move);
+		bool outOfBound = transform.position.x < minX || transform.position.x > maxX ||
+			transform.position.y < minY || transform.position.y > maxY ||
+			transform.position.z < minZ || transform.position.z > maxZ;
+		if (outOfBound) {
+			this.Kill ();
+		} else {
+			float move = moveSpeed * Time.deltaTime;
+			transform.position = Vector3.MoveTowards(transform.position, track.position, move);
+		}
 	}
 
 	/// <summary>
@@ -101,11 +108,27 @@ public class Enemy : HittableObject {
 		return isBoss;
 	}
 
+	public virtual void RunDieAnimation () {}
+
 	public virtual void Kill() {
-		base.Kill ();
+		StartCoroutine (BaseClassKill ());
+
+		DisableMovementsAndCollisions ();
+		RunDieAnimation ();
 		if (isBoss) {
 			GameManager gm = ObjectStore.FindGameManager ().GetComponent<GameManager> ();
 			gm.PlayerWin ();
 		}
+	}
+	IEnumerator BaseClassKill () {
+		yield return new WaitForSeconds (2);
+		base.Kill ();
+	}
+
+	private void DisableMovementsAndCollisions () {
+		isIdle = true;
+		Rigidbody rb = GetComponent<Rigidbody>();
+		rb.isKinematic = true;
+		rb.detectCollisions = false;
 	}
 }
