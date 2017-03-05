@@ -17,7 +17,7 @@ public class SceneSetting : MonoBehaviour {
 			trinus.transform.position = new Vector3 (0, 0, 0);
 			leap.SetActive (false);
 			break;	
-		case ChangeScene.BRIGHT_SCENE:
+		default:
 			leap.SetActive (true);
 			break;
 			
