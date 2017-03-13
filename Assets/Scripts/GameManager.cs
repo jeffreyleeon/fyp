@@ -59,8 +59,10 @@ public class GameManager : Photon.PunBehaviour {
 		GameObject trinus = ObjectStore.FindTrinus();
 		trinus.transform.parent = null;
 
-		GameObject sceneMan = ObjectStore.FindSceneManager();
-		sceneMan.GetPhotonView().RPC ("BroadcastChangeToScene", PhotonTargets.AllViaServer, ChangeScene.SCORE_SCENE);
+		ChangeScene.ChangeToScene (ChangeScene.SCORE_SCENE);
+
+//		GameObject sceneMan = ObjectStore.FindSceneManager();
+//		sceneMan.GetPhotonView().RPC ("BroadcastChangeToScene", PhotonTargets.AllViaServer, ChangeScene.SCORE_SCENE);
 	}
 
 	#endregion
