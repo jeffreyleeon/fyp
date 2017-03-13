@@ -24,6 +24,7 @@ public class StartSceneManager : MonoBehaviour {
 		if (startCount >= 60) {
 			ChangeScene.ChangeToScene (sceneIndex);
 			startCount = 0;
+			sceneIndex = -1;
 		}
 
 		// Debug usage
