@@ -14,6 +14,7 @@ public class SceneSetting : MonoBehaviour {
 		switch (CurrentSceneIndex()){
 		case ChangeScene.MENU_SCENE:
 		case ChangeScene.SCORE_SCENE:
+			NetworkManager.DisconnectServer ();
 			trinus.transform.position = new Vector3 (0, 0, 0);
 			leap.SetActive (false);
 			break;	

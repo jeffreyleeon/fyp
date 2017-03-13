@@ -40,6 +40,15 @@ public sealed class NetworkManager {
 	}
 
 	/// <summary>
+	/// Disconnects the server.
+	/// </summary>
+	public static void DisconnectServer(){
+		if (NetworkManager.IsServerConnected) {
+			PhotonNetwork.Disconnect ();
+		}
+	}
+
+	/// <summary>
 	/// Joins the room.
 	/// Caller should override OnJoinedRoom, OnPhotonJoinRoomFailed callbacks from PUN and deal with it themselves
 	/// </summary>
