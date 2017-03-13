@@ -23,6 +23,7 @@ public class StartSceneManager : MonoBehaviour {
 	void Update () {
 		if (startCount >= 60) {
 			ChangeScene.ChangeToScene (sceneIndex);
+			startCount = 0;
 		}
 
 		// Debug usage
