@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class StartSceneManager : MonoBehaviour {
 
+	public int threshold = 60;
 	public static int startCount = 0;
 	public static int MENU_SCENE = ChangeScene.MENU_SCENE;
 	public static int BRIGHT_SCENE = ChangeScene.BRIGHT_SCENE;
@@ -20,11 +21,13 @@ public class StartSceneManager : MonoBehaviour {
 	void Start () {
 		loadingPanel = GameObject.Find ("LoadingPanel");
 		loadingPanel.SetActive(false);
+
+		LoadingBar.SetMax (threshold);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (startCount >= 60) {
+		if (startCount >= threshold) {
 			ChangeScene.ChangeToScene (sceneIndex);
 			startCount = 0;
 			sceneIndex = -1;
