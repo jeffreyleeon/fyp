@@ -1,0 +1,110 @@
+fileFormatVersion: 2
+guid: c4d1f27348a6f416a937eb2e47df389f
+timeCreated: 1489583452
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: christmasButton
+    21300002: horrorButton
+    21300004: forestButton
+    21300006: spaceButton
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: christmasButton
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1032
+        width: 1275
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 74, y: 164, z: 74, w: 238}
+      outline: []
+    - serializedVersion: 2
+      name: horrorButton
+      rect:
+        serializedVersion: 2
+        x: 2667
+        y: 1032
+        width: 997
+        height: 763
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 108, y: 99, z: 83, w: 191}
+      outline: []
+    - serializedVersion: 2
+      name: forestButton
+      rect:
+        serializedVersion: 2
+        x: 1778
+        y: 581
+        width: 949
+        height: 824
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 130, y: 169, z: 108, w: 235}
+      outline: []
+    - serializedVersion: 2
+      name: spaceButton
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 0
+        width: 810
+        height: 919
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 78, y: 130, z: 103, w: 156}
+      outline: []
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
