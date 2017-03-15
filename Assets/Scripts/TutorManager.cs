@@ -19,6 +19,11 @@ public class TutorManager : MonoBehaviour {
 	private GameObject shootingManager;
 	GameObject[] enemies;
 	private int inactiveCount;
+	private static int nextScene = ChangeScene.BRIGHT_SCENE;
+
+	public static void SetNextScene (int sceneIndex) {
+		nextScene = sceneIndex;
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -150,7 +155,7 @@ public class TutorManager : MonoBehaviour {
 
 	IEnumerator LeaveTutorialScene () {
 		yield return new WaitForSeconds (10);
-		ChangeScene.ChangeToScene (ChangeScene.BRIGHT_SCENE);
+		ChangeScene.ChangeToScene (nextScene);
 	}
 
 }

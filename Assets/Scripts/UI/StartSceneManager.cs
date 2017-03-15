@@ -48,9 +48,13 @@ public class StartSceneManager : MonoBehaviour {
 			ChangeScene.ChangeToScene (MAP_SCENE);
 		}
 	}
-
+		
 	public static void SetTargetScene (int targetSceneIndex) {
 		sceneIndex = targetSceneIndex;
+	}
+
+	public static void SetTutorNext (int targetNext) {
+		TutorManager.SetNextScene(targetNext);
 	}
 
 	public static void EnableLoading() {
