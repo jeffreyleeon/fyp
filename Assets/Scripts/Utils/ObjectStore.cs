@@ -14,6 +14,10 @@ public class ObjectStore {
 	private const string MENU_BUTTON_NAME = "MenuButton";
 	private const string START_BUTTON_NAME = "StartButton";
 	private const string MAP_BUTTON_NAME = "MapButton";
+	private const string FOREST_BUTTON_NAME = "forestButton";
+	private const string SPACE_BUTTON_NAME = "spaceButton";
+	private const string HORROR_BUTTON_NAME = "horrorButton";
+	private const string CHRISTMAS_BUTTON_NAME = "christmasButton";
 	private const string SCENE_MANAGER_NAME = "SceneManager";
 	private const string GAME_MANAGER_NAME = "GameManager";
 	private const string DEATH_PANEL_NAME = "Death";
@@ -100,6 +104,22 @@ public class ObjectStore {
 
 	public static string GetMapButtonName() {
 		return MAP_BUTTON_NAME;
+	}
+
+	public static string GetForestButtonName() {
+		return FOREST_BUTTON_NAME;
+	}
+
+	public static string GetSpaceButtonName() {
+		return SPACE_BUTTON_NAME;
+	}
+
+	public static string GetHorrorButtonName() {
+		return HORROR_BUTTON_NAME;
+	}
+
+	public static string GetChristmasButtonName() {
+		return CHRISTMAS_BUTTON_NAME;
 	}
 
 	public static int GetScoreByTag(string tag){
