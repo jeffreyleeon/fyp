@@ -121,8 +121,10 @@ public class Enemy : HittableObject {
 			GameManager gm = ObjectStore.FindGameManager ().GetComponent<GameManager> ();
 			gm.PlayerWin ();
 		}
-
-		DisplayScoreText ();
+		if (GetCurrentHealth () <= 0) {
+			//not out of bound
+			DisplayScoreText ();
+		}
 	}
 	IEnumerator BaseClassKill () {
 		yield return new WaitForSeconds (2);
