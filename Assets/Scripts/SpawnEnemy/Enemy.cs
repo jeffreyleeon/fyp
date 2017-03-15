@@ -142,6 +142,6 @@ public class Enemy : HittableObject {
 		}
 		GameObject textObject = (GameObject)Instantiate(scoreText, transform.position, Quaternion.identity);
 		TextMesh textMesh = textObject.GetComponent<TextMesh> ();
-		textMesh.text = ObjectStore.GetScoreByTag (this.tag).ToString();
+		textMesh.text = "+" + ObjectStore.GetScoreByTag (this.tag).ToString();
 	}
 }
