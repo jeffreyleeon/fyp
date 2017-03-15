@@ -23,6 +23,8 @@ public class ObjectStore {
 	private const string UI_SCORE_TAG = "UI_Score";
 	private const string UI_HP_TAG = "UI_HP";
 
+	private static Material activeSkybox;
+
 	private static readonly Dictionary<string, int> ScoreDictionary = new Dictionary<string, int>{
 		{ENEMY_TAG, 10}
 	};
@@ -125,5 +127,14 @@ public class ObjectStore {
 			}
 		}
 		return null;
+	}
+
+	public static Material ActiveSkybox {
+		get {
+			return activeSkybox;
+		}
+		set {
+			activeSkybox = value;
+		}
 	}
 }

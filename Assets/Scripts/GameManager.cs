@@ -29,6 +29,11 @@ public class GameManager : Photon.PunBehaviour {
 
 	void Start () {
 		PlayBackgroundMusic ();
+		RecordSkybox ();
+	}
+
+	void RecordSkybox () {
+		ObjectStore.ActiveSkybox = RenderSettings.skybox;
 	}
 
 	void JoinGameRoom () {
