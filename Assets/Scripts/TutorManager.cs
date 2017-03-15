@@ -18,6 +18,7 @@ public class TutorManager : MonoBehaviour {
 
 	private HandStore handStore;
 	private GameObject shootingManager;
+	private TutorialShootingController shootingController;
 	GameObject[] enemies;
 	private int inactiveCount;
 
@@ -27,6 +28,8 @@ public class TutorManager : MonoBehaviour {
 
 		shootingManager = ObjectStore.FindShootingManager ();
 		shootingManager.SetActive (false);
+
+		shootingController = shootingManager.GetComponent<TutorialShootingController> ();
 
 		enemies = ObjectStore.FindEnemies ();
 		ShowEnemies (false);
@@ -67,7 +70,7 @@ public class TutorManager : MonoBehaviour {
 			}
 		case TutorState.CHANGE_BULLET_STATE:
 			{
-				if (false) {
+				if (shootingController.HasChangedWeapon ()) {
 					ProceedState ();
 				}
 				break;
