@@ -11,7 +11,15 @@ public class ChangeScene : MonoBehaviour {
 	public const int MAP_SCENE = 4;
 
 	public static void ChangeToScene (int sceneIndex) {
+		if (sceneIndex == SCORE_SCENE) {
+			RetainDecoration ();
+		}
 		SceneManager.LoadScene (sceneIndex);
+	}
+
+	private static void RetainDecoration () {
+		GameObject decoration = ObjectStore.FindDecoration ();
+		DontDestroyOnLoad (decoration);
 	}
 }
 

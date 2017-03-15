@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class ObjectStore {
 
 	private const string LEAP_MOTION_CONTROLLER_TAG = "LeapMotionController";
+	private const string DECORATION_NAME = "Decoration";
 	private const string ENEMY_TAG = "Enemy";
 	private const string SHOOTING_MANAGER_NAME = "ShootingManager";
 	private const string ENEMY_MANAGER_NAME = "EnemyManager";
@@ -29,7 +30,11 @@ public class ObjectStore {
 	public static GameObject FindLeapMotionController () {
 		return GameObject.FindGameObjectWithTag (LEAP_MOTION_CONTROLLER_TAG);
 	}
-		
+
+	public static GameObject FindDecoration () {
+		return GameObject.Find (DECORATION_NAME);
+	}
+
 	public static GameObject[] FindEnemies () {
 		return GameObject.FindGameObjectsWithTag (ENEMY_TAG);
 	}
