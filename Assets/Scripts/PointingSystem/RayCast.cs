@@ -35,6 +35,22 @@ public class RayCast : MonoBehaviour {
 				StartSceneManager.EnableLoading ();
 				StartSceneManager.SetTargetScene (StartSceneManager.MENU_SCENE);
 				StartSceneManager.AddCount ();
+			} else if (hit.collider.gameObject.name == ObjectStore.GetForestButtonName ()) {
+				StartSceneManager.EnableLoading ();
+				StartSceneManager.SetTargetScene (StartSceneManager.BRIGHT_SCENE);
+				StartSceneManager.AddCount ();
+			} else if (hit.collider.gameObject.name == ObjectStore.GetChristmasButtonName ()) {
+				StartSceneManager.EnableLoading ();
+				StartSceneManager.SetTargetScene (StartSceneManager.CHRISTMAS_SCENE);
+				StartSceneManager.AddCount ();
+			} else if (hit.collider.gameObject.name == ObjectStore.GetSpaceButtonName ()) {
+				StartSceneManager.EnableLoading ();
+				StartSceneManager.SetTargetScene (StartSceneManager.SPACE_SCENE);
+				StartSceneManager.AddCount ();
+			} else if (hit.collider.gameObject.name == ObjectStore.GetHorrorButtonName ()) {
+				StartSceneManager.EnableLoading ();
+				StartSceneManager.SetTargetScene (StartSceneManager.HORROR_SCENE);
+				StartSceneManager.AddCount ();
 			}else{
 				StartSceneManager.DisableLoading ();
 			}

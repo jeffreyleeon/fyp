@@ -10,6 +10,9 @@ public class StartSceneManager : MonoBehaviour {
 	public static int TUTORIAL_SCENE = ChangeScene.TUTORIAL_SCENE;
 	public static int SCORE_SCENE = ChangeScene.SCORE_SCENE;
 	public static int MAP_SCENE = ChangeScene.MAP_SCENE;
+	public static int SPACE_SCENE = ChangeScene.SPACE_SCENE;
+	public static int CHRISTMAS_SCENE = ChangeScene.CHRISTMAS_SCENE;
+	public static int HORROR_SCENE = ChangeScene.HORROR_SCENE;
 	public static int sceneIndex = -1;
 	public static GameObject loadingPanel;
 
