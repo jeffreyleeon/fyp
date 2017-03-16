@@ -24,7 +24,8 @@ public class RayCast : MonoBehaviour {
 
 			if (hit.collider.gameObject.name == ObjectStore.GetStartButtonName ()) {
 				StartSceneManager.EnableLoading ();
-				StartSceneManager.SetTargetScene (StartSceneManager.BRIGHT_SCENE);
+				StartSceneManager.SetTargetScene (StartSceneManager.TUTORIAL_SCENE);
+				StartSceneManager.SetTutorNext (StartSceneManager.BRIGHT_SCENE);
 				StartSceneManager.AddCount ();
 			} else if (hit.collider.gameObject.name == ObjectStore.GetMapButtonName ()) {
 				StartSceneManager.EnableLoading ();
@@ -37,19 +38,23 @@ public class RayCast : MonoBehaviour {
 				StartSceneManager.AddCount ();
 			} else if (hit.collider.gameObject.name == ObjectStore.GetForestButtonName ()) {
 				StartSceneManager.EnableLoading ();
-				StartSceneManager.SetTargetScene (StartSceneManager.BRIGHT_SCENE);
+				StartSceneManager.SetTargetScene (StartSceneManager.TUTORIAL_SCENE);
+				StartSceneManager.SetTutorNext (StartSceneManager.BRIGHT_SCENE);
 				StartSceneManager.AddCount ();
 			} else if (hit.collider.gameObject.name == ObjectStore.GetChristmasButtonName ()) {
 				StartSceneManager.EnableLoading ();
-				StartSceneManager.SetTargetScene (StartSceneManager.CHRISTMAS_SCENE);
+				StartSceneManager.SetTargetScene (StartSceneManager.TUTORIAL_SCENE);
+				StartSceneManager.SetTutorNext (StartSceneManager.CHRISTMAS_SCENE);
 				StartSceneManager.AddCount ();
 			} else if (hit.collider.gameObject.name == ObjectStore.GetSpaceButtonName ()) {
 				StartSceneManager.EnableLoading ();
-				StartSceneManager.SetTargetScene (StartSceneManager.SPACE_SCENE);
+				StartSceneManager.SetTargetScene (StartSceneManager.TUTORIAL_SCENE);
+				StartSceneManager.SetTutorNext (StartSceneManager.SPACE_SCENE);
 				StartSceneManager.AddCount ();
 			} else if (hit.collider.gameObject.name == ObjectStore.GetHorrorButtonName ()) {
 				StartSceneManager.EnableLoading ();
-				StartSceneManager.SetTargetScene (StartSceneManager.HORROR_SCENE);
+				StartSceneManager.SetTargetScene (StartSceneManager.TUTORIAL_SCENE);
+				StartSceneManager.SetTutorNext (StartSceneManager.HORROR_SCENE);
 				StartSceneManager.AddCount ();
 			}else{
 				StartSceneManager.DisableLoading ();
