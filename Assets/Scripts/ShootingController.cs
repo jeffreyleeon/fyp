@@ -18,7 +18,7 @@ public class ShootingController : Photon.MonoBehaviour {
 	[Tooltip("Number of bullets to be spawned per second")]
 	public float numOfBulletPerSecond;
 
-	private HandStore handStore;
+	protected HandStore handStore;
 
 	[Tooltip("A mutex lock to prevent calling multiple change weapon at the same time")]
 	private bool changingWeaponMutexLock = false; // True is changing weapon, False is not changing weapon
@@ -121,7 +121,7 @@ public class ShootingController : Photon.MonoBehaviour {
 		StartCoroutine (UnlockChangeWeaponMutex());
 	}
 
-	private void ChangeWeapon () {
+	virtual protected void ChangeWeapon () {
 		Player player = ObjectStore.FindMyPlayer ();
 		if (!player) {
 			Debug.Log ("/FYP/ShootingController/ChangeWeapon: player is null");

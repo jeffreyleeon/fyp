@@ -10,6 +10,7 @@ public class TutorManager : MonoBehaviour {
 		SHOW_HAND_STATE,
 		DISMISS_HAND_STATE,
 		SHOOT_BULLET_STATE,
+		CHANGE_BULLET_STATE,
 		SHOOT_ENEMIES_STATE,
 		END_STATE,
 	};
@@ -17,6 +18,7 @@ public class TutorManager : MonoBehaviour {
 
 	private HandStore handStore;
 	private GameObject shootingManager;
+	private TutorialShootingController shootingController;
 	GameObject[] enemies;
 	private int inactiveCount;
 	private static int nextScene = ChangeScene.BRIGHT_SCENE;
@@ -31,6 +33,8 @@ public class TutorManager : MonoBehaviour {
 
 		shootingManager = ObjectStore.FindShootingManager ();
 		shootingManager.SetActive (false);
+
+		shootingController = shootingManager.GetComponent<TutorialShootingController> ();
 
 		enemies = ObjectStore.FindEnemies ();
 		ShowEnemies (false);
@@ -65,6 +69,13 @@ public class TutorManager : MonoBehaviour {
 		case TutorState.SHOOT_BULLET_STATE:
 			{
 				if (ObjectStore.FindBullets ().Length > 0) {
+					ProceedState ();
+				}
+				break;
+			}
+		case TutorState.CHANGE_BULLET_STATE:
+			{
+				if (shootingController.HasChangedWeapon ()) {
 					ProceedState ();
 				}
 				break;
@@ -125,6 +136,11 @@ public class TutorManager : MonoBehaviour {
 			{
 				shootingManager.SetActive (true);
 				MsgSystem.ShowMsg (MsgStore.GetShootingTutorMsg (), 30);
+				break;
+			}
+		case TutorState.CHANGE_BULLET_STATE:
+			{
+				MsgSystem.ShowMsg (MsgStore.GetChangeWeaponTutorMsg (), 30);
 				break;
 			}
 		case TutorState.SHOOT_ENEMIES_STATE:
