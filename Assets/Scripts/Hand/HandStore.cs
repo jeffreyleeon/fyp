@@ -85,6 +85,10 @@ public sealed class HandStore{
 		return isSwiping;
 	}
 
+	public void resetHands(){
+		HandController leapController = leapMotionController.GetComponent<HandController> ();
+		leapController.DestroyAllHands ();
+	}
 	/*
 	public Vector3 GetPalmPosition (HandModel handmod) {
 		return handmod.GetPalmPosition();
