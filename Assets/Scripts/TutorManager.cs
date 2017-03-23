@@ -170,7 +170,12 @@ public class TutorManager : MonoBehaviour {
 	}
 
 	IEnumerator LeaveTutorialScene () {
+		shootingManager.SetActive (false);
+		HandStore.GetInstance ().resetHands ();
+		GameObject leap = ObjectStore.FindLeapMotionController ();
+		leap.SetActive (false);
 		yield return new WaitForSeconds (10);
+		leap.SetActive (true);
 		ChangeScene.ChangeToScene (nextScene);
 	}
 
