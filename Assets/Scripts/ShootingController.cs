@@ -42,6 +42,9 @@ public class ShootingController : Photon.MonoBehaviour {
 		if (!isActiveAndEnabled) {
 			return;
 		}
+		if (handStore.handNum > 2) {
+			handStore.resetHands ();
+		}
 		HandModel[] handModels = new HandModel[handStore.handNum];
 		handStore.GetHands ().CopyTo (handModels, 0);
 		foreach (HandModel handmod in handModels) {

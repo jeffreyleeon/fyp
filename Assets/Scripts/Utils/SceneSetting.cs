@@ -4,12 +4,13 @@ using System.Collections;
 public class SceneSetting : MonoBehaviour {
 	GameObject trinus;
 	GameObject leap;
-
+	HandStore handStore;
 
 	// Use this for initialization
 	void Start () {
 		trinus = ObjectStore.FindTrinus ();
 		leap = ObjectStore.FindLeapMotionController ();
+		handStore = HandStore.GetInstance ();
 
 		switch (CurrentSceneIndex()){
 		case ChangeScene.MENU_SCENE:
@@ -19,6 +20,7 @@ public class SceneSetting : MonoBehaviour {
 			leap.SetActive (false);
 			break;	
 		default:
+			handStore.resetHands ();
 			leap.SetActive (true);
 			break;
 			
