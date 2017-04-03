@@ -121,8 +121,10 @@ public class Enemy : HittableObject {
 			GameManager gm = ObjectStore.FindGameManager ().GetComponent<GameManager> ();
 			gm.PlayerWin ();
 		}
-
-		DisplayScoreText ();
+		if (GetCurrentHealth () <= 0) {
+			//not out of bound
+			DisplayScoreText ();
+		}
 	}
 	IEnumerator BaseClassKill () {
 		yield return new WaitForSeconds (2);
@@ -142,6 +144,6 @@ public class Enemy : HittableObject {
 		}
 		GameObject textObject = (GameObject)Instantiate(scoreText, transform.position, Quaternion.identity);
 		TextMesh textMesh = textObject.GetComponent<TextMesh> ();
-		textMesh.text = ObjectStore.GetScoreByTag (this.tag).ToString();
+		textMesh.text = "+" + ObjectStore.GetScoreByTag (this.tag).ToString();
 	}
 }
