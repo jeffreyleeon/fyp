@@ -7,6 +7,7 @@ public class TutorManager : MonoBehaviour {
 	public int inactiveSeconds;
 
 	enum TutorState {
+		INTRO_STATE,
 		SHOW_HAND_STATE,
 		DISMISS_HAND_STATE,
 		SHOOT_BULLET_STATE,
@@ -22,6 +23,7 @@ public class TutorManager : MonoBehaviour {
 	GameObject[] enemies;
 	private int inactiveCount;
 	private static int nextScene = ChangeScene.BRIGHT_SCENE;
+	private bool msgLock;
 
 	public static void SetNextScene (int sceneIndex) {
 		nextScene = sceneIndex;
@@ -39,6 +41,7 @@ public class TutorManager : MonoBehaviour {
 		enemies = ObjectStore.FindEnemies ();
 		ShowEnemies (false);
 
+		msgLock = false;
 		InitialState ();
 	}
 	
@@ -51,6 +54,11 @@ public class TutorManager : MonoBehaviour {
 		// Debug usage
 		ListenKeyboard ();
 		switch (currentState) {
+		case TutorState.INTRO_STATE:
+			{
+				//do nothing, proceed in ShowIntro()
+				break;
+			}
 		case TutorState.SHOW_HAND_STATE:
 			{
 				if (handStore.handNum >= 2) {
@@ -106,7 +114,7 @@ public class TutorManager : MonoBehaviour {
 	}
 
 	void InitialState () {
-		currentState = TutorState.SHOW_HAND_STATE;
+		currentState = TutorState.INTRO_STATE;
 		OnUpdateState ();
 	}
 
@@ -119,9 +127,16 @@ public class TutorManager : MonoBehaviour {
 	void ResetInactiveCount () {
 		inactiveCount = 60 * inactiveSeconds;
 	}
+		
 
 	void OnUpdateState () {
 		switch (currentState) {
+		case TutorState.INTRO_STATE:
+			{
+				StartCoroutine (ShowMsgwithDelay(MsgStore.GetExtendHandMsg(), 4, false));
+				StartCoroutine (ShowMsgwithDelay(MsgStore.GetFlipHandMsg(), 4, true));
+				break;
+			}
 		case TutorState.SHOW_HAND_STATE:
 			{
 				MsgSystem.ShowMsg (MsgStore.GetShowHandTutorMsg (), 30);
@@ -179,4 +194,18 @@ public class TutorManager : MonoBehaviour {
 		ChangeScene.ChangeToScene (nextScene);
 	}
 
+	IEnumerator ShowMsgwithDelay(string message, float delay, bool proceed){
+		if (msgLock) {
+			yield return new WaitForSeconds (1);
+			StartCoroutine (ShowMsgwithDelay (message, delay, proceed));
+		} else {
+			msgLock = true;
+			MsgSystem.ShowMsg (message, delay);
+			yield return new WaitForSeconds (delay);
+			msgLock = false;
+			if (proceed) {
+				ProceedState ();
+			}
+		}
+	}
 }

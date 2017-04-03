@@ -50,6 +50,7 @@ public class MsgText : MsgObserver {
 	public override void ShowMessage (string msg, float duration){
 		txt.text = msg;
 		showDuration = duration;
+		timer = 0;
 		timerOn = true;
 	}
 
