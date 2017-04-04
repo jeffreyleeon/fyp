@@ -46,7 +46,7 @@ public class GameManager : Photon.PunBehaviour {
 
 	void StartGame () {
 		GameObject player;
-		player = PhotonNetwork.Instantiate ("Player", new Vector3(0, 0, 0), Quaternion.identity, 0);
+		player = PhotonNetwork.Instantiate ("Player", new Vector3(0, -1.5f, 0), Quaternion.identity, 0);
 		trinus.transform.parent = player.transform;
 		enemyManager.GetComponent<Spawn> ().enabled = true;
 	}
