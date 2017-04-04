@@ -150,6 +150,17 @@ public class GameManager : Photon.PunBehaviour {
 
 	#endregion
 
+	#region Update Canvas
+
+	public void UpdateBossStatus(int remaining, int max) {
+		GameObject BossStatus = ObjectStore.FindBossStatus ();
+		BossStatusUpdate BossUpdate = BossStatus.GetComponentInChildren<BossStatusUpdate> ();
+		BossUpdate.StatusUpdate (remaining, max);
+	}
+
+	#endregion
+
+
 	#region Background music
 
 	void PlayBackgroundMusic () {

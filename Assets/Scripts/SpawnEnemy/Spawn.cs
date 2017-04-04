@@ -10,6 +10,9 @@ public class Spawn : MonoBehaviour {
 	public GameObject boss;
 
 	[Tooltip("Amount of enemies to be spawned before spawning big boss")]
+	private int enemiesBeforeBoss = 20;
+
+	[Tooltip("Current amount of enemies remaining before spawning boss")]
 	public int enemiesRemaining = 20;
 
 	[Tooltip("Max no. of enemies that appear at the same time")]
@@ -38,6 +41,7 @@ public class Spawn : MonoBehaviour {
 	private bool isBossSpawned = false;
 
 	void Start () {
+		enemiesBeforeBoss = enemiesRemaining;
 		if (PhotonNetwork.isMasterClient) {
 			Debug.Log ("MasterClient!");
 			SpawnEnemy ();
@@ -59,6 +63,11 @@ public class Spawn : MonoBehaviour {
 			int index = Random.Range (0, enemies.Length);
 			PhotonNetwork.Instantiate(enemies [index].gameObject.name, spawnPoint, Quaternion.identity, 0);
 			enemiesRemaining--;
+
+			GameObject gm = ObjectStore.FindGameManager();
+			if (enemiesRemaining > 0) {
+				gm.GetComponent<GameManager> ().UpdateBossStatus (enemiesRemaining, enemiesBeforeBoss);
+			}
 		}
 		Invoke ("SpawnEnemy", Random.Range(minSpawnTime, maxSpawnTime));
 	}

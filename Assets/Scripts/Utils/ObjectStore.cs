@@ -26,6 +26,7 @@ public class ObjectStore {
 	private const string UI_WEAPON_TAG = "UI_Weapon";
 	private const string UI_SCORE_TAG = "UI_Score";
 	private const string UI_HP_TAG = "UI_HP";
+	private const string UI_BOSS_ID = "Boss";
 
 	private static Material activeSkybox;
 
@@ -83,6 +84,10 @@ public class ObjectStore {
 
 	public static GameObject[] FindUIHP(){
 		return GameObject.FindGameObjectsWithTag (UI_HP_TAG);
+	}
+
+	public static GameObject FindBossStatus(){
+		return GameObject.Find (UI_BOSS_ID);
 	}
 
 	public static GameObject[] FindUIScore(){
