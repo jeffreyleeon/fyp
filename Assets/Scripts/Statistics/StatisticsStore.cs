@@ -42,7 +42,7 @@ public sealed class StatisticsStore : MonoBehaviour {
 		float deltaTime = Mathf.Floor((float)((now - gameStartTime).TotalSeconds));
 		int minutes = (int)deltaTime / 60;
 		int second = (int)deltaTime % 60;
-		return formattedTime + minutes + "min " + second + "sec\n";
+		return formattedTime + minutes + " min " + second + " sec\n\n";
 	}
 
 	#endregion
