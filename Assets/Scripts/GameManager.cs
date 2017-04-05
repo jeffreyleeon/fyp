@@ -34,12 +34,6 @@ public class GameManager : Photon.PunBehaviour {
 		ResetStat ();
 	}
 
-	void Update () {
-		if (Input.GetKeyDown (KeyCode.M)) {
-			Debug.Log (statisticsStore.GetStatistics ());
-		}
-	}
-
 	void RecordSkybox () {
 		ObjectStore.ActiveSkybox = RenderSettings.skybox;
 	}
