@@ -14,10 +14,10 @@ public class PresentManager : MonoBehaviour {
 public interface IPresent {
 	PresentManager.PresentType PresentType ();
 	string GetPresentIcon ();
-	void RedeemEffect ();
+	void RedeemEffect (Player player);
 }
 
-public class ShieldBehv : MonoBehaviour, IPresent {
+public class ShieldBehv : IPresent {
 	public PresentManager.PresentType PresentType () {
 		return PresentManager.PresentType.Shield;
 	}
@@ -26,12 +26,12 @@ public class ShieldBehv : MonoBehaviour, IPresent {
 		return "";
 	}
 
-	public void RedeemEffect (){
+	public void RedeemEffect (Player player) {
 		Debug.Log ("======Redeem effect: Shield");
 	}
 }
 
-public class HalfDamageBehv : MonoBehaviour, IPresent {
+public class HalfDamageBehv : IPresent {
 	public PresentManager.PresentType PresentType () {
 		return PresentManager.PresentType.HalfDamage;
 	}
@@ -40,12 +40,12 @@ public class HalfDamageBehv : MonoBehaviour, IPresent {
 		return "";
 	}
 
-	public void RedeemEffect (){
+	public void RedeemEffect (Player player) {
 		Debug.Log ("======Redeem effect: Half damage");
 	}
 }
 
-public class AddHPBehv : MonoBehaviour, IPresent {
+public class AddHPBehv : IPresent {
 	public PresentManager.PresentType PresentType () {
 		return PresentManager.PresentType.AddHP;
 	}
@@ -54,7 +54,7 @@ public class AddHPBehv : MonoBehaviour, IPresent {
 		return "";
 	}
 
-	public void RedeemEffect (){
+	public void RedeemEffect (Player player) {
 		Debug.Log ("======Redeem effect: Add HP");
 	}
 }
