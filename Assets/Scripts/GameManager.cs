@@ -5,6 +5,7 @@ using System.Collections;
 public class GameManager : Photon.PunBehaviour {
 	GameObject trinus;
 	GameObject enemyManager;
+	StatisticsStore statisticsStore;
 
 	[Tooltip("Room Name, empty for joining random room. If failed, create one with random name. Specifiying roomName will try to connect to that room, if NOT EXIST, create room with that name")]
 	public string roomName = "";
@@ -30,10 +31,17 @@ public class GameManager : Photon.PunBehaviour {
 	void Start () {
 		PlayBackgroundMusic ();
 		RecordSkybox ();
+		ResetStat ();
 	}
 
 	void RecordSkybox () {
 		ObjectStore.ActiveSkybox = RenderSettings.skybox;
+	}
+
+	void ResetStat () {
+		statisticsStore = StatisticsStore.GetInstance ();
+		statisticsStore.ResetStat ();
+		statisticsStore.SetGameStartTime (System.DateTime.Now);
 	}
 
 	void JoinGameRoom () {
