@@ -5,9 +5,10 @@ public class PresentManager : MonoBehaviour {
 
 	static public string presentsIconBasePath = "PresentsIcon/";
 	public enum PresentType {
-		Shield,
+		Shield = 0,
 		HalfDamage,
 		AddHP,
+		PresentCount,
 	}
 }
 

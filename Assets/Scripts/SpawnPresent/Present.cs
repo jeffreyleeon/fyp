@@ -11,7 +11,9 @@ public class Present : HittableObject {
 
 	virtual public void Start () {
 		SetHitBehv (HitType.Normal);
-		SetPresentBehv (PresentManager.PresentType.Shield);
+
+		PresentManager.PresentType type = (PresentManager.PresentType)Random.Range ((int)0, (int)PresentManager.PresentType.PresentCount);
+		SetPresentBehv (type);
 	}
 
 	public void SetPresentBehv (PresentManager.PresentType newPresentType){
