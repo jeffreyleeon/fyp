@@ -27,7 +27,7 @@ public class Enemy : HittableObject {
 	[Tooltip("Boundary of Y-cor that an enemy to destroy")]
 	public int maxY = 40;
 	[Tooltip("Boundary of Z-cor that an enemy to destroy")]
-	public int minZ = 2;
+	public int minZ = 0;
 	[Tooltip("Boundary of Z-cor that an enemy to destroy")]
 	public int maxZ = 40;
 	[Tooltip("Audio of enemy being hit")]

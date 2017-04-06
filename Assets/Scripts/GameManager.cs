@@ -46,9 +46,17 @@ public class GameManager : Photon.PunBehaviour {
 
 	void StartGame () {
 		GameObject player;
-		player = PhotonNetwork.Instantiate ("Player", new Vector3(0, 0, 0), Quaternion.identity, 0);
+		player = PhotonNetwork.Instantiate ("Player", new Vector3(0, -1.5f, 0), Quaternion.identity, 0);
 		trinus.transform.parent = player.transform;
+		ChangeLayers (player, LayerMask.NameToLayer ("LocalPlayerModel"));
 		enemyManager.GetComponent<Spawn> ().enabled = true;
+	}
+
+	void ChangeLayers (GameObject go, int layer) {
+		go.layer = layer;
+		foreach (Transform child in go.transform) {
+			ChangeLayers (child.gameObject, layer);
+		}
 	}
 
 	#region PlayerWin
