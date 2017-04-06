@@ -36,6 +36,9 @@ public class Spawn : MonoBehaviour {
 	[Tooltip("Max time for new enemy to appear")]
 	public int maxSpawnTime = 5;
 
+	[Tooltip("Script for spawning present")]
+	public SpawnPresent spawnPresent;
+
 	private Vector3 spawnPoint;
 
 	private bool isBossSpawned = false;
@@ -68,7 +71,7 @@ public class Spawn : MonoBehaviour {
 			if (enemiesRemaining > 0) {
 				gm.GetComponent<GameManager> ().UpdateBossStatus (enemiesRemaining, enemiesBeforeBoss);
 			}
-			SpawnPresent ();
+			spawnPresent.spawn ();
 		}
 		Invoke ("SpawnEnemy", Random.Range(minSpawnTime, maxSpawnTime));
 	}
@@ -79,12 +82,5 @@ public class Spawn : MonoBehaviour {
 
 		GameObject gm = ObjectStore.FindGameManager();
 		gm.GetComponent<GameManager> ().DisableBossProgress (boss.gameObject.GetComponent<HittableObject>().GetCurrentHealth());
-	}
-
-	void SpawnPresent () {
-		spawnPoint.x = Random.Range (minX, maxX);
-		spawnPoint.y = 5;
-		spawnPoint.z = Random.Range (minZ, maxZ);
-		PhotonNetwork.Instantiate("Present", spawnPoint, Quaternion.identity, 0);
 	}
 }
