@@ -6,6 +6,7 @@ public class Player : HittableObject {
 	
 	#region public param
 	public int playerId;
+	public GameObject shieldPrefab;
 	#endregion 
 
 
@@ -13,6 +14,7 @@ public class Player : HittableObject {
 	private IWeapon weaponBehv;
 	private string userName;
 	private float damageFactor = 1.0f;
+	private GameObject shieldReference = null;
 	#endregion
 
 	void Start(){
@@ -121,6 +123,8 @@ public class Player : HittableObject {
 
 	#endregion
 
+	#region special effects
+
 	public void SetDamageFactor (float factor) {
 		if (factor < 0.0f || factor > 1.0f) {
 			Debug.Log ("FYP/Player/SetDamageFactor: Damage factor cannot be set to invalid value");
@@ -137,6 +141,26 @@ public class Player : HittableObject {
 		yield return new WaitForSeconds (15);
 		damageFactor = 1.0f;
 	}
+
+	public void AddShield () {
+		if (shieldReference != null) {
+			Debug.Log ("FYP/Player/AddShield: Shield has already added");
+			return;
+		} else if (shieldPrefab == null) {
+			Debug.Log ("FYP/Player/AddShield: ShieldPrefab is not assigned to player");
+			return;
+		}
+		shieldReference = PhotonNetwork.Instantiate (shieldPrefab.name, transform.position, Quaternion.identity, 0);
+		StartCoroutine (ResetShield ());
+	}
+
+	private IEnumerator ResetShield () {
+		yield return new WaitForSeconds (10);
+		NetworkManager.DestroyNetworkObject (shieldReference);
+		shieldReference = null;
+	}
+
+	#endregion
 
 	void OnCollisionEnter(Collision collision){
 		//TODO: should check photonview.isMine? could reduce some computation

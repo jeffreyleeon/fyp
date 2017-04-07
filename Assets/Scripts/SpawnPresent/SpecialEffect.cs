@@ -3,8 +3,15 @@ using System.Collections;
 
 public sealed class SpecialEffect {
 
-	public static void Shield () {
-
+	public static void AddShield (Player player) {
+		if (player == null) {
+			return;
+		}
+		try {
+			player.AddShield ();
+		} catch {
+			Debug.Log ("FYP/SpecialEffect/AddShield: Error caught");
+		}
 	}
 
 	public static void ReduceDamage (Player player, float damageFactor) {
@@ -14,7 +21,7 @@ public sealed class SpecialEffect {
 		try {
 			player.SetDamageFactor (damageFactor);
 		} catch {
-			Debug.Log ("FYP/SpecialEffect/AddHP: Error caught");
+			Debug.Log ("FYP/SpecialEffect/ReduceDamage: Error caught");
 		}
 	}
 

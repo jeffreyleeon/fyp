@@ -28,7 +28,8 @@ public class ShieldBehv : IPresent {
 	}
 
 	public void RedeemEffect (Player player) {
-		Debug.Log ("======Redeem effect: Shield");
+		Debug.Log ("Redeem effect: Shield");
+		SpecialEffect.AddShield (player);
 	}
 }
 
