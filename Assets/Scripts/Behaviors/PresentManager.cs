@@ -42,7 +42,8 @@ public class HalfDamageBehv : IPresent {
 	}
 
 	public void RedeemEffect (Player player) {
-		Debug.Log ("======Redeem effect: Half damage");
+		Debug.Log ("Redeem effect: Half damage");
+		SpecialEffect.ReduceDamage (player, 0.5f);
 	}
 }
 

@@ -12,6 +12,7 @@ public class Player : HittableObject {
 	#region private param
 	private IWeapon weaponBehv;
 	private string userName;
+	private float damageFactor = 1.0f;
 	#endregion
 
 	void Start(){
@@ -120,11 +121,28 @@ public class Player : HittableObject {
 
 	#endregion
 
+	public void SetDamageFactor (float factor) {
+		if (factor < 0.0f || factor > 1.0f) {
+			Debug.Log ("FYP/Player/SetDamageFactor: Damage factor cannot be set to invalid value");
+			return;
+		} else if (damageFactor < 0.99f) {
+			Debug.Log ("FYP/Player/SetDamageFactor: Damage factor is already in effect");
+			return;
+		}
+		damageFactor = factor;
+		StartCoroutine (ResetDamageFactor ());
+	}
+
+	private IEnumerator ResetDamageFactor () {
+		yield return new WaitForSeconds (15);
+		damageFactor = 1.0f;
+	}
+
 	void OnCollisionEnter(Collision collision){
 		//TODO: should check photonview.isMine? could reduce some computation
 		if (collision.gameObject.tag == ObjectStore.GetEnemyTag ()) {
 			Enemy enemy = collision.gameObject.GetComponent<Enemy> ();
-			hitBehv.HitBy (enemy.attack);
+			hitBehv.HitBy ((int)(enemy.attack * damageFactor));
 			if (enemy.IsBoss () && userName == PhotonNetwork.player.name) {
 				PlayerDie ();
 			}

@@ -7,9 +7,14 @@ public sealed class SpecialEffect {
 
 	}
 
-	public static void ReduceDamage (Player player, float amount) {
+	public static void ReduceDamage (Player player, float damageFactor) {
 		if (player == null) {
 			return;
+		}
+		try {
+			player.SetDamageFactor (damageFactor);
+		} catch {
+			Debug.Log ("FYP/SpecialEffect/AddHP: Error caught");
 		}
 	}
 
