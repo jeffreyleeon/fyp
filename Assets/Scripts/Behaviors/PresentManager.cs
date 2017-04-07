@@ -56,6 +56,7 @@ public class AddHPBehv : IPresent {
 	}
 
 	public void RedeemEffect (Player player) {
-		Debug.Log ("======Redeem effect: Add HP");
+		Debug.Log ("Redeem effect: Add HP");
+		SpecialEffect.AddHP (player, 20);
 	}
 }
