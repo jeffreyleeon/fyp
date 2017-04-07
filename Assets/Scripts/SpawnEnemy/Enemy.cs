@@ -58,6 +58,10 @@ public class Enemy : HittableObject {
 		if (this.photonView.isMine && isActive) {
 			Move ();
 		}
+
+		if (IsBoss ()) {
+			hitBehv.HitBy (10);
+		}
 	}
 
 
