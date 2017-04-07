@@ -60,7 +60,10 @@ public class Enemy : HittableObject {
 		}
 
 		if (IsBoss ()) {
-			hitBehv.HitBy (10);
+			int currHP = GetCurrentHealth ();
+			DeductHealth (1);
+			GameObject gm = ObjectStore.FindGameManager();
+			gm.GetComponent<GameManager> ().UpdateBossHP (1);
 		}
 	}
 

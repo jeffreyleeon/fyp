@@ -26,6 +26,7 @@ public class BossHPUpdate : MonoBehaviour {
 	public void DisableBossProgress(int maxhealth){
 		bossBar.SetActive (false);
 		maxHP = maxhealth;
+		maxHP = 2000;
 		currHP = (float) maxHP;
 		Debug.Log ("Boss Health == " + maxHP);
 	}

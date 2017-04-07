@@ -77,6 +77,6 @@ public class Spawn : MonoBehaviour {
 		PhotonNetwork.Instantiate(boss.gameObject.name, point, Quaternion.identity, 0);
 
 		GameObject gm = ObjectStore.FindGameManager();
-		gm.GetComponent<GameManager> ().DisableBossProgress (boss.GetComponentInChildren<HittableObject>().GetCurrentHealth());
+		gm.GetComponent<GameManager> ().DisableBossProgress (boss.gameObject.GetComponent<HittableObject>().GetCurrentHealth());
 	}
 }
