@@ -49,6 +49,11 @@ public class Enemy : HittableObject {
 		}
 		SetHitBehv (HitType.Normal);
 
+		if (IsBoss ()) {
+			float currentHP = (float)GetCurrentHealth ();
+			ObjectStore.SetBossMaxHP (currentHP);
+			ObjectStore.SetBossCurrentHP (currentHP);
+		}
 	}
 
 
@@ -60,10 +65,8 @@ public class Enemy : HittableObject {
 		}
 
 		if (IsBoss ()) {
-			int currHP = GetCurrentHealth ();
-			DeductHealth (1);
-			GameObject gm = ObjectStore.FindGameManager();
-			gm.GetComponent<GameManager> ().UpdateBossHP (1);
+			int currentHP = GetCurrentHealth ();
+			ObjectStore.SetBossCurrentHP (currentHP);
 		}
 	}
 

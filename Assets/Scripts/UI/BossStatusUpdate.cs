@@ -17,7 +17,6 @@ public class BossStatusUpdate : MonoBehaviour {
 	public void StatusUpdate (int remaining, int max) {
 		if (remaining != 0) {
 			float progress = (1 / (float)max) * (bossBar.rect.width - boss.rect.width * 2);
-			Debug.Log ("======Translate is " + progress);
 			boss.Translate (-progress, 0, 0);
 		} else {
 			DisableBossUpdate ();
