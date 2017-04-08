@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Present : HittableObject {
 
@@ -14,6 +15,13 @@ public class Present : HittableObject {
 
 		PresentManager.PresentType type = (PresentManager.PresentType)Random.Range ((int)0, (int)PresentManager.PresentType.PresentCount);
 		SetPresentBehv (type);
+
+		// Disable gravity if it is SpaceScene
+		Scene scene = SceneManager.GetActiveScene();
+		if (scene.buildIndex == ChangeScene.SPACE_SCENE) {
+			Rigidbody rb = GetComponent<Rigidbody> ();
+			rb.useGravity = false;
+		}
 	}
 
 	public void SetPresentBehv (PresentManager.PresentType newPresentType){
