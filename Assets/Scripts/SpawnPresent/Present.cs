@@ -74,7 +74,9 @@ public class Present : HittableObject {
 			return;
 		}
 		Quaternion rotation = new Quaternion ();
-		GameObject iconObject = (GameObject)Instantiate(presentIcon, transform.position, rotation);
+		GameObject iconObject = Instantiate(presentIcon, transform.position, rotation) as GameObject;
+		PresentIcon iconScript = iconObject.GetComponent<PresentIcon> ();
+		iconScript.SetIcon (presentBehv.GetPresentIcon());
 	}
 
 	bool IsDead () {

@@ -21,4 +21,16 @@ public class PresentIcon : MonoBehaviour {
 		float delta = 0.5f * Mathf.Sin (2 * Mathf.PI * frequency * Time.time);
 		transform.position = new Vector3(baseX + delta, currentPosition.y + 0.05f, currentPosition.z);
 	}
+
+	public void SetIcon (string filePath) {
+		string _filePath = filePath;
+		if (!Resources.Load(_filePath)) {
+			Debug.Log ("FYP/PresentIcon/SetIcon: Invalid file path");
+			return;
+		}
+		Texture texture = Resources.Load(_filePath) as Texture;
+		Renderer renderer = GetComponent<Renderer> ();
+		renderer.material.mainTexture = texture;
+	}
+
 }
