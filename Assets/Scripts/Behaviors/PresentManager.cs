@@ -24,7 +24,7 @@ public class ShieldBehv : IPresent {
 	}
 
 	public string GetPresentIcon () {
-		return "";
+		return PresentManager.presentsIconBasePath + "shield";
 	}
 
 	public void RedeemEffect (Player player) {
@@ -39,7 +39,7 @@ public class HalfDamageBehv : IPresent {
 	}
 
 	public string GetPresentIcon () {
-		return "";
+		return PresentManager.presentsIconBasePath + "half_damage";
 	}
 
 	public void RedeemEffect (Player player) {
@@ -54,7 +54,7 @@ public class AddHPBehv : IPresent {
 	}
 
 	public string GetPresentIcon () {
-		return "";
+		return PresentManager.presentsIconBasePath + "medic";
 	}
 
 	public void RedeemEffect (Player player) {

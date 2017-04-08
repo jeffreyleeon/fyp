@@ -6,6 +6,8 @@ public class Present : HittableObject {
 
 	[Tooltip("Audio of present being hit")]
 	public AudioClip hitAudio;
+	[Tooltip("Plane object of the present icon")]
+	public GameObject presentIcon;
 
 	protected PresentManager.PresentType presentType;
 	protected IPresent presentBehv;
@@ -49,6 +51,7 @@ public class Present : HittableObject {
 			Bullet b = collision.gameObject.GetComponent<Bullet> ();
 			hitBehv.HitBy (b.Attack);
 			if (this.IsDead()) {
+				DisplayPresentIcon ();
 				if (b.IsOwnBy(PhotonNetwork.player.name) && presentBehv != null) {
 					// Only perform effect on target player
 					Player player = ObjectStore.FindMyPlayer ();
@@ -64,6 +67,14 @@ public class Present : HittableObject {
 			AudioSource audio = GetComponent<AudioSource>();
 			audio.PlayOneShot(hitAudio);
 		}
+	}
+
+	void DisplayPresentIcon () {
+		if (presentIcon == null) {
+			return;
+		}
+		Quaternion rotation = new Quaternion ();
+		GameObject iconObject = (GameObject)Instantiate(presentIcon, transform.position, rotation);
 	}
 
 	bool IsDead () {
