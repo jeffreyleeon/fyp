@@ -26,8 +26,13 @@ public class ObjectStore {
 	private const string UI_WEAPON_TAG = "UI_Weapon";
 	private const string UI_SCORE_TAG = "UI_Score";
 	private const string UI_HP_TAG = "UI_HP";
+	private const string UI_BOSS_TAG = "UI_Boss";
+	private const string UI_BOSSHP_TAG = "UI_BossHP";
+	private const string BOSS_MAX_HP = "BossMaxHP";
 
 	private static Material activeSkybox;
+	private static float BossMaxHP;
+	private static float BossCurrentHP;
 
 	private static readonly Dictionary<string, int> ScoreDictionary = new Dictionary<string, int>{
 		{ENEMY_TAG, 10}
@@ -85,12 +90,36 @@ public class ObjectStore {
 		return GameObject.FindGameObjectsWithTag (UI_HP_TAG);
 	}
 
+	public static GameObject [] FindBossStatus(){
+		return GameObject.FindGameObjectsWithTag (UI_BOSS_TAG);
+	}
+
+	public static GameObject [] FindBossHP(){
+		return GameObject.FindGameObjectsWithTag (UI_BOSSHP_TAG);
+	}
+
 	public static GameObject[] FindUIScore(){
 		return GameObject.FindGameObjectsWithTag (UI_SCORE_TAG);
 	}
 
 	public static GameObject[] FindUIWeapon(){
 		return GameObject.FindGameObjectsWithTag (UI_WEAPON_TAG);
+	}
+
+	public static void SetBossMaxHP (float hp) {
+		BossMaxHP = hp;
+	}
+
+	public static float GetBossMaxHP () {
+		return BossMaxHP;
+	}
+
+	public static void SetBossCurrentHP (float hp) {
+		BossCurrentHP = hp;
+	}
+
+	public static float GetBossCurrentHP () {
+		return BossCurrentHP;
 	}
 
 	public static string GetEnemyTag (){

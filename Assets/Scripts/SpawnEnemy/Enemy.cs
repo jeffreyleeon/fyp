@@ -49,6 +49,11 @@ public class Enemy : HittableObject {
 		}
 		SetHitBehv (HitType.Normal);
 
+		if (IsBoss ()) {
+			float currentHP = (float)GetCurrentHealth ();
+			ObjectStore.SetBossMaxHP (currentHP);
+			ObjectStore.SetBossCurrentHP (currentHP);
+		}
 	}
 
 
@@ -57,6 +62,11 @@ public class Enemy : HittableObject {
 		bool isActive = !isIdle;
 		if (this.photonView.isMine && isActive) {
 			Move ();
+		}
+
+		if (IsBoss ()) {
+			int currentHP = GetCurrentHealth ();
+			ObjectStore.SetBossCurrentHP (currentHP);
 		}
 	}
 
