@@ -8,6 +8,7 @@ public abstract class MsgObserver : MonoBehaviour {
 
 	public abstract void ShowMessage (string msg, float duration);
 	public abstract void StopMessage ();
+	public abstract void ActivateFade (bool activate);
 
 }
 
@@ -15,6 +16,7 @@ public class MsgText : MsgObserver {
 
 	public Text txt;
 	public float fadeTime = 1.0f;
+	public bool activateFade = true;
 
 	private Color txtColor;
 	private float timer = 0.0f;
@@ -32,9 +34,9 @@ public class MsgText : MsgObserver {
 		//Time.time
 		if (timerOn) {
 			timer += Time.deltaTime;
-			if (IsEntering ()) {
+			if (IsEntering () && activateFade == true) {
 				SetTextAlpha (Mathf.Lerp (0, 1, timer / fadeTime));
-			} else if (IsLeaving ()) {
+			} else if (IsLeaving () && activateFade == true) {
 				SetTextAlpha (Mathf.Lerp (1, 0, (timer - fadeTime - showDuration) / fadeTime));
 				if (IsInvisible ()) {
 					TurnOffTimer ();
@@ -59,6 +61,10 @@ public class MsgText : MsgObserver {
 		SetTextAlpha (0.0f);
 		txtColor.a = 0.0f;
 		txt.color = txtColor;
+	}
+
+	public override void ActivateFade (bool activate) {
+		activateFade = activate;
 	}
 
 	private bool IsEntering () {

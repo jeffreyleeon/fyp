@@ -167,7 +167,7 @@ public class TutorManager : MonoBehaviour {
 		case TutorState.END_STATE:
 			{
 				StartCoroutine (LeaveTutorialScene());
-				MsgSystem.ShowMsg (MsgStore.GetTutorialEndMsg (), 30);
+				StartCoroutine (ShowCountDownMsg ());
 				break;
 			}
 		default:
@@ -182,6 +182,16 @@ public class TutorManager : MonoBehaviour {
 		foreach (GameObject enemy in enemies) {
 			enemy.SetActive (show);
 		}
+	}
+
+	IEnumerator ShowCountDownMsg () {
+		MsgSystem.ActivateFade (false);
+		for (int i = 10; i > 0; --i) {
+			string msg = MsgStore.GetTutorialEndMsgPartOne () + i.ToString () + MsgStore.GetTutorialEndMsgPartTwo ();
+			MsgSystem.ShowMsg (msg, 30);
+			yield return new WaitForSeconds (1);
+		}
+		MsgSystem.ActivateFade (true);
 	}
 
 	IEnumerator LeaveTutorialScene () {
