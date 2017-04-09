@@ -17,6 +17,8 @@ public class StartSceneManager : MonoBehaviour {
 	public static int sceneIndex = -1;
 	public static GameObject loadingPanel;
 
+	public static int[] LEVEL = { BRIGHT_SCENE, CHRISTMAS_SCENE, SPACE_SCENE, HORROR_SCENE };
+
 	// Use this for initialization
 	void Start () {
 		loadingPanel = GameObject.Find ("LoadingPanel");
@@ -55,6 +57,21 @@ public class StartSceneManager : MonoBehaviour {
 
 	public static void SetTutorNext (int targetNext) {
 		TutorManager.SetNextScene(targetNext);
+	}
+
+	public static int GetNextLevel (int currentLevel){
+		for (int i = 0; i < LEVEL.Length; i++) {
+			if (LEVEL [i] == currentLevel) {
+				if (i + 1 == LEVEL.Length) {
+					//last level
+					return BRIGHT_SCENE;
+				} else {
+					return LEVEL [i + 1];
+				}
+			}
+		}
+		Debug.LogError ("StartSceneManager/GetNextLevel: wrong currentLevel");
+		return -1;
 	}
 
 	public static void EnableLoading() {

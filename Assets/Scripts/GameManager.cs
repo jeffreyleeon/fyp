@@ -32,6 +32,7 @@ public class GameManager : Photon.PunBehaviour {
 		PlayBackgroundMusic ();
 		RecordSkybox ();
 		ResetStat ();
+		CurrentLevel.currentLevel = SceneManagerHelper.ActiveSceneBuildIndex;
 	}
 
 	void RecordSkybox () {
