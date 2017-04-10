@@ -36,6 +36,9 @@ public class Spawn : MonoBehaviour {
 	[Tooltip("Max time for new enemy to appear")]
 	public int maxSpawnTime = 5;
 
+	[Tooltip("Script for spawning present")]
+	public SpawnPresent spawnPresent;
+
 	private Vector3 spawnPoint;
 
 	private bool isBossSpawned = false;
@@ -68,6 +71,7 @@ public class Spawn : MonoBehaviour {
 			if (enemiesRemaining > 0) {
 				gm.GetComponent<GameManager> ().UpdateBossStatus (enemiesRemaining, enemiesBeforeBoss);
 			}
+			spawnPresent.spawn ();
 		}
 		Invoke ("SpawnEnemy", Random.Range(minSpawnTime, maxSpawnTime));
 	}
