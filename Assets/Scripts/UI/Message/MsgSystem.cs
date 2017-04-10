@@ -20,6 +20,12 @@ public sealed class MsgSystem : MonoBehaviour {
 		}
 	}
 
+	public static void ActivateFade (bool activate){
+		foreach( MsgObserver observer in msgObservers){
+			observer.ActivateFade (activate);
+		}
+	}
+
 	public static void StopMsg(){
 		foreach( MsgObserver observer in msgObservers){
 			observer.StopMessage ();
