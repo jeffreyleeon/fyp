@@ -62,12 +62,7 @@ public class StartSceneManager : MonoBehaviour {
 	public static int GetNextLevel (int currentLevel){
 		for (int i = 0; i < LEVEL.Length; i++) {
 			if (LEVEL [i] == currentLevel) {
-				if (i + 1 == LEVEL.Length) {
-					//last level
-					return BRIGHT_SCENE;
-				} else {
-					return LEVEL [i + 1];
-				}
+				return LEVEL [(i + 1) % LEVEL.Length];
 			}
 		}
 		Debug.LogError ("StartSceneManager/GetNextLevel: wrong currentLevel");
