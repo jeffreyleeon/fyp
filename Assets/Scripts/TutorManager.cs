@@ -168,6 +168,7 @@ public class TutorManager : MonoBehaviour {
 			{
 				StartCoroutine (LeaveTutorialScene());
 				StartCoroutine (ShowCountDownMsg ());
+				GameSettings.finishedTutorial = true;
 				break;
 			}
 		default:
