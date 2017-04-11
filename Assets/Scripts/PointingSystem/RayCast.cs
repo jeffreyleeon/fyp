@@ -36,6 +36,10 @@ public class RayCast : MonoBehaviour {
 				StartSceneManager.EnableLoading ();
 				StartSceneManager.SetTargetScene (StartSceneManager.MENU_SCENE);
 				StartSceneManager.AddCount ();
+			} else if (hit.collider.gameObject.name == ObjectStore.GetNextButtonName ()) {
+				StartSceneManager.EnableLoading ();
+				StartSceneManager.SetTargetScene (StartSceneManager.GetNextLevel(CurrentLevel.currentLevel));
+				StartSceneManager.AddCount ();
 			} else if (hit.collider.gameObject.name == ObjectStore.GetForestButtonName ()) {
 				StartSceneManager.EnableLoading ();
 				StartSceneManager.SetTargetScene (StartSceneManager.TUTORIAL_SCENE);
