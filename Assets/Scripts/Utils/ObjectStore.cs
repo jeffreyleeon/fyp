@@ -14,6 +14,7 @@ public class ObjectStore {
 	private const string PLAYER_TAG = "Player";
 	private const string MENU_BUTTON_NAME = "MenuButton";
 	private const string NEXT_BUTTON_NAME = "NextButton";
+	private const string ONLINE_BUTTON_NAME = "OnlineButton";
 	private const string START_BUTTON_NAME = "StartButton";
 	private const string MAP_BUTTON_NAME = "MapButton";
 	private const string FOREST_BUTTON_NAME = "forestButton";
@@ -141,6 +142,10 @@ public class ObjectStore {
 
 	public static string GetStartButtonName() {
 		return START_BUTTON_NAME;
+	}
+
+	public static string GetOnlineButtonName() {
+		return ONLINE_BUTTON_NAME;
 	}
 
 	public static string GetMapButtonName() {

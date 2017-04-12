@@ -42,7 +42,11 @@ public class RayCast : MonoBehaviour {
 				StartSceneManager.AddCount ();
 			} else if (hit.collider.gameObject.name == ObjectStore.GetNextButtonName ()) {
 				StartSceneManager.EnableLoading ();
-				StartSceneManager.SetTargetScene (StartSceneManager.GetNextLevel(CurrentLevel.currentLevel));
+				StartSceneManager.SetTargetScene (StartSceneManager.GetNextLevel (CurrentLevel.currentLevel));
+				StartSceneManager.AddCount ();
+			}else if (hit.collider.gameObject.name == ObjectStore.GetOnlineButtonName ()) {
+				StartSceneManager.EnableLoading ();
+				StartSceneManager.SetTargetScene (StartSceneManager.ONLINE_TOGGLE);
 				StartSceneManager.AddCount ();
 			} else if (hit.collider.gameObject.name == ObjectStore.GetForestButtonName ()) {
 				StartSceneManager.EnableLoading ();

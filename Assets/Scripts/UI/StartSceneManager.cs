@@ -14,6 +14,7 @@ public class StartSceneManager : MonoBehaviour {
 	public static int SPACE_SCENE = ChangeScene.SPACE_SCENE;
 	public static int CHRISTMAS_SCENE = ChangeScene.CHRISTMAS_SCENE;
 	public static int HORROR_SCENE = ChangeScene.HORROR_SCENE;
+	public static int ONLINE_TOGGLE = -2;
 	public static int sceneIndex = -1;
 	public static GameObject loadingPanel;
 
@@ -26,11 +27,17 @@ public class StartSceneManager : MonoBehaviour {
 
 		LoadingBar.SetMax (threshold);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if (startCount >= threshold) {
-			ChangeScene.ChangeToScene (sceneIndex);
+			if (sceneIndex != ONLINE_TOGGLE) {
+				ChangeScene.ChangeToScene (sceneIndex);
+			} else {
+				//toggle online
+				ToggleOnline();
+			}
+			LoadingBar.currentAmount = 0;
 			startCount = 0;
 			sceneIndex = -1;
 		}
@@ -51,6 +58,16 @@ public class StartSceneManager : MonoBehaviour {
 		}
 	}
 		
+	private static void ToggleOnline(){
+		GameSettings.online = !GameSettings.online;
+		PhotonNetwork.offlineMode = !GameSettings.online;
+		if (GameSettings.online) {
+			GameObject.Find (ObjectStore.GetOnlineButtonName ()).GetComponent<Renderer> ().material = Resources.Load ("Button/online_button") as Material;
+		} else {
+			GameObject.Find (ObjectStore.GetOnlineButtonName ()).GetComponent<Renderer> ().material = Resources.Load ("Button/offline_button") as Material;
+		}
+	}
+
 	public static void SetTargetScene (int targetSceneIndex) {
 		sceneIndex = targetSceneIndex;
 	}
@@ -91,6 +108,5 @@ public class StartSceneManager : MonoBehaviour {
 	public static void AddCount() {
 		startCount++;
 		LoadingBar.currentAmount++;
-		print ("count added" + startCount);
 	}
 }
