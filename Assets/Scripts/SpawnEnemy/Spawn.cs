@@ -68,8 +68,8 @@ public class Spawn : MonoBehaviour {
 			enemiesRemaining--;
 
 			GameObject gm = ObjectStore.FindGameManager();
-			if (enemiesRemaining > 0) {
-				gm.GetComponent<GameManager> ().UpdateBossStatus (enemiesRemaining, enemiesBeforeBoss);
+			if (enemiesRemaining >= 0) {
+				gm.GetComponent<GameManager> ().UpdateBossStatus (enemiesBeforeBoss);
 			}
 			spawnPresent.spawn ();
 		}
