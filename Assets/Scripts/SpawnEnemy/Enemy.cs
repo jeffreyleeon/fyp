@@ -128,6 +128,7 @@ public class Enemy : HittableObject {
 		DisableMovementsAndCollisions ();
 		RunDieAnimation ();
 		if (isBoss) {
+			StatisticsStore.GetInstance ().SetBossDieTime ();
 			GameManager gm = ObjectStore.FindGameManager ().GetComponent<GameManager> ();
 			gm.PlayerWin ();
 		}

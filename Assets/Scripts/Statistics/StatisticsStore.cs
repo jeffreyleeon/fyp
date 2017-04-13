@@ -10,6 +10,9 @@ public sealed class StatisticsStore : MonoBehaviour {
 	private int enemyKilled;
 	private float playerMaxHP;
 	private float playerEndGameHP;
+	private System.DateTime bossSpawnTime;
+	private System.DateTime bossDieTime;
+
 
 	private StatisticsStore () {
 		ResetStat ();
@@ -24,6 +27,8 @@ public sealed class StatisticsStore : MonoBehaviour {
 		enemyKilled = 0;
 		playerMaxHP = 0;
 		playerEndGameHP = 0;
+		bossSpawnTime = System.DateTime.Now;
+		bossDieTime = System.DateTime.Now;
 	}
 
 	public string GetStatistics () {
@@ -31,6 +36,7 @@ public sealed class StatisticsStore : MonoBehaviour {
 		stat += GetFormattedTime ();
 		stat += GetPlayerHPStat ();
 		stat += GetEnemyKilled ();
+		stat += GetBossKillTimeStat ();
 
 		return stat;
 	}
@@ -80,6 +86,29 @@ public sealed class StatisticsStore : MonoBehaviour {
 
 	private string GetEnemyKilled () {
 		return "Enemy Killed: " + enemyKilled + "\n";
+	}
+
+	#endregion
+
+	#region boss killed
+
+	public void SetBossSpawnTime () {
+		bossSpawnTime = System.DateTime.Now;
+	}
+
+	public void SetBossDieTime () {
+		bossDieTime = System.DateTime.Now;
+	}
+
+	private string GetBossKillTimeStat () {
+		if (bossSpawnTime.Equals (bossDieTime)) {
+			return "";
+		}
+		float deltaTime = Mathf.Floor((float)((bossDieTime - bossSpawnTime).TotalSeconds));
+		if (deltaTime <= 0) {
+			return "";
+		}
+		return "Kill Boss: " + deltaTime + " sec\n";
 	}
 
 	#endregion
