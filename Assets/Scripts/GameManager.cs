@@ -153,12 +153,12 @@ public class GameManager : Photon.PunBehaviour {
 
 	#region Update Canvas
 
-	public void UpdateBossStatus(int remaining, int max) {
+	public void UpdateBossStatus(int max) {
 		GameObject [] BossStatus = ObjectStore.FindBossStatus ();
 
 		for (int i = 0; i < BossStatus.Length; ++i) {
 			BossStatusUpdate BossUpdate = BossStatus[i].GetComponentInChildren<BossStatusUpdate> ();
-			BossUpdate.StatusUpdate (remaining, max);
+			BossUpdate.StatusUpdate (max);
 		}
 	}
 

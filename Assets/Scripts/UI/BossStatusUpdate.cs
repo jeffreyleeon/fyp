@@ -14,16 +14,9 @@ public class BossStatusUpdate : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	public void StatusUpdate (int remaining, int max) {
-		if (remaining != 0) {
-			float progress = (1 / (float)max) * (bossBar.rect.width - boss.rect.width * 2);
-			boss.Translate (-progress, 0, 0);
-		} else {
-			DisableBossUpdate ();
-		}
-	}
-
-	void DisableBossUpdate () {
-		
+	public void StatusUpdate (int max) {
+		float progress = (1 / (float)max) * bossBar.rect.width;
+		Vector3 bossLocalPos = boss.localPosition;
+		boss.localPosition = new Vector3 (bossLocalPos.x - progress, bossLocalPos.y, bossLocalPos.z);
 	}
 }
