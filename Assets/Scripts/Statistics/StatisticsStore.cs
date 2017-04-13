@@ -8,6 +8,8 @@ public sealed class StatisticsStore : MonoBehaviour {
 	// Variables related to statistics
 	private System.DateTime gameStartTime;
 	private int enemyKilled;
+	private float playerMaxHP;
+	private float playerEndGameHP;
 
 	private StatisticsStore () {
 		ResetStat ();
@@ -20,11 +22,14 @@ public sealed class StatisticsStore : MonoBehaviour {
 	public void ResetStat () {
 		gameStartTime = System.DateTime.Now;
 		enemyKilled = 0;
+		playerMaxHP = 0;
+		playerEndGameHP = 0;
 	}
 
 	public string GetStatistics () {
 		string stat = "";
 		stat += GetFormattedTime ();
+		stat += GetPlayerHPStat ();
 		stat += GetEnemyKilled ();
 
 		return stat;
@@ -46,6 +51,23 @@ public sealed class StatisticsStore : MonoBehaviour {
 		int minutes = (int)deltaTime / 60;
 		int second = (int)deltaTime % 60;
 		return formattedTime + minutes + " min " + second + " sec\n";
+	}
+
+	#endregion
+
+	#region player HP
+
+	public void SetPlayerMaxHP (float hp) {
+		playerMaxHP = hp;
+	}
+
+	public void SetPlayerEndGameHP (float hp) {
+		playerEndGameHP = hp;
+	}
+
+	private string GetPlayerHPStat () {
+		int hpLost = (int)(playerMaxHP - playerEndGameHP);
+		return "HP Lost: " + hpLost.ToString () + "\n";
 	}
 
 	#endregion
