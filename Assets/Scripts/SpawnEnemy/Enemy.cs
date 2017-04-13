@@ -135,6 +135,7 @@ public class Enemy : HittableObject {
 			//not out of bound
 			DisplayScoreText ();
 		}
+		StatisticsStore.GetInstance ().IncrementEnemyKilled ();
 	}
 	IEnumerator BaseClassKill () {
 		yield return new WaitForSeconds (2);
