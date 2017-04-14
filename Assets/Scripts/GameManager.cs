@@ -19,12 +19,16 @@ public class GameManager : Photon.PunBehaviour {
 		}
 		trinus = ObjectStore.FindTrinus ();
 		enemyManager = ObjectStore.FindEnemyManager ();
-
-		NetworkManager.InitConfig ();
-		if (!NetworkManager.IsServerConnected) {
-			NetworkManager.ConnectServer ();
+		if (GameSettings.online) {
+			NetworkManager.InitConfig ();
+			if (!NetworkManager.IsServerConnected) {
+				NetworkManager.ConnectServer ();
+			} else {
+				JoinGameRoom ();
+			}
 		} else {
-			JoinGameRoom ();
+			PhotonNetwork.offlineMode = !GameSettings.online;
+			NetworkManager.CreateRoom("localroom");
 		}
 	}
 
