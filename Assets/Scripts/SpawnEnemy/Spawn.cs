@@ -82,5 +82,7 @@ public class Spawn : MonoBehaviour {
 
 		GameObject gm = ObjectStore.FindGameManager();
 		gm.GetComponent<GameManager> ().DisableBossProgress (boss.gameObject.GetComponent<HittableObject>().GetCurrentHealth());
+
+		StatisticsStore.GetInstance ().SetBossSpawnTime ();
 	}
 }

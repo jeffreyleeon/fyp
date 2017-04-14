@@ -76,6 +76,10 @@ public class GameManager : Photon.PunBehaviour {
 
 	public void PlayerWin() {
 		playerWin = true;
+
+		Player player = ObjectStore.FindMyPlayer ();
+		StatisticsStore.GetInstance ().SetPlayerEndGameHP ((float)player.GetCurrentHealth ());
+
 		StartCoroutine ("ActivateWin");
 	}
 
@@ -99,6 +103,7 @@ public class GameManager : Photon.PunBehaviour {
 		if (playerWin) {
 			return;
 		}
+		StatisticsStore.GetInstance ().SetPlayerEndGameHP (0.0f);
 		StartCoroutine ("ActivateDeath");
 	}
 

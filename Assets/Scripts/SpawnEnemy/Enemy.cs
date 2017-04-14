@@ -128,12 +128,14 @@ public class Enemy : HittableObject {
 		DisableMovementsAndCollisions ();
 		RunDieAnimation ();
 		if (isBoss) {
+			StatisticsStore.GetInstance ().SetBossDieTime ();
 			GameManager gm = ObjectStore.FindGameManager ().GetComponent<GameManager> ();
 			gm.PlayerWin ();
 		}
 		if (GetCurrentHealth () <= 0) {
 			//not out of bound
 			DisplayScoreText ();
+			StatisticsStore.GetInstance ().IncrementEnemyKilled ();
 		}
 	}
 	IEnumerator BaseClassKill () {

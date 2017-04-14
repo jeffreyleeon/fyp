@@ -26,6 +26,7 @@ public class Player : HittableObject {
 		} else {
 			userName = this.photonView.owner.name;
 		}
+		StatisticsStore.GetInstance ().SetPlayerMaxHP ((float)maxHealth);
 	}
 
 	// Update is called once per frame
