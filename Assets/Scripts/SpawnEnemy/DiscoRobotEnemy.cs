@@ -4,7 +4,7 @@ using System.Collections;
 public class DiscoRobotEnemy  : WalkingEnemy {
 
 	Animator anim;
-	string walkHash = "Walk 13";
+	string walkHash = "Sneak 01";
 	string idleHash = "Idle 02";
 	string dieHash = "Fall 04";
 
@@ -15,6 +15,7 @@ public class DiscoRobotEnemy  : WalkingEnemy {
 		anim = gameObject.GetComponent<Animator>();
 
 		transform.rotation = Quaternion.AngleAxis (180, Vector3.up);
+		transform.position = new Vector3 (transform.position.x, -5.0f, transform.position.z);
 		string action = GetInitialAction ();
 		anim.Play (action);
 	}
