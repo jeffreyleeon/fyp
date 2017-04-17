@@ -58,7 +58,7 @@ public class LightingShotBehv : MonoBehaviour, IWeapon {
 		ShootingController shootControler=  ObjectStore.FindShootingManager ().GetComponent<ShootingController>();
 		shootControler.bulletPrefab = (Object)Resources.Load("LightingShot") as GameObject;
 		shootControler.numOfBulletPerSecond = 3;
-		shootControler.UpdateWeaponIcon (WeaponManager.weaponIconBasePath + "weapon_bg"); // TODO: Update image when it is ready
+		shootControler.UpdateWeaponIcon (WeaponManager.weaponIconBasePath + "weapon_lightning_shot");
 	}
 }
 
