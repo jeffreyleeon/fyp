@@ -82,3 +82,38 @@ A: First, try to kill Trinus VR app and re-launch it see if it works. If not, pr
 Q: Leap motion is not working, no red light on front panel
 A: Leap Service need to be active. Go to Task Manager, select Service, right click LeapService and Start service.
    
+
+Reference of resources used
+------------------
+Asset:</br>
+[1] Skybox for Menu - Cope! Free Skybox Pack, 70:30,</br>
+https://www.assetstore.unity3d.com/en/#!/content/22252</br>
+[2] Decoration for Menu and Present for all stages - Medieval Chest Pack, rereke,</br>
+https://www.assetstore.unity3d.com/en/#!/content/61923</br>
+[3] Weapon for Lost Forest - Crazt Weapon, Crazy Cube,</br>
+https://www.assetstore.unity3d.com/en/#!/content/15090</br>
+[4] Decoration for Lost Forest - Stylized Nature Pack, Mikael Gustafsson,</br>
+https://www.assetstore.unity3d.com/en/#!/content/37457</br>
+[5] Enemy in Lost Forest - Chibi Mummy, Richchet,</br>
+https://www.assetstore.unity3d.com/en/#!/content/60462</br>
+[6] Enemy in Lost Forest - Toon Death Knight Pack, Mesh Tint,</br>
+https://www.assetstore.unity3d.com/en/#!/content/48188</br>
+[7] Skybox for Planet 404 - Star Nest Skybox, Ninjapretzel,</br>
+https://www.assetstore.unity3d.com/en/#!/content/63726</br>
+[8] Decoration of Planet 404 - Vast Outer Space, Prodigious Creations,</br>
+https://www.assetstore.unity3d.com/en/#!/content/38913</br>
+
+Music:</br>
+[1] Background Music of Menu - Cute, Bensound.com</br>
+http://www.bensound.com/royalty-free-music/track/cute</br>
+[2] Background Music of Tutorial - The Lounge, Bensound.com</br>
+http://www.bensound.com/the-lounge</br>
+[3] Background Music of Snowman Island - Christmas Theme Music, dl-sound,</br>
+https://www.dl-sounds.com/royalty-free/category/holiday-season/</br>
+[4] Background Music of Planet 404 - Librarians in Space, Looperman.com,</br>
+https://www.looperman.com/loops/detail/102550/librarians-in-space-bylankframpard-
+free-78bpm-hip-hop-synth-loop</br>
+[5] Background Music of Spookiland - Children of Shadows, Playonloop.com,</br>
+https://www.playonloop.com/2016-music-loops/children-of-shadows/</br></br>
+Design Elements:</br>
+Most of the design are based on design from Freepik (http://www.freepik.com)
