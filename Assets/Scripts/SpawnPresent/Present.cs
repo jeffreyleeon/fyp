@@ -4,13 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class Present : HittableObject {
 
-	[Tooltip("Audio of present being hit")]
-	public AudioClip hitAudio;
 	[Tooltip("Plane object of the present icon")]
 	public GameObject presentIcon;
 
 	protected PresentManager.PresentType presentType;
 	protected IPresent presentBehv;
+	private AudioSource presentSound;
 
 	virtual public void Start () {
 		SetHitBehv (HitType.Normal);
@@ -19,7 +18,7 @@ public class Present : HittableObject {
 		SetPresentBehv (type);
 
 		// Disable gravity if it is SpaceScene
-		Scene scene = SceneManager.GetActiveScene();
+		Scene scene = SceneManager.GetActiveScene ();
 		if (scene.buildIndex == ChangeScene.SPACE_SCENE) {
 			Rigidbody rb = GetComponent<Rigidbody> ();
 			rb.useGravity = false;
@@ -43,6 +42,15 @@ public class Present : HittableObject {
 			presentBehv = (IPresent)new AddHPBehv ();
 			break;
 		}
+		SetPresentSound ();
+	}
+
+	public void SetPresentSound () {
+		presentSound = GetComponent<AudioSource> ();
+		if (presentBehv == null || presentSound == null) {
+			return;
+		}
+		presentSound.clip = Resources.Load<AudioClip>(presentBehv.GetPresentAudioPath ());
 	}
 
 	void OnCollisionEnter (Collision collision){
@@ -63,9 +71,9 @@ public class Present : HittableObject {
 	}
 
 	void PlayHitSound () {
-		if (hitAudio != null) {
+		if (presentSound != null) {
 			AudioSource audio = GetComponent<AudioSource>();
-			audio.PlayOneShot(hitAudio);
+			audio.PlayOneShot(presentSound.clip);
 		}
 	}
 
@@ -84,6 +92,18 @@ public class Present : HittableObject {
 	}
 
 	public virtual void Kill () {
+		StartCoroutine (BaseClassKill ());
+		DisableMovementsAndCollisions ();
+	}
+	IEnumerator BaseClassKill () {
+		yield return new WaitForSeconds (2);
 		base.Kill ();
+	}
+
+	private void DisableMovementsAndCollisions () {
+		transform.position = new Vector3 (1000, 1000, 1000);
+		Rigidbody rb = GetComponent<Rigidbody>();
+		rb.isKinematic = true;
+		rb.detectCollisions = false;
 	}
 }
