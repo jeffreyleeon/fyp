@@ -29,6 +29,9 @@ public class Video : MonoBehaviour {
 			movie.Play ();
 			audio.Play ();
 			started = true;
+		} else if (Input.GetKey (KeyCode.Space)) {
+			movie.Stop ();
+			audio.Stop ();
 		}
 	}
 
