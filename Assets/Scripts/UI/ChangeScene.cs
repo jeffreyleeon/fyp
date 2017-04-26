@@ -12,6 +12,7 @@ public class ChangeScene : MonoBehaviour {
 	public const int SPACE_SCENE = 5;
 	public const int CHRISTMAS_SCENE = 6;
 	public const int HORROR_SCENE = 7;
+	public const int TRAILOR_SCENE = 8;
 
 	public static void ChangeToScene (int sceneIndex) {
 		if (sceneIndex == SCORE_SCENE) {
