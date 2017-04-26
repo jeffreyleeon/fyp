@@ -7,6 +7,8 @@ public class Video : MonoBehaviour {
 	public MovieTexture movie;
 	private AudioSource audio;
 
+	private bool started = false;
+
 	// Use this for initialization
 	void Start () {
 		Renderer renderer = GetComponent<Renderer> ();
@@ -19,12 +21,22 @@ public class Video : MonoBehaviour {
 
 	void Update () {
 		ListenKeyboard ();
+		CheckEndOfTrailor ();
 	}
 
 	void ListenKeyboard () {
 		if (Input.GetKey (KeyCode.P)) {
 			movie.Play ();
 			audio.Play ();
+			started = true;
+		}
+	}
+
+	void CheckEndOfTrailor () {
+		if (started == true && !movie.isPlaying) {
+			ChangeScene.ChangeToScene (ChangeScene.MENU_SCENE);
+			Destroy (this.gameObject, 0.5f);
+			started = false;
 		}
 	}
 }
