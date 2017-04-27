@@ -82,7 +82,9 @@ public class Enemy : HittableObject {
 			this.Kill ();
 		} else {
 			float move = moveSpeed * Time.deltaTime;
-			transform.position = Vector3.MoveTowards(transform.position, track.position, move);
+			GameObject[] allPlayers = ObjectStore.FindAllPlayers ();
+			int randomPlayer = (int)Random.Range (0.0f, allPlayers.Length-0.01f);
+			transform.position = Vector3.MoveTowards(transform.position, allPlayers[randomPlayer].transform.position, move);
 		}
 	}
 
