@@ -51,6 +51,8 @@ public class StartSceneManager : MonoBehaviour {
 		if (Input.GetKey (KeyCode.S)) {
 			// Enter bright scene directly
 			ChangeScene.ChangeToScene (BRIGHT_SCENE);
+		} else if (Input.GetKey (KeyCode.C)) {
+			ChangeScene.ChangeToScene (CHRISTMAS_SCENE);
 		} else if (Input.GetKey (KeyCode.T)) {
 			// Enter tutorial scene directly
 			ChangeScene.ChangeToScene (TUTORIAL_SCENE);
