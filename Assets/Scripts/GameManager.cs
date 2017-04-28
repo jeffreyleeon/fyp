@@ -11,6 +11,7 @@ public class GameManager : Photon.PunBehaviour {
 	public string roomName = "";
 
 	private bool playerWin = false;
+	private bool endSoundPlayed = false;
 
 	void Awake(){
 		if (PhotonNetwork.connected) {
@@ -80,6 +81,8 @@ public class GameManager : Photon.PunBehaviour {
 		Player player = ObjectStore.FindMyPlayer ();
 		StatisticsStore.GetInstance ().SetPlayerEndGameHP ((float)player.GetCurrentHealth ());
 
+		PlayEndMusic ("GameEndSound/Win");
+
 		StartCoroutine ("ActivateWin");
 	}
 
@@ -103,6 +106,9 @@ public class GameManager : Photon.PunBehaviour {
 		if (playerWin) {
 			return;
 		}
+
+		PlayEndMusic ("GameEndSound/Lose");
+
 		StatisticsStore.GetInstance ().SetPlayerEndGameHP (0.0f);
 		StartCoroutine ("ActivateDeath");
 	}
@@ -188,6 +194,19 @@ public class GameManager : Photon.PunBehaviour {
 		if (audio != null) {
 			audio.Play();
 		}
+	}
+
+	#endregion
+
+	#region Game End Sound
+
+	void PlayEndMusic (string url) {
+		AudioSource audio = GetComponent<AudioSource>();
+		audio.clip = Resources.Load<AudioClip> (url);
+		if (audio != null && !endSoundPlayed) {
+			audio.Play();
+		}
+		endSoundPlayed = true;
 	}
 
 	#endregion
