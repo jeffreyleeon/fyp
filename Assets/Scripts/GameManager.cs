@@ -201,12 +201,16 @@ public class GameManager : Photon.PunBehaviour {
 	#region Game End Sound
 
 	void PlayEndMusic (string url) {
-		AudioSource audio = GetComponent<AudioSource>();
-		audio.clip = Resources.Load<AudioClip> (url);
-		if (audio != null && !endSoundPlayed) {
-			audio.Play();
+		if (endSoundPlayed == true) {
+			return;
 		}
 		endSoundPlayed = true;
+		AudioSource audio = GetComponent<AudioSource>();
+		audio.clip = Resources.Load<AudioClip> (url);
+		if (audio != null) {
+			audio.Play();
+		}
+
 	}
 
 	#endregion
