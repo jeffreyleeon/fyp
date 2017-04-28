@@ -54,8 +54,11 @@ public class StartSceneManager : MonoBehaviour {
 		} else if (Input.GetKey (KeyCode.T)) {
 			// Enter tutorial scene directly
 			ChangeScene.ChangeToScene (TUTORIAL_SCENE);
-		} else if (Input.GetKey (KeyCode.M)) {
+		} else if (Input.GetKey (KeyCode.D)) {
 			ChangeScene.ChangeToScene (MAP_SCENE);
+		} else if (Input.GetKey (KeyCode.Space)) {
+			DisableLoading ();
+			ChangeScene.ChangeToScene (MENU_SCENE);
 		}
 	}
 		
